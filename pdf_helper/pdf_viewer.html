@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PDF Viewer</title>
+    <script src="https://krunalpandav.github.io/pdf_helper/build/pdf.mjs"></script>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+        #pdf-viewer {
+            width: 100%;
+            height: 100vh;
+        }
+    </style>
+</head>
+<body>
+    <div id="pdf-viewer"></div>
+    <script>
+        var url = new URL(window.location.href);
+        var pdfPath = url.searchParams.get("file");
+
+        var pdfjsLib = window['pdf'];
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://krunalpandav.github.io/pdf_helper/build/pdf.worker.mjs';
+
+        var loadingTask = pdfjsLib.getDocument(pdfPath);
+        loadingTask.promise.then(function(pdf) {
+            pdf.getPage(1).then(function(page) {
+                var scale = 1.5;
+                var viewport = page.getViewport({ scale: scale });
+
+                var canvas = document.createElement('canvas');
+                var context = canvas.getContext('2d');
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+
+                document.getElementById('pdf-viewer').appendChild(canvas);
+
+                var renderContext = {
+                    canvasContext: context,
+                    viewport: viewport
+                };
+                page.render(renderContext);
+            });
+        });
+    </script>
+</body>
+</html>
