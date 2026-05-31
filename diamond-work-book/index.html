@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Diamond Work Book — Track your diamond work &amp; earnings</title>
+<meta name="description" content="Diamond Work Book helps diamond workers log daily work, count diamonds, track earnings and withdrawals — private, offline, in English, हिन्दी &amp; ગુજરાતી." />
+<link rel="icon" type="image/png" href="assets/icon-512.png" />
+<!-- Social preview -->
+<meta property="og:title" content="Diamond Work Book" />
+<meta property="og:description" content="Log daily diamond work, track earnings &amp; withdrawals. Private &amp; offline." />
+<meta property="og:image" content="assets/feature-en.png" />
+<meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --blue:#007AFF; --blue-dark:#0051D5; --blue-50:#E3F2FD;
+    --ink:#202124; --muted:#5F6368; --line:#E8EAED;
+    --green:#34A853; --red:#EA4335; --white:#fff;
+    --radius:18px; --shadow:0 10px 30px rgba(0,40,120,.12);
+    --grad:linear-gradient(135deg,#007AFF 0%,#0051D5 100%);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:var(--ink);line-height:1.6;background:#fff;-webkit-font-smoothing:antialiased}
+  a{color:var(--blue);text-decoration:none}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+  .btn{display:inline-flex;align-items:center;gap:10px;background:var(--grad);color:#fff;font-weight:600;padding:14px 26px;border-radius:999px;box-shadow:var(--shadow);transition:transform .15s ease,box-shadow .15s ease}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(0,40,120,.22)}
+  .btn.secondary{background:#fff;color:var(--blue);border:1.5px solid var(--blue-50)}
+
+  /* Header */
+  header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:66px}
+  .brand{display:flex;align-items:center;gap:12px;font-weight:700;font-size:1.05rem}
+  .brand img{width:36px;height:36px;border-radius:9px}
+  .nav-links{display:flex;gap:26px;align-items:center}
+  .nav-links a{color:var(--muted);font-weight:500;font-size:.95rem}
+  .nav-links a:hover{color:var(--ink)}
+  @media(max-width:680px){.nav-links a:not(.btn){display:none}}
+
+  /* Hero */
+  .hero{background:var(--grad);color:#fff;position:relative;overflow:hidden;padding:74px 0 90px}
+  .hero::after{content:"";position:absolute;right:-120px;top:-120px;width:420px;height:420px;background:radial-gradient(circle,rgba(255,255,255,.16),transparent 70%);border-radius:50%}
+  .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;position:relative;z-index:1}
+  .hero h1{font-size:2.7rem;line-height:1.15;font-weight:800;margin-bottom:16px}
+  .hero p.lead{font-size:1.15rem;opacity:.95;margin-bottom:28px;max-width:520px}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
+  .chip{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);padding:6px 14px;border-radius:999px;font-size:.85rem;font-weight:500}
+  .hero-art{display:flex;justify-content:center}
+  .hero-art img{width:230px;border-radius:34px;box-shadow:0 24px 60px rgba(0,0,0,.35)}
+  @media(max-width:780px){.hero-grid{grid-template-columns:1fr;text-align:center}.hero h1{font-size:2.1rem}.hero p.lead{margin-inline:auto}.hero-cta{justify-content:center}.chips{justify-content:center}.hero-art{margin-top:20px}}
+
+  /* Sections */
+  section{padding:74px 0}
+  .section-title{text-align:center;margin-bottom:46px}
+  .section-title h2{font-size:1.9rem;font-weight:700}
+  .section-title p{color:var(--muted);margin-top:8px}
+
+  /* Features */
+  .features{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  @media(max-width:860px){.features{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:520px){.features{grid-template-columns:1fr}}
+  .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px;transition:transform .15s,box-shadow .15s}
+  .card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+  .ficon{width:48px;height:48px;border-radius:12px;background:var(--blue-50);color:var(--blue);display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:14px}
+  .card h3{font-size:1.1rem;margin-bottom:6px}
+  .card p{color:var(--muted);font-size:.95rem}
+
+  /* Screenshots */
+  .shots{background:#F8F9FA}
+  .gallery{display:flex;gap:22px;overflow-x:auto;padding:8px 4px 18px;scroll-snap-type:x mandatory}
+  .gallery img{width:230px;flex:0 0 auto;border-radius:24px;border:1px solid var(--line);box-shadow:var(--shadow);scroll-snap-align:center;background:#fff}
+
+  /* Trust band */
+  .trust{background:var(--grad);color:#fff;text-align:center}
+  .trust h2{font-size:1.7rem;margin-bottom:10px}
+  .trust p{opacity:.95;max-width:640px;margin:0 auto}
+
+  /* Footer */
+  footer{background:#10161f;color:#aeb6c2;padding:48px 0;font-size:.92rem}
+  .foot{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center}
+  .foot a{color:#cfd6e0}
+  .foot-links{display:flex;gap:22px;flex-wrap:wrap}
+  .foot .brand{color:#fff}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="brand"><img src="assets/icon-512.png" alt="Diamond Work Book icon" />Diamond Work Book</div>
+    <nav class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#screens">Screenshots</a>
+      <a href="privacy-policy.html">Privacy</a>
+      <a class="btn" href="https://play.google.com/store/apps/details?id=com.kp.diamondworkbook">Get the app</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <h1>Track your diamond work &amp; earnings</h1>
+      <p class="lead">A simple, private workbook for diamond workers. Log how many diamonds you finished each day, see your earnings add up, and keep track of your withdrawals — all on your phone.</p>
+      <div class="hero-cta">
+        <a class="btn" href="https://play.google.com/store/apps/details?id=com.kp.diamondworkbook">▶ Get it on Google Play</a>
+        <a class="btn secondary" href="#screens">See screenshots</a>
+      </div>
+      <div class="chips">
+        <span class="chip">English</span>
+        <span class="chip">हिन्दी</span>
+        <span class="chip">ગુજરાતી</span>
+        <span class="chip">100% offline</span>
+        <span class="chip">No account needed</span>
+      </div>
+    </div>
+    <div class="hero-art">
+      <img src="assets/screenshots/01-dashboard.png" alt="Diamond Work Book dashboard" />
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="wrap">
+    <div class="section-title">
+      <h2>Everything you need, nothing you don't</h2>
+      <p>Built for the way diamond workers actually track their work.</p>
+    </div>
+    <div class="features">
+      <div class="card"><div class="ficon">💎</div><h3>Daily work records</h3><p>Log the number of diamonds and the price for each day in seconds.</p></div>
+      <div class="card"><div class="ficon">🧮</div><h3>Automatic earnings</h3><p>Your total is calculated for you — no manual maths, no mistakes.</p></div>
+      <div class="card"><div class="ficon">📅</div><h3>Working days count</h3><p>See how many days you worked this month at a glance.</p></div>
+      <div class="card"><div class="ficon">💸</div><h3>Withdrawal tracking</h3><p>Record advances and withdrawals so your balance is always clear.</p></div>
+      <div class="card"><div class="ficon">🌙</div><h3>Light &amp; dark mode</h3><p>Comfortable to use any time of day, on any screen.</p></div>
+      <div class="card"><div class="ficon">🌐</div><h3>3 languages</h3><p>Use the app in English, हिन्दी or ગુજરાતી — switch any time.</p></div>
+      <div class="card"><div class="ficon">🔒</div><h3>Private &amp; offline</h3><p>Your records never leave your device. No sign-up, no cloud.</p></div>
+      <div class="card"><div class="ficon">📊</div><h3>Monthly view</h3><p>Browse any month to review past work and earnings.</p></div>
+      <div class="card"><div class="ficon">⚡</div><h3>Fast &amp; lightweight</h3><p>Opens instantly and works smoothly even on modest phones.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SCREENSHOTS -->
+<section id="screens" class="shots">
+  <div class="wrap">
+    <div class="section-title">
+      <h2>Take a look inside</h2>
+      <p>Clean, focused screens made for everyday use.</p>
+    </div>
+    <div class="gallery">
+      <img src="assets/screenshots/01-dashboard.png" alt="Dashboard with earnings summary" />
+      <img src="assets/screenshots/02-records.png" alt="Daily work records" />
+      <img src="assets/screenshots/03-withdrawal.png" alt="Withdrawals list" />
+      <img src="assets/screenshots/04-settings.png" alt="Settings and language" />
+      <img src="assets/screenshots/05-dashboard-dark.png" alt="Dark mode dashboard" />
+    </div>
+  </div>
+</section>
+
+<!-- TRUST -->
+<section class="trust">
+  <div class="wrap">
+    <h2>Your work and money stay yours</h2>
+    <p>Diamond Work Book stores everything on your device. There's no account to create and your records are never uploaded — uninstalling the app removes all your data. Read our <a href="privacy-policy.html" style="color:#fff;text-decoration:underline">Privacy Policy</a>.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap foot">
+    <div class="brand"><strong>Diamond Work Book</strong></div>
+    <nav class="foot-links">
+      <a href="#features">Features</a>
+      <a href="#screens">Screenshots</a>
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="mailto:krunalpandav65@gmail.com">Contact</a>
+      <a href="https://play.google.com/store/apps/details?id=com.kp.diamondworkbook">Google Play</a>
+    </nav>
+  </div>
+  <div class="wrap" style="margin-top:18px;opacity:.7">© 2026 Diamond Work Book. Made for diamond workers.</div>
+</footer>
+
+</body>
+</html>
