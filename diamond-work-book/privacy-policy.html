@@ -1,93 +1,256 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy — Diamond Work Book</title>
-    <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-            line-height: 1.6;
-            color: #1a1a1a;
-            max-width: 760px;
-            margin: 0 auto;
-            padding: 24px 16px 64px;
-        }
-        h1 { font-size: 1.8rem; margin-bottom: 4px; }
-        h2 { font-size: 1.2rem; margin-top: 32px; }
-        .updated { color: #666; font-size: 0.9rem; margin-bottom: 24px; }
-        a { color: #007AFF; }
-        ul { padding-left: 20px; }
-        code { background: #f2f2f2; padding: 1px 5px; border-radius: 4px; }
-        footer { margin-top: 40px; color: #666; font-size: 0.9rem; }
-    </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Privacy Policy — Diamond Work Book</title>
+<meta name="description" content="How Diamond Work Book handles your information. Your work data stays on your device — private and offline." />
+<link rel="icon" type="image/png" href="assets/icon-512.png" />
+<meta property="og:title" content="Privacy Policy — Diamond Work Book" />
+<meta property="og:description" content="Your work data stays on your device. Private &amp; offline." />
+<meta property="og:image" content="assets/feature-en.png" />
+<meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --blue:#007AFF; --blue-dark:#0051D5; --blue-50:#E3F2FD;
+    --ink:#202124; --muted:#5F6368; --line:#E8EAED;
+    --green:#34A853; --red:#EA4335; --white:#fff;
+    --radius:18px; --shadow:0 10px 30px rgba(0,40,120,.12);
+    --grad:linear-gradient(135deg,#007AFF 0%,#0051D5 100%);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:var(--ink);line-height:1.7;background:#F8F9FA;-webkit-font-smoothing:antialiased}
+  a{color:var(--blue);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:880px;margin:0 auto;padding:0 20px}
+  .btn{display:inline-flex;align-items:center;gap:10px;background:var(--grad);color:#fff;font-weight:600;padding:13px 24px;border-radius:999px;box-shadow:var(--shadow);transition:transform .15s ease,box-shadow .15s ease}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(0,40,120,.22);text-decoration:none}
+
+  /* Header */
+  header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:66px;max-width:1100px;margin:0 auto;padding:0 20px}
+  .brand{display:flex;align-items:center;gap:12px;font-weight:700;font-size:1.05rem;color:var(--ink)}
+  .brand:hover{text-decoration:none}
+  .brand img{width:36px;height:36px;border-radius:9px}
+  .nav-links{display:flex;gap:26px;align-items:center}
+  .nav-links a{color:var(--muted);font-weight:500;font-size:.95rem}
+  .nav-links a:hover{color:var(--ink);text-decoration:none}
+  .nav-links a.btn{color:#fff}
+  .nav-links a.btn:hover{color:#fff}
+  @media(max-width:680px){.nav-links a:not(.btn){display:none}}
+
+  /* Hero */
+  .hero{background:var(--grad);color:#fff;position:relative;overflow:hidden;padding:58px 0 84px;text-align:center}
+  .hero::after{content:"";position:absolute;right:-120px;top:-120px;width:420px;height:420px;background:radial-gradient(circle,rgba(255,255,255,.16),transparent 70%);border-radius:50%}
+  .hero::before{content:"";position:absolute;left:-100px;bottom:-160px;width:360px;height:360px;background:radial-gradient(circle,rgba(255,255,255,.12),transparent 70%);border-radius:50%}
+  .hero-inner{position:relative;z-index:1}
+  .hero-icon{width:84px;height:84px;border-radius:20px;box-shadow:0 16px 40px rgba(0,0,0,.28);margin-bottom:18px;background:#fff}
+  .hero h1{font-size:2.3rem;line-height:1.15;font-weight:800;margin-bottom:10px}
+  .hero .app-name{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);padding:6px 16px;border-radius:999px;font-size:.9rem;font-weight:600;margin-bottom:22px}
+  .hero p.lead{font-size:1.05rem;opacity:.95;max-width:560px;margin:0 auto}
+  .hero .updated{margin-top:18px;font-size:.85rem;opacity:.85;font-weight:500}
+
+  /* Privacy highlight badges */
+  .badges{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;max-width:880px;margin:-50px auto 0;padding:0 20px;position:relative;z-index:5}
+  .badge{flex:1 1 200px;background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px;text-align:center}
+  .badge .b-ico{width:46px;height:46px;border-radius:12px;background:var(--blue-50);color:var(--blue);display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin:0 auto 10px}
+  .badge h4{font-size:.98rem;margin-bottom:2px}
+  .badge p{color:var(--muted);font-size:.84rem;line-height:1.45}
+
+  /* Content card */
+  .content{margin:42px auto 0;background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:0 6px 24px rgba(0,40,120,.06);padding:14px 34px 40px}
+  .intro{font-size:1.02rem;color:#3c4043;padding:24px 0 6px;border-bottom:1px solid var(--line)}
+  .sec{display:flex;gap:16px;padding:26px 0;border-bottom:1px solid var(--line)}
+  .sec:last-of-type{border-bottom:none}
+  .sec-num{flex:0 0 38px;height:38px;border-radius:11px;background:var(--blue-50);color:var(--blue);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1rem}
+  .sec-body{flex:1;min-width:0}
+  .sec-body h2{font-size:1.18rem;font-weight:700;margin-bottom:8px}
+  .sec-body p{color:#3c4043;margin-bottom:8px}
+  .sec-body p:last-child{margin-bottom:0}
+  .sec-body ul{padding-left:20px;color:#3c4043}
+  .sec-body li{margin-bottom:6px}
+  code{background:#F1F3F4;padding:2px 7px;border-radius:6px;font-size:.88em;color:#0051D5}
+
+  /* Contact CTA */
+  .contact-cta{margin:34px auto 0;background:var(--grad);color:#fff;border-radius:22px;padding:34px;text-align:center;box-shadow:var(--shadow)}
+  .contact-cta h3{font-size:1.3rem;margin-bottom:6px}
+  .contact-cta p{opacity:.95;margin-bottom:20px}
+  .contact-cta .btn{background:#fff;color:var(--blue)}
+
+  /* Footer */
+  footer{background:#10161f;color:#aeb6c2;padding:42px 0;font-size:.92rem;margin-top:54px}
+  .foot{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center;max-width:1100px;margin:0 auto;padding:0 20px}
+  .foot a{color:#cfd6e0}
+  .foot .brand{color:#fff}
+  .foot-links{display:flex;gap:22px;flex-wrap:wrap}
+  .copyright{max-width:1100px;margin:18px auto 0;padding:0 20px;opacity:.7}
+
+  @media(max-width:560px){
+    .hero h1{font-size:1.8rem}
+    .content{padding:10px 20px 30px}
+    .sec{gap:12px}
+  }
+</style>
 </head>
 <body>
+
+<header>
+  <div class="nav">
+    <a class="brand" href="index.html"><img src="assets/icon-512.png" alt="Diamond Work Book icon" />Diamond Work Book</a>
+    <nav class="nav-links">
+      <a href="index.html#features">Features</a>
+      <a href="index.html#screens">Screenshots</a>
+      <a class="btn" href="https://play.google.com/store/apps/details?id=com.kp.diamondworkbook">Get the app</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-inner">
+    <img class="hero-icon" src="assets/icon-512.png" alt="Diamond Work Book app icon" />
+    <div><span class="app-name">💎 Diamond Work Book</span></div>
     <h1>Privacy Policy</h1>
-    <p class="updated">Diamond Work Book &middot; Last updated: 31 May 2026</p>
+    <p class="lead">Your work and your money stay yours. Here's exactly how we handle — and don't touch — your information.</p>
+    <p class="updated">Last updated: 31 May 2026</p>
+  </div>
+</section>
 
-    <p>
-        This Privacy Policy explains how <strong>Diamond Work Book</strong> ("the app", "we", "us")
-        handles your information. The app helps diamond workers record their daily work, working
-        days, and withdrawals. By using the app you agree to this policy.
+<!-- PRIVACY BADGES -->
+<div class="badges">
+  <div class="badge">
+    <div class="b-ico">🔒</div>
+    <h4>Stored on device</h4>
+    <p>Your records never leave your phone.</p>
+  </div>
+  <div class="badge">
+    <div class="b-ico">🙅</div>
+    <h4>No account</h4>
+    <p>No name, email or phone required.</p>
+  </div>
+  <div class="badge">
+    <div class="b-ico">☁️</div>
+    <h4>No cloud sync</h4>
+    <p>We can't see or upload your data.</p>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<main class="wrap">
+  <div class="content">
+    <p class="intro">
+      This Privacy Policy explains how <strong>Diamond Work Book</strong> ("the app", "we", "us")
+      handles your information. The app helps diamond workers record their daily work, working
+      days, and withdrawals. By using the app you agree to this policy.
     </p>
 
-    <h2>1. Information you enter</h2>
-    <p>
-        All work data you create in the app — daily work records, working days, and withdrawal
-        entries — is stored <strong>only on your device</strong>. We do not upload, transmit, sync,
-        or have any access to this data. The app does not require you to create an account or
-        provide any personal details such as your name, phone number, or email.
-    </p>
+    <div class="sec">
+      <div class="sec-num">1</div>
+      <div class="sec-body">
+        <h2>Information you enter</h2>
+        <p>
+          All work data you create in the app — daily work records, working days, and withdrawal
+          entries — is stored <strong>only on your device</strong>. We do not upload, transmit, sync,
+          or have any access to this data. The app does not require you to create an account or
+          provide any personal details such as your name, phone number, or email.
+        </p>
+      </div>
+    </div>
 
-    <h2>2. Information collected automatically (advertising)</h2>
-    <p>
-        The app displays advertisements served by <strong>Google AdMob</strong>. To deliver ads,
-        Google and its partners may collect and process certain information, including your device's
-        advertising identifier, IP address, general device information, and app-usage interactions.
-        This processing is governed by Google's own policies:
-    </p>
-    <ul>
-        <li><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a></li>
-        <li><a href="https://support.google.com/admob/answer/6128543" target="_blank" rel="noopener">How Google uses information from sites or apps that use its services</a></li>
-    </ul>
-    <p>
-        You can reset or limit ad personalization at any time from your device's settings
-        (<code>Settings &rarr; Google &rarr; Ads</code>).
-    </p>
+    <div class="sec">
+      <div class="sec-num">2</div>
+      <div class="sec-body">
+        <h2>Information collected automatically (advertising)</h2>
+        <p>
+          The app displays advertisements served by <strong>Google AdMob</strong>. To deliver ads,
+          Google and its partners may collect and process certain information, including your device's
+          advertising identifier, IP address, general device information, and app-usage interactions.
+          This processing is governed by Google's own policies:
+        </p>
+        <ul>
+          <li><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a></li>
+          <li><a href="https://support.google.com/admob/answer/6128543" target="_blank" rel="noopener">How Google uses information from sites or apps that use its services</a></li>
+        </ul>
+        <p>
+          You can reset or limit ad personalization at any time from your device's settings
+          (<code>Settings &rarr; Google &rarr; Ads</code>).
+        </p>
+      </div>
+    </div>
 
-    <h2>3. Permissions the app uses</h2>
-    <ul>
-        <li><strong>Internet &amp; network state</strong> — required only to load advertisements.</li>
-        <li><strong>Notifications</strong> — used to send an optional daily reminder. You can disable this in your device's notification settings.</li>
-        <li><strong>Run at startup</strong> — used to reschedule the daily reminder after the device restarts.</li>
-    </ul>
+    <div class="sec">
+      <div class="sec-num">3</div>
+      <div class="sec-body">
+        <h2>Permissions the app uses</h2>
+        <ul>
+          <li><strong>Internet &amp; network state</strong> — required only to load advertisements.</li>
+          <li><strong>Notifications</strong> — used to send an optional daily reminder. You can disable this in your device's notification settings.</li>
+          <li><strong>Run at startup</strong> — used to reschedule the daily reminder after the device restarts.</li>
+        </ul>
+      </div>
+    </div>
 
-    <h2>4. Children's privacy</h2>
-    <p>
-        The app is not directed to children under 13, and we do not knowingly collect personal
-        information from children.
-    </p>
+    <div class="sec">
+      <div class="sec-num">4</div>
+      <div class="sec-body">
+        <h2>Children's privacy</h2>
+        <p>
+          The app is not directed to children under 13, and we do not knowingly collect personal
+          information from children.
+        </p>
+      </div>
+    </div>
 
-    <h2>5. Data retention and deletion</h2>
-    <p>
-        Because your work data lives only on your device, <strong>uninstalling the app permanently
-        deletes all of it</strong>. You may also clear the app's data from your device settings at
-        any time.
-    </p>
+    <div class="sec">
+      <div class="sec-num">5</div>
+      <div class="sec-body">
+        <h2>Data retention and deletion</h2>
+        <p>
+          Because your work data lives only on your device, <strong>uninstalling the app permanently
+          deletes all of it</strong>. You may also clear the app's data from your device settings at
+          any time.
+        </p>
+      </div>
+    </div>
 
-    <h2>6. Changes to this policy</h2>
-    <p>
-        We may update this Privacy Policy from time to time. Any changes will be posted on this page
-        with an updated date.
-    </p>
+    <div class="sec">
+      <div class="sec-num">6</div>
+      <div class="sec-body">
+        <h2>Changes to this policy</h2>
+        <p>
+          We may update this Privacy Policy from time to time. Any changes will be posted on this page
+          with an updated date.
+        </p>
+      </div>
+    </div>
+  </div>
 
-    <h2>7. Contact us</h2>
-    <p>
-        If you have any questions about this Privacy Policy, contact us at
-        <a href="mailto:krunalpandav65@gmail.com">krunalpandav65@gmail.com</a>.
-    </p>
+  <!-- CONTACT CTA -->
+  <div class="contact-cta">
+    <h3>Questions about your privacy?</h3>
+    <p>We're happy to help. Reach out any time.</p>
+    <a class="btn" href="mailto:krunalpandav65@gmail.com">✉ krunalpandav65@gmail.com</a>
+  </div>
+</main>
 
-    <footer>&copy; 2026 Diamond Work Book. All rights reserved.</footer>
+<!-- FOOTER -->
+<footer>
+  <div class="foot">
+    <a class="brand" href="index.html" style="display:flex;align-items:center;gap:12px"><strong>Diamond Work Book</strong></a>
+    <nav class="foot-links">
+      <a href="index.html#features">Features</a>
+      <a href="index.html#screens">Screenshots</a>
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="mailto:krunalpandav65@gmail.com">Contact</a>
+      <a href="https://play.google.com/store/apps/details?id=com.kp.diamondworkbook">Google Play</a>
+    </nav>
+  </div>
+  <div class="copyright">© 2026 Diamond Work Book. Made for diamond workers.</div>
+</footer>
+
 </body>
 </html>
