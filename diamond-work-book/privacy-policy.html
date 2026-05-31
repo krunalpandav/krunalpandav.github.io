@@ -41,7 +41,13 @@
   .nav-links a:hover{color:var(--ink);text-decoration:none}
   .nav-links a.btn{color:#fff}
   .nav-links a.btn:hover{color:#fff}
-  @media(max-width:680px){.nav-links a:not(.btn){display:none}}
+  @media(max-width:680px){
+    .nav-links a:not(.btn){display:none}
+    .nav{height:auto;min-height:58px;padding:9px 16px;gap:10px}
+    .brand{font-size:.92rem;gap:8px;min-width:0}
+    .brand img{width:30px;height:30px;flex:0 0 auto}
+    .nav-links a.btn{padding:9px 16px;font-size:.85rem;white-space:nowrap;flex:0 0 auto}
+  }
 
   /* Hero */
   .hero{background:var(--grad);color:#fff;position:relative;overflow:hidden;padding:58px 0 84px;text-align:center}
@@ -93,6 +99,9 @@
     .hero h1{font-size:1.8rem}
     .content{padding:10px 20px 30px}
     .sec{gap:12px}
+    .contact-cta{padding:28px 20px}
+    .contact-cta .btn{max-width:100%;font-size:.9rem;padding:13px 18px}
+    .contact-cta .btn svg{flex:0 0 auto}
   }
 </style>
 </head>
@@ -233,7 +242,7 @@
   <div class="contact-cta">
     <h3>Questions about your privacy?</h3>
     <p>We're happy to help. Reach out any time.</p>
-    <a class="btn" href="mailto:krunalpandav65@gmail.com">✉ krunalpandav65@gmail.com</a>
+    <a class="btn" href="mailto:krunalpandav65@gmail.com"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>krunalpandav65@gmail.com</a>
   </div>
 </main>
 

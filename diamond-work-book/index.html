@@ -39,7 +39,15 @@
   .nav-links{display:flex;gap:26px;align-items:center}
   .nav-links a{color:var(--muted);font-weight:500;font-size:.95rem}
   .nav-links a:hover{color:var(--ink)}
-  @media(max-width:680px){.nav-links a:not(.btn){display:none}}
+  .nav-links a.btn{color:#fff}
+  .nav-links a.btn:hover{color:#fff}
+  @media(max-width:680px){
+    .nav-links a:not(.btn){display:none}
+    .nav{height:auto;min-height:58px;padding:9px 16px;gap:10px}
+    .brand{font-size:.92rem;gap:8px;min-width:0}
+    .brand img{width:30px;height:30px;flex:0 0 auto}
+    .nav-links a.btn{padding:9px 16px;font-size:.85rem;white-space:nowrap;flex:0 0 auto}
+  }
 
   /* Hero */
   .hero{background:var(--grad);color:#fff;position:relative;overflow:hidden;padding:74px 0 90px}
