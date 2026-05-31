@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="512" y2="512" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0A82FF"></stop>
+      <stop offset="1" stop-color="#0051D5"></stop>
+    </linearGradient>
+    <radialGradient id="glow" cx="30%" cy="18%" r="62%">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.24"></stop>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"></stop>
+    </radialGradient>
+  </defs>
+
+  
+  <rect width="512" height="512" fill="url(#bg)"></rect>
+  <rect width="512" height="512" fill="url(#glow)"></rect>
+
+  
+  <g transform="translate(106,55.75) scale(3)">
+    <polygon points="26,34 74,34 86,48 50,84 14,48" fill="#ffffff"></polygon>
+    <g fill="none" stroke="#0046B4" stroke-opacity="0.20" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="14" y1="48" x2="86" y2="48"></line>
+      <line x1="26" y1="34" x2="14" y2="48"></line>
+      <line x1="74" y1="34" x2="86" y2="48"></line>
+      <line x1="42" y1="34" x2="34" y2="48"></line>
+      <line x1="58" y1="34" x2="66" y2="48"></line>
+      <line x1="34" y1="48" x2="50" y2="84"></line>
+      <line x1="66" y1="48" x2="50" y2="84"></line>
+      <line x1="50" y1="48" x2="50" y2="84"></line>
+    </g>
+    <rect x="30" y="93" width="40" height="6.5" rx="3.25" fill="#ffffff"></rect>
+  </g>
+</svg>
