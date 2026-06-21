@@ -4,10 +4,10 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Privacy Policy — Diamond Work Book</title>
-<meta name="description" content="How Diamond Work Book handles your information. Your work data stays on your device — private and offline." />
+<meta name="description" content="How Diamond Work Book handles your information. Your work data stays on your device, with an optional Google Drive backup you control." />
 <link rel="icon" type="image/png" href="assets/icon-512.png" />
 <meta property="og:title" content="Privacy Policy — Diamond Work Book" />
-<meta property="og:description" content="Your work data stays on your device. Private &amp; offline." />
+<meta property="og:description" content="Your work data stays on your device, with an optional Google Drive backup you control." />
 <meta property="og:image" content="assets/feature-en.png" />
 <meta property="og:type" content="website" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -125,7 +125,7 @@
     <div><span class="app-name">💎 Diamond Work Book</span></div>
     <h1>Privacy Policy</h1>
     <p class="lead">Your work and your money stay yours. Here's exactly how we handle — and don't touch — your information.</p>
-    <p class="updated">Last updated: 31 May 2026</p>
+    <p class="updated">Last updated: 22 June 2026</p>
   </div>
 </section>
 
@@ -134,17 +134,17 @@
   <div class="badge">
     <div class="b-ico">🔒</div>
     <h4>Stored on device</h4>
-    <p>Your records never leave your phone.</p>
+    <p>Your records stay on your phone by default.</p>
   </div>
   <div class="badge">
     <div class="b-ico">🙅</div>
-    <h4>No account</h4>
-    <p>No name, email or phone required.</p>
+    <h4>No account to use</h4>
+    <p>No name, email or phone required to use the app.</p>
   </div>
   <div class="badge">
     <div class="b-ico">☁️</div>
-    <h4>No cloud sync</h4>
-    <p>We can't see or upload your data.</p>
+    <h4>Backup you own</h4>
+    <p>Optional backup saved only to your private Drive folder.</p>
   </div>
 </div>
 
@@ -162,16 +162,67 @@
       <div class="sec-body">
         <h2>Information you enter</h2>
         <p>
-          All work data you create in the app — daily work records, working days, and withdrawal
-          entries — is stored <strong>only on your device</strong>. We do not upload, transmit, sync,
-          or have any access to this data. The app does not require you to create an account or
-          provide any personal details such as your name, phone number, or email.
+          All work data you create in the app — daily work records, working days, withdrawal entries,
+          and (in Manager mode) the employees you add — is stored <strong>on your device</strong>.
+          We do not transmit or access this data, <strong>unless you choose to turn on Google Drive
+          backup</strong> (see section 2 below). The app does not require you to create an account or
+          provide personal details such as your name, phone number, or email to use it.
         </p>
       </div>
     </div>
 
     <div class="sec">
       <div class="sec-num">2</div>
+      <div class="sec-body">
+        <h2>Google Drive backup (optional)</h2>
+        <p>
+          The app offers an <strong>optional</strong> backup of your data to your own Google Drive.
+          It is off by default; nothing is uploaded until you turn it on. When you enable it, the app
+          asks you to sign in with <strong>Google Sign-In</strong>, which lets it see your account's
+          <strong>email address and basic profile</strong> (shown on the Backup screen so you know
+          which account is connected), and requests only the <code>drive.appdata</code> permission —
+          a hidden, app-private folder in your Drive. The app <strong>cannot see, read, or change any
+          other files</strong> in your Google Drive.
+        </p>
+        <p>
+          The backup is a single file containing your work records, withdrawals, employees, and your
+          preferences (theme, language, price). You can run a backup manually or schedule automatic
+          backups (Off / Daily / Weekly). Restoring on a new device replaces that device's data with
+          the contents of your backup.
+        </p>
+        <p>
+          You can turn backup off, disconnect your Google account, or delete the backup at any time
+          from <strong>Settings → Backup</strong>. You can also remove the app's hidden data from
+          your Google account at <a href="https://drive.google.com" target="_blank" rel="noopener">drive.google.com</a>.
+        </p>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-num">3</div>
+      <div class="sec-body">
+        <h2>Analytics &amp; crash reporting</h2>
+        <p>
+          The app uses <strong>Google Firebase</strong> to keep it stable and improve it:
+        </p>
+        <ul>
+          <li><strong>Firebase Analytics</strong> — aggregate, non-identifying usage data collected
+            automatically by Google (such as app opens and sessions, and general device and country
+            information). The app does not log your work records or any personal details as events.</li>
+          <li><strong>Firebase Crashlytics</strong> — automatic crash and error reports, including
+            your device model, operating-system version, and the technical stack trace, so we can fix
+            problems. These reports do not include your work records or withdrawals.</li>
+        </ul>
+        <p>
+          This processing is governed by Google's policies — see the
+          <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a>
+          and <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">Firebase privacy &amp; security</a>.
+        </p>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-num">4</div>
       <div class="sec-body">
         <h2>Information collected automatically (advertising)</h2>
         <p>
@@ -192,19 +243,24 @@
     </div>
 
     <div class="sec">
-      <div class="sec-num">3</div>
+      <div class="sec-num">5</div>
       <div class="sec-body">
         <h2>Permissions the app uses</h2>
         <ul>
-          <li><strong>Internet &amp; network state</strong> — required only to load advertisements.</li>
+          <li><strong>Internet &amp; network state</strong> — used to load advertisements, send crash and analytics reports, and (if you enable it) back up to Google Drive.</li>
           <li><strong>Notifications</strong> — used to send an optional daily reminder. You can disable this in your device's notification settings.</li>
           <li><strong>Run at startup</strong> — used to reschedule the daily reminder after the device restarts.</li>
         </ul>
+        <p>
+          A Google account is requested <strong>only</strong> when you choose to turn on Google Drive
+          backup. The app uses your device's screen lock or fingerprint for the optional app lock; this
+          is handled by Android and we never receive your biometric data.
+        </p>
       </div>
     </div>
 
     <div class="sec">
-      <div class="sec-num">4</div>
+      <div class="sec-num">6</div>
       <div class="sec-body">
         <h2>Children's privacy</h2>
         <p>
@@ -215,19 +271,25 @@
     </div>
 
     <div class="sec">
-      <div class="sec-num">5</div>
+      <div class="sec-num">7</div>
       <div class="sec-body">
         <h2>Data retention and deletion</h2>
         <p>
-          Because your work data lives only on your device, <strong>uninstalling the app permanently
-          deletes all of it</strong>. You may also clear the app's data from your device settings at
+          Your work data lives on your device, so <strong>uninstalling the app permanently deletes the
+          copy on your phone</strong>. You may also clear the app's data from your device settings at
           any time.
+        </p>
+        <p>
+          If you turned on Google Drive backup, that backup <strong>stays in your Drive until you
+          delete it</strong> — uninstalling the app does not remove it. You can delete it from
+          <strong>Settings → Backup</strong> before uninstalling, or remove the app's hidden data from
+          your Google account at <a href="https://drive.google.com" target="_blank" rel="noopener">drive.google.com</a>.
         </p>
       </div>
     </div>
 
     <div class="sec">
-      <div class="sec-num">6</div>
+      <div class="sec-num">8</div>
       <div class="sec-body">
         <h2>Changes to this policy</h2>
         <p>
