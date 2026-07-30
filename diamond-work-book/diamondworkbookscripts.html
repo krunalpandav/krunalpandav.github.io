@@ -1,0 +1,436 @@
+<title>Diamond Work Book — Video Scripts</title>
+<style>
+  :root {
+    --bg: #eef2f8;
+    --surface: #ffffff;
+    --surface-2: #f4f7fc;
+    --ink: #0f1b2d;
+    --muted: #5b6b82;
+    --line: #dbe3ef;
+    --accent: #0ea5e9;
+    --accent-soft: #e2f3fc;
+    --yt: #e11900;
+    --sh: #ff2d55;
+    --ig: #c1338c;
+    --shadow: 0 1px 2px rgba(15,27,45,.06), 0 12px 34px rgba(15,27,45,.08);
+    --gu: "Noto Sans Gujarati", "Hind Vadodara", "Mukta Vaani", "Shruti", "Gujarati Sangam MN", system-ui, sans-serif;
+    --lat: ui-sans-serif, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --maxw: 940px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0a1120;
+      --surface: #111d31;
+      --surface-2: #0e1829;
+      --ink: #eaf2ff;
+      --muted: #90a3c0;
+      --line: #223350;
+      --accent: #45b8ec;
+      --accent-soft: #12283e;
+      --yt: #ff5a45;
+      --sh: #ff6b86;
+      --ig: #e07ac0;
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 16px 40px rgba(0,0,0,.45);
+    }
+  }
+  :root[data-theme="light"] {
+    --bg: #eef2f8; --surface: #ffffff; --surface-2: #f4f7fc; --ink: #0f1b2d;
+    --muted: #5b6b82; --line: #dbe3ef; --accent: #0ea5e9; --accent-soft: #e2f3fc;
+    --yt:#e11900; --sh:#ff2d55; --ig:#c1338c;
+    --shadow: 0 1px 2px rgba(15,27,45,.06), 0 12px 34px rgba(15,27,45,.08);
+  }
+  :root[data-theme="dark"] {
+    --bg: #0a1120; --surface: #111d31; --surface-2: #0e1829; --ink: #eaf2ff;
+    --muted: #90a3c0; --line: #223350; --accent: #45b8ec; --accent-soft: #12283e;
+    --yt:#ff5a45; --sh:#ff6b86; --ig:#e07ac0;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 16px 40px rgba(0,0,0,.45);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: var(--gu); line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 20px 80px; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative; overflow: hidden;
+    background:
+      radial-gradient(1200px 380px at 82% -10%, var(--accent-soft), transparent 60%),
+      linear-gradient(180deg, var(--surface), var(--bg));
+    border-bottom: 1px solid var(--line);
+  }
+  .hero-inner {
+    max-width: var(--maxw); margin: 0 auto; padding: 56px 20px 46px;
+    display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center;
+  }
+  .eyebrow {
+    font-family: var(--lat); text-transform: uppercase; letter-spacing: .28em;
+    font-size: 11px; font-weight: 700; color: var(--accent);
+    display: flex; align-items: center; gap: 10px; margin: 0 0 14px;
+  }
+  .eyebrow::before { content:""; width: 26px; height: 1.5px; background: var(--accent); display:inline-block; }
+  h1 {
+    font-family: var(--lat); font-weight: 800; letter-spacing: -.02em;
+    font-size: clamp(30px, 6vw, 52px); line-height: 1.02; margin: 0 0 16px;
+    text-wrap: balance;
+  }
+  .hero p.lead { margin: 0; max-width: 46ch; color: var(--muted); font-size: 17px; }
+  .gem { width: clamp(84px, 16vw, 132px); height: auto; filter: drop-shadow(0 10px 24px rgba(14,165,233,.35)); }
+  @media (max-width: 640px){
+    .hero-inner { grid-template-columns: 1fr; }
+    .gem { width: 84px; }
+  }
+
+  /* ---------- Meta strip ---------- */
+  .meta {
+    display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px;
+  }
+  .chip {
+    font-family: var(--lat); font-size: 12.5px; font-weight: 600;
+    background: var(--surface); border: 1px solid var(--line); color: var(--muted);
+    padding: 6px 12px; border-radius: 999px;
+  }
+  .chip b { color: var(--ink); font-weight: 700; }
+
+  /* ---------- Section ---------- */
+  section.script { margin-top: 40px; }
+  .s-head { display: flex; align-items: center; gap: 14px; margin-bottom: 6px; flex-wrap: wrap; }
+  .badge {
+    font-family: var(--lat); font-weight: 700; font-size: 12px; letter-spacing: .04em;
+    color: #fff; padding: 5px 12px; border-radius: 7px; white-space: nowrap;
+  }
+  .badge.yt { background: var(--yt); }
+  .badge.sh { background: var(--sh); }
+  .badge.ig { background: linear-gradient(120deg, #f58529, var(--ig) 55%, #7a3ff2); }
+  .s-head h2 {
+    font-family: var(--lat); font-weight: 800; letter-spacing: -.01em;
+    font-size: clamp(21px, 3.4vw, 27px); margin: 0;
+  }
+  .s-sub { color: var(--muted); margin: 2px 0 18px; font-size: 15px; }
+  .s-title {
+    background: var(--surface-2); border: 1px dashed var(--line); border-radius: 10px;
+    padding: 12px 16px; margin-bottom: 20px; font-size: 15px;
+  }
+  .s-title span { font-family: var(--lat); text-transform: uppercase; letter-spacing:.14em;
+    font-size: 10.5px; font-weight: 700; color: var(--accent); display:block; margin-bottom: 4px; }
+
+  /* ---------- Table ---------- */
+  .tblwrap {
+    overflow-x: auto; border: 1px solid var(--line); border-radius: 14px;
+    background: var(--surface); box-shadow: var(--shadow);
+  }
+  table { border-collapse: collapse; width: 100%; min-width: 640px; }
+  thead th {
+    text-align: left; font-family: var(--lat); text-transform: uppercase;
+    letter-spacing: .1em; font-size: 10.5px; font-weight: 700; color: var(--muted);
+    background: var(--surface-2); padding: 12px 16px; border-bottom: 1px solid var(--line);
+    position: sticky; top: 0;
+  }
+  tbody td { padding: 13px 16px; border-bottom: 1px solid var(--line); vertical-align: top; font-size: 15px; }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:nth-child(even) { background: color-mix(in srgb, var(--surface-2) 55%, transparent); }
+  td.num {
+    font-family: var(--lat); font-variant-numeric: tabular-nums; font-weight: 700;
+    color: var(--accent); white-space: nowrap; width: 1%;
+  }
+  td.vo { font-weight: 500; }
+  td.txt { color: var(--muted); font-size: 13.5px; white-space: nowrap; }
+  .say { display:block; font-family: var(--lat); font-size: 10px; letter-spacing:.12em;
+    text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 3px; }
+
+  /* ---------- Caption / CTA blocks ---------- */
+  .note {
+    margin-top: 18px; border-left: 3px solid var(--accent);
+    background: var(--surface); border-radius: 0 12px 12px 0;
+    padding: 14px 18px; box-shadow: var(--shadow);
+  }
+  .note h4 {
+    margin: 0 0 8px; font-family: var(--lat); font-size: 11px; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--accent); font-weight: 700;
+  }
+  .note p { margin: 0 0 6px; font-size: 15px; }
+  .tags { color: var(--muted); font-size: 13.5px; font-family: var(--lat); word-spacing: 3px; }
+
+  .cta-line {
+    margin-top: 16px; background: var(--accent-soft);
+    border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--line));
+    border-radius: 12px; padding: 14px 18px; font-size: 15.5px; font-weight: 600;
+  }
+  .cta-line span { font-family: var(--lat); text-transform: uppercase; letter-spacing:.12em;
+    font-size: 10.5px; font-weight: 700; color: var(--accent); display:block; margin-bottom: 4px; }
+
+  /* ---------- Tips ---------- */
+  .tips {
+    margin-top: 48px; background: var(--surface); border: 1px solid var(--line);
+    border-radius: 16px; padding: 26px 26px 10px; box-shadow: var(--shadow);
+  }
+  .tips h3 { font-family: var(--lat); font-weight: 800; margin: 0 0 4px; font-size: 20px; }
+  .tips > p.sub { color: var(--muted); margin: 0 0 16px; font-size: 14px; }
+  .tips ul { margin: 0; padding: 0; list-style: none; }
+  .tips li { padding: 12px 0 12px 34px; position: relative; border-top: 1px solid var(--line); font-size: 15px; }
+  .tips li:first-of-type { border-top: 0; }
+  .tips li::before {
+    content: "◆"; position: absolute; left: 6px; top: 12px; color: var(--accent); font-size: 12px;
+  }
+
+  hr.div { border: 0; height: 1px; background: var(--line); margin: 40px 0 0; }
+  footer { text-align: center; color: var(--muted); font-size: 13px; margin-top: 30px; font-family: var(--lat); }
+
+  a { color: var(--accent); }
+  ::selection { background: var(--accent); color: #fff; }
+</style>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div>
+      <p class="eyebrow">Diamond Work Book · Video Scripts</p>
+      <h1>પ્રમોશન વિડિયો<br>સ્ક્રિપ્ટ — ગુજરાતી</h1>
+      <p class="lead">હીરાના કારીગરો માટે બનેલી ચોપડી App ના પ્રમોશન માટે — YouTube, YouTube Shorts અને Instagram Reel ની તૈયાર scripts, દ્રશ્ય-દ્રશ્ય પ્રમાણે.</p>
+      <div class="meta">
+        <span class="chip"><b>3</b> platform</span>
+        <span class="chip">YouTube · Shorts · Instagram</span>
+        <span class="chip">Voiceover + Screen text</span>
+        <span class="chip"><b>ગુજરાતી</b></span>
+      </div>
+    </div>
+    <svg class="gem" viewBox="0 0 120 130" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <polygon points="24,6 96,6 118,40 60,124 2,40" fill="#7fd2f2"/>
+      <polygon points="24,6 60,40 2,40" fill="#bfe8f8"/>
+      <polygon points="96,6 118,40 60,40" fill="#a5ddf5"/>
+      <polygon points="24,6 96,6 60,40" fill="#e6f6fd"/>
+      <polygon points="2,40 60,40 60,124" fill="#5cbfe8"/>
+      <polygon points="60,40 118,40 60,124" fill="#3ba9dc"/>
+      <polygon points="24,6 60,40 96,6" fill="#d4f0fb" opacity=".7"/>
+    </svg>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- ============ YOUTUBE ============ -->
+  <section class="script">
+    <div class="s-head">
+      <span class="badge yt">YouTube</span>
+      <h2>લાંબો વિડિયો</h2>
+    </div>
+    <p class="s-sub">સમય: આશરે 2–3 મિનિટ · Format: Horizontal 16:9</p>
+    <div class="s-title">
+      <span>Title suggestion</span>
+      હીરાના કારીગરો માટે No.1 ચોપડી App — Diamond Work Book | રોજનો હિસાબ ફોનમાં
+    </div>
+    <div class="tblwrap">
+      <table>
+        <thead>
+          <tr><th>#</th><th>દ્રશ્ય (Visual / B-roll)</th><th>Voiceover — બોલવાનું</th><th>Screen text</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="num">1</td>
+            <td>કારખાનામાં હીરો ઘસતા કારીગર, પછી ખિસ્સામાંથી ડાયરી કાઢે</td>
+            <td class="vo">"રોજ કેટલા હીરા થયા? કેટલા પૈસા બાકી? આ ડાયરીમાં લખો... ને ડાયરી ખોવાય તો?"</td>
+            <td class="txt">ડાયરી હવે જૂની થઈ ગઈ</td>
+          </tr>
+          <tr>
+            <td class="num">2</td>
+            <td>App icon zoom-in, splash screen</td>
+            <td class="vo">"એટલે જ બનાવી છે — Diamond Work Book. તમારા રોજના કામની ડિજિટલ ચોપડી."</td>
+            <td class="txt">Diamond Work Book</td>
+          </tr>
+          <tr>
+            <td class="num">3</td>
+            <td>Add Record sheet — હીરાની સંખ્યા + ભાવ ટાઈપ કરે</td>
+            <td class="vo">"કામ પૂરું થાય એટલે ખાલી ઉમેરો — કેટલા હીરા, શું ભાવ. બસ. એક જ દિવસે અલગ-અલગ ભાવના હીરા હોય તોય બધું આપોઆપ ગણાઈ જાય."</td>
+            <td class="txt">➕ કામ ઉમેરો</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>Dashboard — મહિનાના metrics દેખાય</td>
+            <td class="vo">"Dashboard ખોલો — આખા મહિનાના કામના દિવસ, હીરા, કમાણી અને ઉપાડ... એક જ નજરમાં."</td>
+            <td class="txt">આખો મહિનો એક નજરમાં</td>
+          </tr>
+          <tr>
+            <td class="num">5</td>
+            <td>Withdrawal add — date picker</td>
+            <td class="vo">"પૈસા ઉપાડ્યા? અહીં નોંધો. ને ધ્યાન રાખો — બાકી રકમથી વધારે ઉપાડ App ક્યારેય નહીં થવા દે. હિસાબ હંમેશા સાચો."</td>
+            <td class="txt">ઉપાડ — હિસાબ સાચો</td>
+          </tr>
+          <tr>
+            <td class="num">6</td>
+            <td>Manager mode — employee list, drill in</td>
+            <td class="vo">"શેઠ છો? કારીગરો ઉમેરો. દરેકનો અલગ હિસાબ, અલગ ભાવ — બધું અલગ-અલગ સચવાય."</td>
+            <td class="txt">👥 Manager Mode</td>
+          </tr>
+          <tr>
+            <td class="num">7</td>
+            <td>Google Drive backup screen</td>
+            <td class="vo">"ફોન ખોવાય કે નવો લો — ચિંતા નહીં. Google Drive પર WhatsApp જેવું backup. તમારો data હંમેશા સલામત, ને ફક્ત તમારો."</td>
+            <td class="txt">☁️ Drive Backup</td>
+          </tr>
+          <tr>
+            <td class="num">8</td>
+            <td>Airplane mode on, app ચાલતી બતાવો</td>
+            <td class="vo">"Internet ના હોય તોય ચાલે — સાવ offline. ને ત્રણ ભાષામાં: ગુજરાતી, हिन्दी, English."</td>
+            <td class="txt">Offline · 3 ભાષા</td>
+          </tr>
+          <tr>
+            <td class="num">9</td>
+            <td>Fingerprint unlock + dark mode toggle</td>
+            <td class="vo">"Fingerprint lock થી data ખાનગી. Dark mode આંખને આરામ."</td>
+            <td class="txt">🔒 Lock · 🌙 Dark</td>
+          </tr>
+          <tr>
+            <td class="num">10</td>
+            <td>Play Store page / QR code</td>
+            <td class="vo">"આજે જ Play Store પરથી Diamond Work Book download કરો — ને ડાયરીને કાયમ માટે વિદાય આપો."</td>
+            <td class="txt">હમણાં જ Download કરો</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="cta-line">
+      <span>અંતે CTA — બોલવાનું</span>
+      "વિડિયો ગમ્યો હોય તો Like કરો, Channel Subscribe કરો — ને તમારા કારીગર મિત્રોને જરૂર share કરો!"
+    </div>
+  </section>
+
+  <hr class="div">
+
+  <!-- ============ SHORTS ============ -->
+  <section class="script">
+    <div class="s-head">
+      <span class="badge sh">YouTube Shorts</span>
+      <h2>ટૂંકો વિડિયો</h2>
+    </div>
+    <p class="s-sub">સમય: આશરે 40 સેકન્ડ · Format: Vertical 9:16 · Hook પહેલી 3 સેકન્ડમાં જ</p>
+    <div class="tblwrap">
+      <table>
+        <thead>
+          <tr><th>સમય</th><th>Visual</th><th>Voiceover + Screen text</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="num">0–3s</td>
+            <td>કારીગર જૂની ડાયરીમાં હિસાબ ગોતતો, પાના ફાટેલા</td>
+            <td class="vo"><span class="say">🔊 Hook</span>"હજી પણ હીરાનો હિસાબ ડાયરીમાં લખો છો?"</td>
+          </tr>
+          <tr>
+            <td class="num">3–8s</td>
+            <td>App ખૂલે, Add Record sheet</td>
+            <td class="vo">"કામ થાય એટલે ખાલી ટાઈપ કરો — કેટલા હીરા, શું ભાવ."</td>
+          </tr>
+          <tr>
+            <td class="num">8–15s</td>
+            <td>Dashboard metrics animate</td>
+            <td class="vo">"આખા મહિનાની કમાણી ને ઉપાડ — એક નજરમાં."</td>
+          </tr>
+          <tr>
+            <td class="num">15–22s</td>
+            <td>Withdrawal — વધારે ઉપાડ પર error</td>
+            <td class="vo">"બાકીથી વધારે ઉપાડ? App થવા જ નહીં દે. હિસાબ કાયમ સાચો."</td>
+          </tr>
+          <tr>
+            <td class="num">22–30s</td>
+            <td>Drive backup tick</td>
+            <td class="vo">"ફોન ખોવાય તોય data સલામત — Google Drive backup."</td>
+          </tr>
+          <tr>
+            <td class="num">30–37s</td>
+            <td>Offline (airplane mode) + 3 ભાષા toggle</td>
+            <td class="vo">"Internet વગર ચાલે. ગુજરાતી, हिन्दी, English."</td>
+          </tr>
+          <tr>
+            <td class="num">37–40s</td>
+            <td>Play Store + મોટું text</td>
+            <td class="vo"><span class="say">🔊 CTA</span>"Diamond Work Book — હમણાં download કરો."</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note">
+      <h4>Pinned caption</h4>
+      <p>હીરાના કારીગરો માટે ચોપડી App 💎</p>
+      <p class="tags">#DiamondWorkBook #હીરા #Surat #DiamondWorker #રત્નકલાકાર</p>
+    </div>
+  </section>
+
+  <hr class="div">
+
+  <!-- ============ INSTAGRAM ============ -->
+  <section class="script">
+    <div class="s-head">
+      <span class="badge ig">Instagram Reel</span>
+      <h2>રીલ</h2>
+    </div>
+    <p class="s-sub">સમય: આશરે 30–45 સેકન્ડ · Format: Vertical 9:16 · Trending audio ઉપર, fast transitions</p>
+    <div class="tblwrap">
+      <table>
+        <thead>
+          <tr><th>સમય</th><th>ભાગ</th><th>Voiceover + Screen text</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="num">0–3s</td>
+            <td>Hook</td>
+            <td class="vo"><span class="say">Screen: "ડાયરીવાળા કારીગરો આ જુઓ 👇"</span>🔊 "તમારો આખા મહિનાનો હિસાબ... હવે ફોનમાં."</td>
+          </tr>
+          <tr>
+            <td class="num">3–8s</td>
+            <td>Add Record clip</td>
+            <td class="vo">"કામ ઉમેરો — હીરા ને ભાવ, બસ."</td>
+          </tr>
+          <tr>
+            <td class="num">8–14s</td>
+            <td>Dashboard clip</td>
+            <td class="vo">"કમાણી, ઉપાડ, બાકી — બધું આપોઆપ."</td>
+          </tr>
+          <tr>
+            <td class="num">14–20s</td>
+            <td>Manager mode clip</td>
+            <td class="vo">"શેઠ હો તો બધા કારીગરોનો અલગ હિસાબ."</td>
+          </tr>
+          <tr>
+            <td class="num">20–26s</td>
+            <td>Backup clip</td>
+            <td class="vo">"ફોન બદલો તોય data સલામત — Drive backup."</td>
+          </tr>
+          <tr>
+            <td class="num">26–32s</td>
+            <td>Offline + ભાષા clip</td>
+            <td class="vo">"Offline ચાલે, ગુજરાતીમાં ચાલે."</td>
+          </tr>
+          <tr>
+            <td class="num">32–45s</td>
+            <td>CTA</td>
+            <td class="vo"><span class="say">Screen: "💎 Diamond Work Book — Link in Bio"</span>🔊 "Bio ની link પરથી હમણાં download કરો."</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note">
+      <h4>Caption (post સાથે)</h4>
+      <p>ડાયરીને કહો બાય-બાય 👋</p>
+      <p>હીરાના કારીગરો માટે ખાસ બનેલી App — રોજનું કામ, ઉપાડ ને કમાણી બધું એક જ જગ્યાએ. 📒➡️📱</p>
+      <p>✅ Offline ચાલે &nbsp; ✅ Google Drive backup &nbsp; ✅ ગુજરાતી / हिन्दी / English</p>
+      <p>આજે જ download કરો 👉 link in bio</p>
+      <p class="tags">#DiamondWorkBook #હીરા #Surat #DiamondCity #રત્નકલાકાર #DiamondWorker #Kariger #SuratDiamond</p>
+    </div>
+  </section>
+
+  <!-- ============ TIPS ============ -->
+  <div class="tips">
+    <h3>શૂટ કરતી વખતે ટૂંકી ટિપ્સ</h3>
+    <p class="sub">દરેક platform માટે ધ્યાનમાં રાખવા જેવી બાબતો</p>
+    <ul>
+      <li>App ના actual screens નું <b>screen recording</b> કરો — Add Record → Dashboard → Backup ક્રમમાં.</li>
+      <li>Shorts ને Reel <b>vertical (9:16)</b> રાખો; YouTube લાંબો વિડિયો <b>horizontal (16:9)</b>.</li>
+      <li>પહેલી 3 સેકન્ડ સૌથી અગત્યની — ત્યાં જ "ડાયરી છોડો" વાળો hook આવવો જોઈએ.</li>
+      <li>અંતે હંમેશા સ્પષ્ટ <b>Download CTA</b> — એ જ મુખ્ય call-to-action.</li>
+      <li>Voiceover શાંત, સાફ ને ધીમા અવાજમાં — કારીગર સાથે વાત કરતા હો એમ.</li>
+    </ul>
+  </div>
+
+  <footer>Diamond Work Book · પ્રમોશન સ્ક્રિપ્ટ · ગુજરાતી</footer>
+</div>
