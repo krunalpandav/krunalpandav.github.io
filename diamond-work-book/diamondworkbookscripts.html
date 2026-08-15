@@ -1,436 +1,390 @@
-<title>Diamond Work Book — Video Scripts</title>
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diamond Work Book — Video Scripts (Platform-wise)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anek+Gujarati:wght@500;700;800&family=Mukta:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #eef2f8;
-    --surface: #ffffff;
-    --surface-2: #f4f7fc;
-    --ink: #0f1b2d;
-    --muted: #5b6b82;
-    --line: #dbe3ef;
-    --accent: #0ea5e9;
-    --accent-soft: #e2f3fc;
-    --yt: #e11900;
-    --sh: #ff2d55;
-    --ig: #c1338c;
-    --shadow: 0 1px 2px rgba(15,27,45,.06), 0 12px 34px rgba(15,27,45,.08);
-    --gu: "Noto Sans Gujarati", "Hind Vadodara", "Mukta Vaani", "Shruti", "Gujarati Sangam MN", system-ui, sans-serif;
-    --lat: ui-sans-serif, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    --maxw: 940px;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #0a1120;
-      --surface: #111d31;
-      --surface-2: #0e1829;
-      --ink: #eaf2ff;
-      --muted: #90a3c0;
-      --line: #223350;
-      --accent: #45b8ec;
-      --accent-soft: #12283e;
-      --yt: #ff5a45;
-      --sh: #ff6b86;
-      --ig: #e07ac0;
-      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 16px 40px rgba(0,0,0,.45);
-    }
-  }
-  :root[data-theme="light"] {
-    --bg: #eef2f8; --surface: #ffffff; --surface-2: #f4f7fc; --ink: #0f1b2d;
-    --muted: #5b6b82; --line: #dbe3ef; --accent: #0ea5e9; --accent-soft: #e2f3fc;
-    --yt:#e11900; --sh:#ff2d55; --ig:#c1338c;
-    --shadow: 0 1px 2px rgba(15,27,45,.06), 0 12px 34px rgba(15,27,45,.08);
-  }
-  :root[data-theme="dark"] {
-    --bg: #0a1120; --surface: #111d31; --surface-2: #0e1829; --ink: #eaf2ff;
-    --muted: #90a3c0; --line: #223350; --accent: #45b8ec; --accent-soft: #12283e;
-    --yt:#ff5a45; --sh:#ff6b86; --ig:#e07ac0;
-    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 16px 40px rgba(0,0,0,.45);
-  }
+:root{
+  --ink:#131A26;
+  --paper:#F2F4F7;
+  --card:#FFFFFF;
+  --facet:#0E7C86;
+  --facet-dark:#0A5A62;
+  --marigold:#E8A13D;
+  --line:#D8DDE4;
+  --muted:#5B6472;
+  --danger:#B3382C;
+  --ok:#1E7A46;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Mukta',sans-serif;background:var(--paper);color:var(--ink);line-height:1.65;font-size:16px}
+.wrap{max-width:920px;margin:0 auto;padding:0 16px 80px}
 
-  * { box-sizing: border-box; }
-  body {
-    margin: 0; background: var(--bg); color: var(--ink);
-    font-family: var(--gu); line-height: 1.7;
-    -webkit-font-smoothing: antialiased;
-  }
-  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 20px 80px; }
+header{background:var(--ink);color:#fff;padding:36px 16px 0}
+.head-in{max-width:920px;margin:0 auto}
+.kicker{font-family:'Anek Gujarati';font-weight:700;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--marigold)}
+h1{font-family:'Anek Gujarati';font-weight:800;font-size:clamp(28px,6vw,42px);line-height:1.15;margin:8px 0 6px}
+.sub{color:#B9C2CF;max-width:600px;font-size:15px;margin-bottom:22px}
+.diamond{display:inline-block;width:11px;height:11px;background:var(--marigold);transform:rotate(45deg);margin-right:8px;vertical-align:1px}
 
-  /* ---------- Hero ---------- */
-  .hero {
-    position: relative; overflow: hidden;
-    background:
-      radial-gradient(1200px 380px at 82% -10%, var(--accent-soft), transparent 60%),
-      linear-gradient(180deg, var(--surface), var(--bg));
-    border-bottom: 1px solid var(--line);
-  }
-  .hero-inner {
-    max-width: var(--maxw); margin: 0 auto; padding: 56px 20px 46px;
-    display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center;
-  }
-  .eyebrow {
-    font-family: var(--lat); text-transform: uppercase; letter-spacing: .28em;
-    font-size: 11px; font-weight: 700; color: var(--accent);
-    display: flex; align-items: center; gap: 10px; margin: 0 0 14px;
-  }
-  .eyebrow::before { content:""; width: 26px; height: 1.5px; background: var(--accent); display:inline-block; }
-  h1 {
-    font-family: var(--lat); font-weight: 800; letter-spacing: -.02em;
-    font-size: clamp(30px, 6vw, 52px); line-height: 1.02; margin: 0 0 16px;
-    text-wrap: balance;
-  }
-  .hero p.lead { margin: 0; max-width: 46ch; color: var(--muted); font-size: 17px; }
-  .gem { width: clamp(84px, 16vw, 132px); height: auto; filter: drop-shadow(0 10px 24px rgba(14,165,233,.35)); }
-  @media (max-width: 640px){
-    .hero-inner { grid-template-columns: 1fr; }
-    .gem { width: 84px; }
-  }
+nav{display:flex;gap:0;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+.tab{font-family:'Anek Gujarati';font-weight:700;font-size:15px;padding:13px 16px 15px;color:#8D97A6;background:transparent;border:none;cursor:pointer;white-space:nowrap;position:relative;flex-shrink:0}
+.tab.active{color:#fff}
+.tab.active::after{content:"";position:absolute;left:12px;right:12px;bottom:0;height:4px;background:var(--marigold);clip-path:polygon(6px 0,calc(100% - 6px) 0,100% 100%,0 100%)}
+.panel{display:none;padding-top:28px}
+.panel.active{display:block}
 
-  /* ---------- Meta strip ---------- */
-  .meta {
-    display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px;
-  }
-  .chip {
-    font-family: var(--lat); font-size: 12.5px; font-weight: 600;
-    background: var(--surface); border: 1px solid var(--line); color: var(--muted);
-    padding: 6px 12px; border-radius: 999px;
-  }
-  .chip b { color: var(--ink); font-weight: 700; }
+h2{font-family:'Anek Gujarati';font-weight:800;font-size:clamp(22px,4.5vw,30px);margin:34px 0 6px}
+h2:first-child{margin-top:0}
+h3{font-family:'Anek Gujarati';font-weight:700;font-size:18.5px;margin:28px 0 8px;color:var(--facet-dark)}
+h4{font-family:'Anek Gujarati';font-weight:700;font-size:16px;margin:18px 0 6px}
+p{margin:0 0 12px}
+.lead{font-size:17.5px;color:var(--muted);margin-bottom:20px}
+ul,ol{margin:0 0 14px 22px}
+li{margin-bottom:7px}
+strong{font-weight:700}
 
-  /* ---------- Section ---------- */
-  section.script { margin-top: 40px; }
-  .s-head { display: flex; align-items: center; gap: 14px; margin-bottom: 6px; flex-wrap: wrap; }
-  .badge {
-    font-family: var(--lat); font-weight: 700; font-size: 12px; letter-spacing: .04em;
-    color: #fff; padding: 5px 12px; border-radius: 7px; white-space: nowrap;
-  }
-  .badge.yt { background: var(--yt); }
-  .badge.sh { background: var(--sh); }
-  .badge.ig { background: linear-gradient(120deg, #f58529, var(--ig) 55%, #7a3ff2); }
-  .s-head h2 {
-    font-family: var(--lat); font-weight: 800; letter-spacing: -.01em;
-    font-size: clamp(21px, 3.4vw, 27px); margin: 0;
-  }
-  .s-sub { color: var(--muted); margin: 2px 0 18px; font-size: 15px; }
-  .s-title {
-    background: var(--surface-2); border: 1px dashed var(--line); border-radius: 10px;
-    padding: 12px 16px; margin-bottom: 20px; font-size: 15px;
-  }
-  .s-title span { font-family: var(--lat); text-transform: uppercase; letter-spacing:.14em;
-    font-size: 10.5px; font-weight: 700; color: var(--accent); display:block; margin-bottom: 4px; }
+.spec{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 16px}
+.spec span{background:#E4E9EF;border:1px solid var(--line);padding:3px 12px 4px;font-size:14px;font-weight:500}
 
-  /* ---------- Table ---------- */
-  .tblwrap {
-    overflow-x: auto; border: 1px solid var(--line); border-radius: 14px;
-    background: var(--surface); box-shadow: var(--shadow);
-  }
-  table { border-collapse: collapse; width: 100%; min-width: 640px; }
-  thead th {
-    text-align: left; font-family: var(--lat); text-transform: uppercase;
-    letter-spacing: .1em; font-size: 10.5px; font-weight: 700; color: var(--muted);
-    background: var(--surface-2); padding: 12px 16px; border-bottom: 1px solid var(--line);
-    position: sticky; top: 0;
-  }
-  tbody td { padding: 13px 16px; border-bottom: 1px solid var(--line); vertical-align: top; font-size: 15px; }
-  tbody tr:last-child td { border-bottom: 0; }
-  tbody tr:nth-child(even) { background: color-mix(in srgb, var(--surface-2) 55%, transparent); }
-  td.num {
-    font-family: var(--lat); font-variant-numeric: tabular-nums; font-weight: 700;
-    color: var(--accent); white-space: nowrap; width: 1%;
-  }
-  td.vo { font-weight: 500; }
-  td.txt { color: var(--muted); font-size: 13.5px; white-space: nowrap; }
-  .say { display:block; font-family: var(--lat); font-size: 10px; letter-spacing:.12em;
-    text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 3px; }
+.card{background:var(--card);border:1px solid var(--line);padding:20px 20px 14px;margin:0 0 20px;clip-path:polygon(0 0,calc(100% - 16px) 0,100% 16px,100% 100%,0 100%)}
+.card h3{margin-top:0}
+.card .why{font-size:14px;color:var(--muted);margin-top:-4px;margin-bottom:12px}
 
-  /* ---------- Caption / CTA blocks ---------- */
-  .note {
-    margin-top: 18px; border-left: 3px solid var(--accent);
-    background: var(--surface); border-radius: 0 12px 12px 0;
-    padding: 14px 18px; box-shadow: var(--shadow);
-  }
-  .note h4 {
-    margin: 0 0 8px; font-family: var(--lat); font-size: 11px; letter-spacing: .12em;
-    text-transform: uppercase; color: var(--accent); font-weight: 700;
-  }
-  .note p { margin: 0 0 6px; font-size: 15px; }
-  .tags { color: var(--muted); font-size: 13.5px; font-family: var(--lat); word-spacing: 3px; }
+.note{border-left:4px solid var(--marigold);background:#FCF4E4;padding:12px 16px;margin:0 0 16px;font-size:15px}
+.stop{border-left:4px solid var(--danger);background:#FBEAE8;padding:12px 16px;margin:0 0 16px;font-size:15px}
+.go{border-left:4px solid var(--ok);background:#E9F5EE;padding:12px 16px;margin:0 0 16px;font-size:15px}
 
-  .cta-line {
-    margin-top: 16px; background: var(--accent-soft);
-    border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--line));
-    border-radius: 12px; padding: 14px 18px; font-size: 15.5px; font-weight: 600;
-  }
-  .cta-line span { font-family: var(--lat); text-transform: uppercase; letter-spacing:.12em;
-    font-size: 10.5px; font-weight: 700; color: var(--accent); display:block; margin-bottom: 4px; }
+table{width:100%;border-collapse:collapse;margin:0 0 6px;background:var(--card);font-size:15px}
+th{font-family:'Anek Gujarati';font-weight:700;text-align:left;background:var(--ink);color:#fff;padding:9px 12px;font-size:13.5px}
+td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:none}
+.tbl-wrap{overflow-x:auto;margin:0 0 16px}
+.tbl-wrap table{margin:0;min-width:560px}
+td.t{white-space:nowrap;font-weight:700;color:var(--facet-dark);font-size:14px}
+td.vo{font-size:15.5px}
+td.st{font-family:'Anek Gujarati';font-weight:700;font-size:14px}
 
-  /* ---------- Tips ---------- */
-  .tips {
-    margin-top: 48px; background: var(--surface); border: 1px solid var(--line);
-    border-radius: 16px; padding: 26px 26px 10px; box-shadow: var(--shadow);
-  }
-  .tips h3 { font-family: var(--lat); font-weight: 800; margin: 0 0 4px; font-size: 20px; }
-  .tips > p.sub { color: var(--muted); margin: 0 0 16px; font-size: 14px; }
-  .tips ul { margin: 0; padding: 0; list-style: none; }
-  .tips li { padding: 12px 0 12px 34px; position: relative; border-top: 1px solid var(--line); font-size: 15px; }
-  .tips li:first-of-type { border-top: 0; }
-  .tips li::before {
-    content: "◆"; position: absolute; left: 6px; top: 12px; color: var(--accent); font-size: 12px;
-  }
+.copyblock{position:relative;background:var(--ink);color:#EAEFF6;padding:34px 18px 16px;margin:0 0 18px;font-size:15px;line-height:1.7;white-space:pre-wrap;word-break:break-word}
+.copyblock .lang{position:absolute;top:0;left:0;font-family:'Anek Gujarati';font-weight:700;font-size:11px;letter-spacing:.1em;background:var(--facet);color:#fff;padding:3px 10px}
+.copybtn{position:absolute;top:0;right:0;font-family:'Anek Gujarati';font-weight:700;font-size:12px;background:var(--marigold);color:var(--ink);border:none;padding:4px 14px 5px;cursor:pointer}
+.copybtn:active{background:#fff}
 
-  hr.div { border: 0; height: 1px; background: var(--line); margin: 40px 0 0; }
-  footer { text-align: center; color: var(--muted); font-size: 13px; margin-top: 30px; font-family: var(--lat); }
+.chip{display:inline-block;background:#E4E9EF;border:1px solid var(--line);padding:2px 10px 3px;margin:0 6px 8px 0;font-size:14px;border-radius:2px}
 
-  a { color: var(--accent); }
-  ::selection { background: var(--accent); color: #fff; }
+footer{margin-top:56px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);font-size:13.5px}
+@media(max-width:560px){body{font-size:15.5px}.card{padding:16px 14px 10px}}
 </style>
+</head>
+<body>
 
-<header class="hero">
-  <div class="hero-inner">
-    <div>
-      <p class="eyebrow">Diamond Work Book · Video Scripts</p>
-      <h1>પ્રમોશન વિડિયો<br>સ્ક્રિપ્ટ — ગુજરાતી</h1>
-      <p class="lead">હીરાના કારીગરો માટે બનેલી ચોપડી App ના પ્રમોશન માટે — YouTube, YouTube Shorts અને Instagram Reel ની તૈયાર scripts, દ્રશ્ય-દ્રશ્ય પ્રમાણે.</p>
-      <div class="meta">
-        <span class="chip"><b>3</b> platform</span>
-        <span class="chip">YouTube · Shorts · Instagram</span>
-        <span class="chip">Voiceover + Screen text</span>
-        <span class="chip"><b>ગુજરાતી</b></span>
-      </div>
-    </div>
-    <svg class="gem" viewBox="0 0 120 130" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <polygon points="24,6 96,6 118,40 60,124 2,40" fill="#7fd2f2"/>
-      <polygon points="24,6 60,40 2,40" fill="#bfe8f8"/>
-      <polygon points="96,6 118,40 60,40" fill="#a5ddf5"/>
-      <polygon points="24,6 96,6 60,40" fill="#e6f6fd"/>
-      <polygon points="2,40 60,40 60,124" fill="#5cbfe8"/>
-      <polygon points="60,40 118,40 60,124" fill="#3ba9dc"/>
-      <polygon points="24,6 60,40 96,6" fill="#d4f0fb" opacity=".7"/>
-    </svg>
+<header>
+  <div class="head-in">
+    <div class="kicker">Krunal · Diamond Work Book · Video Production Kit</div>
+    <h1><span class="diamond"></span>Video Scripts — Platform-wise</h1>
+    <p class="sub">Emulator-recording ready · scene-by-scene timing · "ઘડાઈ" ક્યાંય નથી — બધે "કામ" · voiceover + screen text અલગ</p>
+    <nav id="tabs">
+      <button class="tab active" data-t="guide">Shoot Guide</button>
+      <button class="tab" data-t="play">Play Console</button>
+      <button class="tab" data-t="yt">YouTube Video</button>
+      <button class="tab" data-t="shorts">Shorts ×6</button>
+      <button class="tab" data-t="ig">Instagram Reels</button>
+    </nav>
   </div>
 </header>
 
 <div class="wrap">
 
-  <!-- ============ YOUTUBE ============ -->
-  <section class="script">
-    <div class="s-head">
-      <span class="badge yt">YouTube</span>
-      <h2>લાંબો વિડિયો</h2>
-    </div>
-    <p class="s-sub">સમય: આશરે 2–3 મિનિટ · Format: Horizontal 16:9</p>
-    <div class="s-title">
-      <span>Title suggestion</span>
-      હીરાના કારીગરો માટે No.1 ચોપડી App — Diamond Work Book | રોજનો હિસાબ ફોનમાં
-    </div>
-    <div class="tblwrap">
-      <table>
-        <thead>
-          <tr><th>#</th><th>દ્રશ્ય (Visual / B-roll)</th><th>Voiceover — બોલવાનું</th><th>Screen text</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="num">1</td>
-            <td>કારખાનામાં હીરો ઘસતા કારીગર, પછી ખિસ્સામાંથી ડાયરી કાઢે</td>
-            <td class="vo">"રોજ કેટલા હીરા થયા? કેટલા પૈસા બાકી? આ ડાયરીમાં લખો... ને ડાયરી ખોવાય તો?"</td>
-            <td class="txt">ડાયરી હવે જૂની થઈ ગઈ</td>
-          </tr>
-          <tr>
-            <td class="num">2</td>
-            <td>App icon zoom-in, splash screen</td>
-            <td class="vo">"એટલે જ બનાવી છે — Diamond Work Book. તમારા રોજના કામની ડિજિટલ ચોપડી."</td>
-            <td class="txt">Diamond Work Book</td>
-          </tr>
-          <tr>
-            <td class="num">3</td>
-            <td>Add Record sheet — હીરાની સંખ્યા + ભાવ ટાઈપ કરે</td>
-            <td class="vo">"કામ પૂરું થાય એટલે ખાલી ઉમેરો — કેટલા હીરા, શું ભાવ. બસ. એક જ દિવસે અલગ-અલગ ભાવના હીરા હોય તોય બધું આપોઆપ ગણાઈ જાય."</td>
-            <td class="txt">➕ કામ ઉમેરો</td>
-          </tr>
-          <tr>
-            <td class="num">4</td>
-            <td>Dashboard — મહિનાના metrics દેખાય</td>
-            <td class="vo">"Dashboard ખોલો — આખા મહિનાના કામના દિવસ, હીરા, કમાણી અને ઉપાડ... એક જ નજરમાં."</td>
-            <td class="txt">આખો મહિનો એક નજરમાં</td>
-          </tr>
-          <tr>
-            <td class="num">5</td>
-            <td>Withdrawal add — date picker</td>
-            <td class="vo">"પૈસા ઉપાડ્યા? અહીં નોંધો. ને ધ્યાન રાખો — બાકી રકમથી વધારે ઉપાડ App ક્યારેય નહીં થવા દે. હિસાબ હંમેશા સાચો."</td>
-            <td class="txt">ઉપાડ — હિસાબ સાચો</td>
-          </tr>
-          <tr>
-            <td class="num">6</td>
-            <td>Manager mode — employee list, drill in</td>
-            <td class="vo">"શેઠ છો? કારીગરો ઉમેરો. દરેકનો અલગ હિસાબ, અલગ ભાવ — બધું અલગ-અલગ સચવાય."</td>
-            <td class="txt">👥 Manager Mode</td>
-          </tr>
-          <tr>
-            <td class="num">7</td>
-            <td>Google Drive backup screen</td>
-            <td class="vo">"ફોન ખોવાય કે નવો લો — ચિંતા નહીં. Google Drive પર WhatsApp જેવું backup. તમારો data હંમેશા સલામત, ને ફક્ત તમારો."</td>
-            <td class="txt">☁️ Drive Backup</td>
-          </tr>
-          <tr>
-            <td class="num">8</td>
-            <td>Airplane mode on, app ચાલતી બતાવો</td>
-            <td class="vo">"Internet ના હોય તોય ચાલે — સાવ offline. ને ત્રણ ભાષામાં: ગુજરાતી, हिन्दी, English."</td>
-            <td class="txt">Offline · 3 ભાષા</td>
-          </tr>
-          <tr>
-            <td class="num">9</td>
-            <td>Fingerprint unlock + dark mode toggle</td>
-            <td class="vo">"Fingerprint lock થી data ખાનગી. Dark mode આંખને આરામ."</td>
-            <td class="txt">🔒 Lock · 🌙 Dark</td>
-          </tr>
-          <tr>
-            <td class="num">10</td>
-            <td>Play Store page / QR code</td>
-            <td class="vo">"આજે જ Play Store પરથી Diamond Work Book download કરો — ને ડાયરીને કાયમ માટે વિદાય આપો."</td>
-            <td class="txt">હમણાં જ Download કરો</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="cta-line">
-      <span>અંતે CTA — બોલવાનું</span>
-      "વિડિયો ગમ્યો હોય તો Like કરો, Channel Subscribe કરો — ને તમારા કારીગર મિત્રોને જરૂર share કરો!"
-    </div>
-  </section>
+<!-- ================= SHOOT GUIDE ================= -->
+<section class="panel active" id="p-guide">
+  <h2>Shoot Guide — emulator + AI voice workflow</h2>
+  <p class="lead">Tamaro plan (Claude Code + emulator recording → AI voice platform) kaam karse. Pan 5 vastu pehla set karvi padse, nahi to video "fake demo" jevo lagse.</p>
 
-  <hr class="div">
+  <h3>1 · Demo data — aa sauthi pehla, sauthi jaruri</h3>
+  <div class="stop">Khali app ke "Test User / 100 / 100" vala data no video = koi bharoso nahi kare. Recording pehla app ma <strong>saacho lagto demo data</strong> bharvo. Claude Code ne aa j data seed karva kahevu.</div>
+  <div class="tbl-wrap"><table>
+    <tr><th>Shu</th><th>Kevo data</th></tr>
+    <tr><td>Mahino</td><td>Chalu mahino, 22-24 divas ni entries (ravivar khali)</td></tr>
+    <tr><td>Roj nu kaam</td><td>80–140 hira/divas, thodu upar-niche — ek sarkhu nahi</td></tr>
+    <tr><td>Bhav</td><td>2-3 alag bhav (dakhla: ₹4.50, ₹5.25, ₹6.00) — "alag bhav pan aapoaap ganay" scene mate joishe j</td></tr>
+    <tr><td>Upaad</td><td>Mahina ma 2-3 entries (dakhla: ₹5,000 · ₹3,000 · ₹2,000)</td></tr>
+    <tr><td>Manager mode</td><td>5-6 kaarigar, saacha lagta Gujarati naam (Rameshbhai, Jigneshbhai, Sanjaybhai...) — kadi koi olakhita nu aakhu naam nahi</td></tr>
+  </table></div>
 
-  <!-- ============ SHORTS ============ -->
-  <section class="script">
-    <div class="s-head">
-      <span class="badge sh">YouTube Shorts</span>
-      <h2>ટૂંકો વિડિયો</h2>
-    </div>
-    <p class="s-sub">સમય: આશરે 40 સેકન્ડ · Format: Vertical 9:16 · Hook પહેલી 3 સેકન્ડમાં જ</p>
-    <div class="tblwrap">
-      <table>
-        <thead>
-          <tr><th>સમય</th><th>Visual</th><th>Voiceover + Screen text</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="num">0–3s</td>
-            <td>કારીગર જૂની ડાયરીમાં હિસાબ ગોતતો, પાના ફાટેલા</td>
-            <td class="vo"><span class="say">🔊 Hook</span>"હજી પણ હીરાનો હિસાબ ડાયરીમાં લખો છો?"</td>
-          </tr>
-          <tr>
-            <td class="num">3–8s</td>
-            <td>App ખૂલે, Add Record sheet</td>
-            <td class="vo">"કામ થાય એટલે ખાલી ટાઈપ કરો — કેટલા હીરા, શું ભાવ."</td>
-          </tr>
-          <tr>
-            <td class="num">8–15s</td>
-            <td>Dashboard metrics animate</td>
-            <td class="vo">"આખા મહિનાની કમાણી ને ઉપાડ — એક નજરમાં."</td>
-          </tr>
-          <tr>
-            <td class="num">15–22s</td>
-            <td>Withdrawal — વધારે ઉપાડ પર error</td>
-            <td class="vo">"બાકીથી વધારે ઉપાડ? App થવા જ નહીં દે. હિસાબ કાયમ સાચો."</td>
-          </tr>
-          <tr>
-            <td class="num">22–30s</td>
-            <td>Drive backup tick</td>
-            <td class="vo">"ફોન ખોવાય તોય data સલામત — Google Drive backup."</td>
-          </tr>
-          <tr>
-            <td class="num">30–37s</td>
-            <td>Offline (airplane mode) + 3 ભાષા toggle</td>
-            <td class="vo">"Internet વગર ચાલે. ગુજરાતી, हिन्दी, English."</td>
-          </tr>
-          <tr>
-            <td class="num">37–40s</td>
-            <td>Play Store + મોટું text</td>
-            <td class="vo"><span class="say">🔊 CTA</span>"Diamond Work Book — હમણાં download કરો."</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="note">
-      <h4>Pinned caption</h4>
-      <p>હીરાના કારીગરો માટે ચોપડી App 💎</p>
-      <p class="tags">#DiamondWorkBook #હીરા #Surat #DiamondWorker #રત્નકલાકાર</p>
-    </div>
-  </section>
+  <h3>2 · Emulator recording settings</h3>
+  <ul>
+    <li>Device: <strong>Pixel-type profile, 1080×2400</strong> — Shorts/Reels mate portrait recording j joie; Play Console + YouTube long mate landscape alag (niche)</li>
+    <li>Developer options ma <strong>"Show taps" ON</strong> — viewer ne dekhavu joie ke kya tap thay che</li>
+    <li>Animations <strong>1x j rakhvi</strong> (off nahi) — off karso to video robotic lagse</li>
+    <li>Recording: <span class="chip">adb shell screenrecord --size 1080x2400 --bit-rate 12000000</span> (max 3 min/file — scene-wise alag file levi, pachhi jodvi)</li>
+    <li>Status bar saaf: demo mode vaparo — <span class="chip">adb shell settings put global sysui_demo_allowed 1</span> + battery 100/clock set — notification icons video bagade che</li>
+    <li>Dark mode ane light mode — banne ma ek-ek master take levo; Shorts ma je saru lage e vaparvu</li>
+  </ul>
 
-  <hr class="div">
+  <h3>3 · Scene-wise recording (Claude Code ne aapva mate)</h3>
+  <p>Dar script ma timing column che. Claude Code ne aa rite kahevu:</p>
+  <div class="copyblock"><span class="lang">CLAUDE CODE PROMPT</span><button class="copybtn" onclick="cp(this)">COPY</button>Read the scene table in this HTML file (tab: [PLATFORM]). For each scene:
+1. Seed the demo data described in the Shoot Guide tab (realistic Gujarati worker names, 22-24 days of entries, 2-3 different rates, 2-3 withdrawals).
+2. Use adb/maestro to drive the app through the exact actions in the "Visual" column.
+3. Record each scene as a separate mp4 via adb screenrecord (portrait 1080x2400 for Shorts/Reels, landscape 1920x1080 for Play Console and YouTube long video).
+4. Each scene's recording must be 1-2 seconds LONGER than the script timing — editing needs trim room.
+5. Name files: [platform]_scene[N].mp4
+6. Do a slow, human-paced interaction — pause 0.5s after each tap, scroll naturally. No instant robotic jumps.</div>
 
-  <!-- ============ INSTAGRAM ============ -->
-  <section class="script">
-    <div class="s-head">
-      <span class="badge ig">Instagram Reel</span>
-      <h2>રીલ</h2>
-    </div>
-    <p class="s-sub">સમય: આશરે 30–45 સેકન્ડ · Format: Vertical 9:16 · Trending audio ઉપર, fast transitions</p>
-    <div class="tblwrap">
-      <table>
-        <thead>
-          <tr><th>સમય</th><th>ભાગ</th><th>Voiceover + Screen text</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="num">0–3s</td>
-            <td>Hook</td>
-            <td class="vo"><span class="say">Screen: "ડાયરીવાળા કારીગરો આ જુઓ 👇"</span>🔊 "તમારો આખા મહિનાનો હિસાબ... હવે ફોનમાં."</td>
-          </tr>
-          <tr>
-            <td class="num">3–8s</td>
-            <td>Add Record clip</td>
-            <td class="vo">"કામ ઉમેરો — હીરા ને ભાવ, બસ."</td>
-          </tr>
-          <tr>
-            <td class="num">8–14s</td>
-            <td>Dashboard clip</td>
-            <td class="vo">"કમાણી, ઉપાડ, બાકી — બધું આપોઆપ."</td>
-          </tr>
-          <tr>
-            <td class="num">14–20s</td>
-            <td>Manager mode clip</td>
-            <td class="vo">"શેઠ હો તો બધા કારીગરોનો અલગ હિસાબ."</td>
-          </tr>
-          <tr>
-            <td class="num">20–26s</td>
-            <td>Backup clip</td>
-            <td class="vo">"ફોન બદલો તોય data સલામત — Drive backup."</td>
-          </tr>
-          <tr>
-            <td class="num">26–32s</td>
-            <td>Offline + ભાષા clip</td>
-            <td class="vo">"Offline ચાલે, ગુજરાતીમાં ચાલે."</td>
-          </tr>
-          <tr>
-            <td class="num">32–45s</td>
-            <td>CTA</td>
-            <td class="vo"><span class="say">Screen: "💎 Diamond Work Book — Link in Bio"</span>🔊 "Bio ની link પરથી હમણાં download કરો."</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="note">
-      <h4>Caption (post સાથે)</h4>
-      <p>ડાયરીને કહો બાય-બાય 👋</p>
-      <p>હીરાના કારીગરો માટે ખાસ બનેલી App — રોજનું કામ, ઉપાડ ને કમાણી બધું એક જ જગ્યાએ. 📒➡️📱</p>
-      <p>✅ Offline ચાલે &nbsp; ✅ Google Drive backup &nbsp; ✅ ગુજરાતી / हिन्दी / English</p>
-      <p>આજે જ download કરો 👉 link in bio</p>
-      <p class="tags">#DiamondWorkBook #હીરા #Surat #DiamondCity #રત્નકલાકાર #DiamondWorker #Kariger #SuratDiamond</p>
-    </div>
-  </section>
+  <h3>4 · AI voice platform — mari saachi salaah</h3>
+  <div class="note"><strong>Gujarati AI voice hamna pan mostly robotic lage che.</strong> Tamara audience (kaarigar) ne robotic Gujarati turant khabar padi jay — vishwas tya j toote. Etle aa kram ma try karo:</div>
+  <ol>
+    <li><strong>Pehlo vikalp — voiceover j nahi:</strong> Shorts/Reels ma sauthi safal format = <strong>screen text + trending audio, avaj vagar</strong>. 80% loko mute jove che. Tamari badhi Shorts script aa rite pan chale — "Voiceover" column ne khali screen-text banavi devu. Aa karso to AI voice no prashna j nathi.</li>
+    <li><strong>Bijo vikalp — AI voice test karo:</strong> ElevenLabs / Narakeet jeva par Gujarati voice thi <em>ek</em> video banavo. 3-4 olakhita ne moklo, puchho: "avaj kevo lage?" Robotic kahe to vaparvu nahi.</li>
+    <li><strong>Trijo vikalp — potano avaj (long video + Play Console mate):</strong> Aa be video kayami che, varsho chalse. 30 minute nu recording che — phone ma, raatre, shaant room ma. Surti avaj AI karta 10x vadhare vechay che. Script taiyar j che, vanchvani j che.</li>
+  </ol>
+  <div class="go"><strong>Hybrid best che:</strong> Shorts/Reels = text + music (AI/voice ni jarur j nahi) · YouTube long + Play Console = potano avaj ek j vaar.</div>
 
-  <!-- ============ TIPS ============ -->
-  <div class="tips">
-    <h3>શૂટ કરતી વખતે ટૂંકી ટિપ્સ</h3>
-    <p class="sub">દરેક platform માટે ધ્યાનમાં રાખવા જેવી બાબતો</p>
-    <ul>
-      <li>App ના actual screens નું <b>screen recording</b> કરો — Add Record → Dashboard → Backup ક્રમમાં.</li>
-      <li>Shorts ને Reel <b>vertical (9:16)</b> રાખો; YouTube લાંબો વિડિયો <b>horizontal (16:9)</b>.</li>
-      <li>પહેલી 3 સેકન્ડ સૌથી અગત્યની — ત્યાં જ "ડાયરી છોડો" વાળો hook આવવો જોઈએ.</li>
-      <li>અંતે હંમેશા સ્પષ્ટ <b>Download CTA</b> — એ જ મુખ્ય call-to-action.</li>
-      <li>Voiceover શાંત, સાફ ને ધીમા અવાજમાં — કારીગર સાથે વાત કરતા હો એમ.</li>
-    </ul>
+  <h3>5 · AI platform ne shu NA karva devu</h3>
+  <ul>
+    <li><strong>Auto-visuals generate na karva devu</strong> — stock footage, AI images, animated characters kai nahi. App na saacha screens j video che. AI platform khali voice/captions/music mate.</li>
+    <li>Auto-captions aave to <strong>Gujarati spelling check karvi</strong> — AI Gujarati captions ma bhool sami che.</li>
+    <li>Watermark vali free tier thi export karelu video Play Console par kadi nahi mukvu.</li>
+  </ul>
+
+  <h3>Editing (CapCut, free)</h3>
+  <ul>
+    <li>Scene clips jodo → screen text overlay (motu, Anek Gujarati jevu bold font) → music</li>
+    <li>Text screen na upar na 20% ane niche na 25% ma nahi — IG/YT UI dhanki de che</li>
+    <li>Export: Shorts/Reels 1080×1920 · YouTube long 1920×1080 · 30fps chale</li>
+  </ul>
+</section>
+
+<!-- ================= PLAY CONSOLE ================= -->
+<section class="panel" id="p-play">
+  <h2>Play Console — listing video</h2>
+  <p class="lead">Aa video Play Store listing par screenshots ni upar dekhase. Goal ek j: 30 second ma "aa mara mate che" evu lagvu joie. Subscribe/like CTA ahiya NA aave.</p>
+  <div class="spec"><span>⏱ 30–40 sec</span><span>📐 Landscape 16:9 (1920×1080)</span><span>📺 YouTube par upload → link Play Console ma</span><span>🔊 Potano avaj (recommended)</span><span>🚫 "No.1" jeva claim nahi</span></div>
+
+  <div class="note">Play niyam: video ma app no <strong>saacho UI</strong> j dekhavo joie. YouTube par video "Public" ke "Unlisted" rakhvo, ads ON nahi karvi (Play reject kare che monetized listing video).</div>
+
+  <h3>Scene table</h3>
+  <div class="tbl-wrap"><table>
+    <tr><th style="width:70px">સમય</th><th>Visual (emulator action)</th><th>Voiceover — બોલવાનું</th><th>Screen text</th></tr>
+    <tr><td class="t">0–4s</td><td>જૂની ડાયરી બંધ થાય (ઘરે શૂટ, 2 sec) → cut → app icon splash</td><td class="vo">"હીરાના કામનો હિસાબ — હવે ડાયરીમાં નહીં, ફોનમાં."</td><td class="st">Diamond Work Book</td></tr>
+    <tr><td class="t">4–11s</td><td>Add Record ખોલો → હીરાની સંખ્યા (85) → ભાવ (₹5.25) → Save. બીજી entry અલગ ભાવે (₹6.00)</td><td class="vo">"કામ પૂરું થાય એટલે ખાલી ઉમેરો — કેટલા હીરા, શું ભાવ. એક દિવસે અલગ-અલગ ભાવ હોય તોય ટોટલ આપોઆપ."</td><td class="st">➕ કામ ઉમેરો · ટોટલ આપોઆપ</td></tr>
+    <tr><td class="t">11–18s</td><td>Dashboard — મહિનાના આંકડા scroll: કામના દિવસ, હીરા, કમાણી, ઉપાડ</td><td class="vo">"Dashboard માં આખો મહિનો એક નજરમાં — કેટલું કામ, કેટલી કમાણી, કેટલો ઉપાડ."</td><td class="st">આખો મહિનો · એક નજરમાં</td></tr>
+    <tr><td class="t">18–24s</td><td>Withdrawal add → બાકીથી વધારે રકમ નાખો → error દેખાય</td><td class="vo">"ઉપાડ નોંધો — ને બાકીથી વધારે ઉપાડ App ક્યારેય નહીં થવા દે. હિસાબ કાયમ સાચો."</td><td class="st">ઉપાડ · હિસાબ સાચો</td></tr>
+    <tr><td class="t">24–30s</td><td>Manager mode — કારીગર list → એક કારીગરમાં drill → Drive backup tick → airplane mode ચાલુ છતાં app ચાલે</td><td class="vo">"શેઠ માટે બધા કારીગરોનો અલગ હિસાબ. WhatsApp જેવું Google Drive backup. ને Internet વગર પણ ચાલે."</td><td class="st">👥 Manager · ☁️ Backup · Offline</td></tr>
+    <tr><td class="t">30–36s</td><td>App icon + ગુજરાતી/हिन्दी/English toggle → end card</td><td class="vo">"Diamond Work Book — હીરાના કારીગરો માટે બનેલી ચોપડી App. આજે જ Download કરો."</td><td class="st">હમણાં જ Download કરો</td></tr>
+  </table></div>
+
+  <h3>Sathe Play listing ma aa pan (copy-paste)</h3>
+  <div class="copyblock"><span class="lang">SHORT DESCRIPTION (80)</span><button class="copybtn" onclick="cp(this)">COPY</button>રોજનું કામ, ઉપાડ અને કમાણીનો હિસાબ. ઓફલાઇન ચાલે. કારીગર માટે ફ્રી.</div>
+</section>
+
+<!-- ================= YOUTUBE LONG ================= -->
+<section class="panel" id="p-yt">
+  <h2>YouTube — લાંબો વિડિયો</h2>
+  <p class="lead">Aa "kevi rite vaparvu" video che — tamaro support doc + trust builder. Ek j vaar banavvo, varsho chalse. WhatsApp reply ma pan aa j link jase.</p>
+  <div class="spec"><span>⏱ 2.5–3 min</span><span>📐 Landscape 16:9</span><span>🔊 Potano avaj — shaant, dhime</span><span>🎬 Scene-wise emulator clips + 2 ghar-shoot clips</span></div>
+
+  <h3>Title + description</h3>
+  <div class="copyblock"><span class="lang">TITLE</span><button class="copybtn" onclick="cp(this)">COPY</button>હીરાના કારીગરો માટે ચોપડી App — Diamond Work Book | રોજના કામનો હિસાબ ફોનમાં</div>
+  <div class="copyblock"><span class="lang">DESCRIPTION</span><button class="copybtn" onclick="cp(this)">COPY</button>હીરાના કારીગરો માટે બનેલી ફ્રી App — રોજનું કામ, ઉપાડ, કમાણી અને શેઠ માટે બધા કારીગરોનો હિસાબ, બધું એક જ જગ્યાએ.
+
+📲 Download: [PLAY STORE LINK utm_source=youtube]
+
+⏱ Chapters:
+0:00 ડાયરીની તકલીફ
+0:25 કામ કેવી રીતે ઉમેરવું
+1:00 આખા મહિનાનો હિસાબ
+1:25 ઉપાડ અને બાકી રકમ
+1:50 શેઠ માટે — Manager Mode
+2:15 Backup, Offline અને ભાષા
+
+#DiamondWorkBook #હીરા #Surat #રત્નકલાકાર #DiamondWorker</div>
+
+  <h3>Scene table</h3>
+  <div class="tbl-wrap"><table>
+    <tr><th style="width:80px">સમય</th><th>Visual</th><th>Voiceover — બોલવાનું</th><th>Screen text</th></tr>
+    <tr><td class="t">0:00–0:12</td><td><strong>ઘરે શૂટ:</strong> જૂની ડાયરી — પાના ફેરવો, આંકડા શોધો, ના મળે (close-up, ફાટેલી ડાયરી હોય તો ઉત્તમ)</td><td class="vo">"રોજ કેટલા હીરા થયા? કયા ભાવે? કેટલો ઉપાડ લીધો? આ બધું ડાયરીમાં લખો છો... ને મહિનાના અંતે ટોટલ કરવા બેસો ત્યારે માથું દુખે. ને ડાયરી ખોવાય તો? બધો હિસાબ ગયો."</td><td class="st">ડાયરીની તકલીફ બધા જાણે છે</td></tr>
+    <tr><td class="t">0:12–0:25</td><td>App icon splash → home screen</td><td class="vo">"એટલે જ બનાવી છે Diamond Work Book — હીરાના કારીગરો માટે, કારીગરની જ ભાષામાં. ચાલો બતાવું કેવી રીતે ચાલે છે."</td><td class="st">Diamond Work Book</td></tr>
+    <tr><td class="t">0:25–1:00</td><td>Add Record full flow: સંખ્યા 85 → ભાવ ₹5.25 → Save → બીજી entry ₹6.00 ભાવે → list માં બંને દેખાય, દિવસનું ટોટલ આપોઆપ</td><td class="vo">"કામ પૂરું થાય એટલે ખાલી બે વસ્તુ નાખો — કેટલા હીરા, ને શું ભાવ. બસ, થઈ ગયું. એક જ દિવસે બે અલગ ભાવના હીરા હોય? બંને નાખો — ટોટલ App જાતે ગણી લેશે. ભૂલ થવાનો સવાલ જ નથી."</td><td class="st">➕ ૧૦ સેકન્ડમાં entry</td></tr>
+    <tr><td class="t">1:00–1:25</td><td>Dashboard scroll — દિવસ, હીરા, કમાણી, ઉપાડ, બાકી. મહિનો બદલીને જૂનો મહિનો બતાવો</td><td class="vo">"Dashboard ખોલો એટલે આખો મહિનો સામે — કેટલા દિવસ કામ કર્યું, કુલ કેટલા હીરા, કમાણી કેટલી, ઉપાડ કેટલો ને બાકી શું. જૂના મહિના પણ એક tap પર."</td><td class="st">આખો મહિનો એક નજરમાં</td></tr>
+    <tr><td class="t">1:25–1:50</td><td>Withdrawal: ₹5,000 add → પછી બાકીથી વધારે નાખો → error</td><td class="vo">"ઉપાડ લીધો? તારીખ સાથે નોંધો. ને એક ખાસ વાત — બાકી રકમથી વધારે ઉપાડ App ક્યારેય નહીં થવા દે. એટલે હિસાબમાં ગોટાળો થાય જ નહીં."</td><td class="st">ઉપાડ — હિસાબ કાયમ સાચો</td></tr>
+    <tr><td class="t">1:50–2:15</td><td>Manager mode: 5-6 કારીગરની list → Rameshbhai માં drill → એનું કામ, ભાવ, ઉપાડ</td><td class="vo">"શેઠ છો? તો આ તમારા માટે — Manager Mode. બધા કારીગરો ઉમેરો, દરેકનો ભાવ અલગ સેટ કરો, દરેકનો હિસાબ અલગ. પગાર વખતે કોઈ માથાકૂટ નહીં."</td><td class="st">👥 શેઠ માટે Manager Mode</td></tr>
+    <tr><td class="t">2:15–2:40</td><td>Drive backup tick → airplane mode ON છતાં entry થાય → ભાષા toggle ગુ/हि/En → fingerprint lock</td><td class="vo">"ફોન ખોવાય કે નવો લો — WhatsApp જેવું Google Drive backup છે, data સલામત. Internet ના હોય તોય ચાલે — સાવ offline. ત્રણ ભાષા. ને fingerprint lock — તમારો હિસાબ ફક્ત તમે જ જુઓ."</td><td class="st">☁️ Backup · Offline · 🔒 Lock</td></tr>
+    <tr><td class="t">2:40–3:00</td><td>End card: app icon + QR + Play badge</td><td class="vo">"Diamond Work Book — ફ્રી છે, Play Store પર. Link description માં છે. વિડિયો કામનો લાગ્યો હોય તો તમારા કારીગર મિત્રોને share કરજો — ને કંઈ પૂછવું હોય તો comment કરજો, જવાબ હું જાતે આપીશ."</td><td class="st">Link 👇 Description માં</td></tr>
+  </table></div>
+  <div class="note">CTA ma "subscribe karo" karta <strong>"share karjo + comment karjo"</strong> vadhare kaam nu che — comments YouTube ne signal aape che ane tamne user feedback male che. Banne ek sathe.</div>
+</section>
+
+<!-- ================= SHORTS ================= -->
+<section class="panel" id="p-shorts">
+  <h2>YouTube Shorts — 6 અલગ વિડિયો</h2>
+  <p class="lead">Niyam: <strong>ek Short = ek problem = ek feature.</strong> 6 script niche che — week ma 2-3 post karo, 2-3 week nu content taiyar. Dareke ma voiceover <em>optional</em> che — screen text + music thi pan chale (Shoot Guide juo).</p>
+  <div class="spec"><span>⏱ 20–30 sec</span><span>📐 Portrait 9:16 (1080×1920)</span><span>🔊 Voice optional — text + trending audio chale</span><span>📌 Pinned comment ma Play link</span></div>
+
+  <div class="card">
+    <h3>Short 1 · મુનીમ સાથે હિસાબ</h3>
+    <p class="why">Target: pagar ni takrar — sauthi bhavnatmak problem</p>
+    <div class="tbl-wrap"><table>
+      <tr><th style="width:70px">સમય</th><th>Visual</th><th>Screen text (motu) / Voiceover</th></tr>
+      <tr><td class="t">0–3s</td><td>કેલ્ક્યુલેટર + ડાયરી + ગૂંચવાયેલો ચહેરો (ઘરે શૂટ ke stock-style pose)</td><td class="st">મુનીમ સાથે હિસાબ નથી મળતો? 😤</td></tr>
+      <tr><td class="t">3–10s</td><td>App: આખા મહિનાની entries scroll — તારીખ પ્રમાણે</td><td class="st">દરેક દિવસનું કામ — તારીખ ને ભાવ સાથે નોંધેલું</td></tr>
+      <tr><td class="t">10–18s</td><td>Dashboard: કમાણી + ઉપાડ + બાકી</td><td class="st">ટોટલ App એ ગણ્યું છે — ભૂલ શક્ય જ નથી</td></tr>
+      <tr><td class="t">18–24s</td><td>ફોન screen મુનીમ સામે ધરવાનો shot (ke khali dashboard freeze)</td><td class="st">હવે હિસાબ બતાવો — બોલવાનું નહીં, દેખાડવાનું 💎</td></tr>
+      <tr><td class="t">24–28s</td><td>End card</td><td class="st">Diamond Work Book · ફ્રી · Link 👇</td></tr>
+    </table></div>
   </div>
 
-  <footer>Diamond Work Book · પ્રમોશન સ્ક્રિપ્ટ · ગુજરાતી</footer>
+  <div class="card">
+    <h3>Short 2 · ઉપાડ યાદ નથી</h3>
+    <p class="why">Target: upaad/baaki ni guchvan — app no unique guard feature ahiya j che</p>
+    <div class="tbl-wrap"><table>
+      <tr><th style="width:70px">સમય</th><th>Visual</th><th>Screen text / Voiceover</th></tr>
+      <tr><td class="t">0–3s</td><td>ખિસ્સામાંથી ચબરખીઓ કાઢતો હાથ</td><td class="st">ઉપાડ કેટલો લીધો... યાદ છે? 🤔</td></tr>
+      <tr><td class="t">3–10s</td><td>App: Withdrawal add — ₹5,000, તારીખ સાથે</td><td class="st">દરેક ઉપાડ — તારીખ સાથે નોંધાય</td></tr>
+      <tr><td class="t">10–17s</td><td>બાકીથી વધારે રકમ નાખો → error આવે (zoom)</td><td class="st">બાકીથી વધારે ઉપાડ? App રોકી દેશે 🛑</td></tr>
+      <tr><td class="t">17–23s</td><td>Dashboard — બાકી રકમ highlight</td><td class="st">બાકી કેટલા — હંમેશા સામે જ</td></tr>
+      <tr><td class="t">23–27s</td><td>End card</td><td class="st">Diamond Work Book · ફ્રી · Link 👇</td></tr>
+    </table></div>
+  </div>
+
+  <div class="card">
+    <h3>Short 3 · અલગ-અલગ ભાવ</h3>
+    <p class="why">Target: roj ni ganatri ni jhanjhat — app no core magic moment</p>
+    <div class="tbl-wrap"><table>
+      <tr><th style="width:70px">સમય</th><th>Visual</th><th>Screen text / Voiceover</th></tr>
+      <tr><td class="t">0–3s</td><td>કાગળ પર આડાઅવળા આંકડા × ભાવ ગુણાકાર</td><td class="st">આજે ૩ અલગ ભાવના હીરા થયા... હવે ગણો 🧮</td></tr>
+      <tr><td class="t">3–12s</td><td>App: 3 entries fast — 40@₹4.50 → 55@₹5.25 → 30@₹6.00</td><td class="st">ખાલી નાખતા જાઓ — સંખ્યા ને ભાવ</td></tr>
+      <tr><td class="t">12–18s</td><td>દિવસનું ટોટલ આપોઆપ દેખાય (zoom)</td><td class="st">ટોટલ? થઈ ગયું. આપોઆપ. ✅</td></tr>
+      <tr><td class="t">18–22s</td><td>End card</td><td class="st">Diamond Work Book · ફ્રી · Link 👇</td></tr>
+    </table></div>
+  </div>
+
+  <div class="card">
+    <h3>Short 4 · શેઠ માટે — Manager Mode</h3>
+    <p class="why">Target: malik/munim — aa Short FB trader groups ma pan chalse</p>
+    <div class="tbl-wrap"><table>
+      <tr><th style="width:70px">સમય</th><th>Visual</th><th>Screen text / Voiceover</th></tr>
+      <tr><td class="t">0–3s</td><td>જાડું રજિસ્ટર ખૂલે, પાના પર પાના</td><td class="st">૨૦ કારીગરનો હિસાબ... રજિસ્ટરમાં? 📚</td></tr>
+      <tr><td class="t">3–11s</td><td>Manager mode: કારીગર list (Rameshbhai, Jigneshbhai...)</td><td class="st">બધા કારીગર — એક ફોનમાં</td></tr>
+      <tr><td class="t">11–18s</td><td>એક કારીગરમાં drill: એનો ભાવ, કામ, ઉપાડ</td><td class="st">દરેકનો ભાવ અલગ · હિસાબ અલગ</td></tr>
+      <tr><td class="t">18–24s</td><td>Dashboard totals</td><td class="st">પગારના દિવસે માથાકૂટ નહીં 😌</td></tr>
+      <tr><td class="t">24–28s</td><td>End card</td><td class="st">Diamond Work Book · ફ્રી · Link 👇</td></tr>
+    </table></div>
+  </div>
+
+  <div class="card">
+    <h3>Short 5 · ફોન ખોવાય તો?</h3>
+    <p class="why">Target: data no dar — "WhatsApp jevu backup" line ahiya che, e rakhvi j</p>
+    <div class="tbl-wrap"><table>
+      <tr><th style="width:70px">સમય</th><th>Visual</th><th>Screen text / Voiceover</th></tr>
+      <tr><td class="t">0–3s</td><td>ફોન હાથમાંથી પડતો (slow-mo, ઘરે શૂટ)</td><td class="st">ફોન ખોવાય તો હિસાબ પણ ગયો? 😨</td></tr>
+      <tr><td class="t">3–10s</td><td>App: Drive backup ON → tick</td><td class="st">WhatsApp જેવું Google Drive backup ☁️</td></tr>
+      <tr><td class="t">10–17s</td><td>નવા device પર restore → બધો data પાછો</td><td class="st">નવો ફોન → Restore → બધું પાછું ✅</td></tr>
+      <tr><td class="t">17–21s</td><td>End card</td><td class="st">Diamond Work Book · ફ્રી · Link 👇</td></tr>
+    </table></div>
+  </div>
+
+  <div class="card">
+    <h3>Short 6 · ડાયરી vs App</h3>
+    <p class="why">Target: badlaav no virodh — side-by-side sauthi share thato format che</p>
+    <div class="tbl-wrap"><table>
+      <tr><th style="width:70px">સમય</th><th>Visual</th><th>Screen text / Voiceover</th></tr>
+      <tr><td class="t">0–3s</td><td>Split screen: ડાબે ડાયરી, જમણે app</td><td class="st">ડાયરી vs App — તમે નક્કી કરો 👇</td></tr>
+      <tr><td class="t">3–9s</td><td>ડાબે: હાથે ટોટલ · જમણે: આપોઆપ</td><td class="st">ટોટલ: જાતે ગણો ❌ · આપોઆપ ✅</td></tr>
+      <tr><td class="t">9–15s</td><td>ડાબે: ડાયરી ખોવાઈ · જમણે: Drive backup</td><td class="st">ખોવાય તો: બધું ગયું ❌ · Backup છે ✅</td></tr>
+      <tr><td class="t">15–21s</td><td>ડાબે: ઉપાડ ચબરખીમાં · જમણે: error guard</td><td class="st">ઉપાડ: ગૂંચવાય ❌ · App સાચવે ✅</td></tr>
+      <tr><td class="t">21–26s</td><td>End card</td><td class="st">Diamond Work Book · ફ્રી · Link 👇</td></tr>
+    </table></div>
+  </div>
+
+  <h3>Dar Short sathe (copy)</h3>
+  <div class="copyblock"><span class="lang">PINNED COMMENT</span><button class="copybtn" onclick="cp(this)">COPY</button>📲 ફ્રી Download: [PLAY LINK utm_source=youtube_shorts]
+હીરાના કારીગરો માટે બનેલી ચોપડી App 💎 — સવાલ હોય તો અહીં પૂછો, જવાબ હું જાતે આપીશ.</div>
+</section>
+
+<!-- ================= INSTAGRAM ================= -->
+<section class="panel" id="p-ig">
+  <h2>Instagram Reels</h2>
+  <p class="lead">Same 6 Shorts ahiya cross-post thay — navu kai shoot karvanu nathi. Farak khali packaging ma: caption, hashtags, trending audio, ane "Link in bio". Niche IG-specific 2 extra Reel pan che.</p>
+  <div class="spec"><span>⏱ 20–30 sec</span><span>📐 9:16</span><span>🎵 Trending Gujarati audio par text-only version — IG ma aa vadhare chale</span><span>🔗 CTA hamesha "Link in bio"</span></div>
+
+  <h3>Cross-post niyam (Shorts → Reels)</h3>
+  <ul>
+    <li>End card ma "Link 👇" ni jagya <strong>"Link in Bio"</strong> — IG ma comment link clickable nathi</li>
+    <li>YouTube/CapCut watermark vado video IG par kadi nahi — IG watermark vala video ni reach kaape che. CapCut thi <strong>clean export</strong> levo</li>
+    <li>Audio: IG ma trending audio thi post karo (app ma j "Use audio") — reach no farak moto che</li>
+    <li>Posting time: raatre 8–10 — kaarigar tya online che</li>
+  </ul>
+
+  <h3>Dar Reel nu caption (copy — [N] badalvu)</h3>
+  <div class="copyblock"><span class="lang">CAPTION TEMPLATE</span><button class="copybtn" onclick="cp(this)">COPY</button>[Reel no hook ek line ma — dakhla: મુનીમ સાથે હિસાબ હવે ફોનમાં બતાવો 💎]
+
+હીરાના કારીગરો માટે બનેલી ફ્રી App — રોજનું કામ, ઉપાડ ને કમાણી, બધું એક જગ્યાએ.
+✅ Offline ચાલે ✅ Drive backup ✅ ગુજરાતી / हिन्दी / English
+
+Download 👉 Link in Bio
+
+#સુરત #રત્નકલાકાર #હીરા #surat #suratdiamond #diamondworker #ratnakalakar #varachha #katargam #hiraudhyog #gujarat #diamondcity</div>
+
+  <h3>IG-specific Reel A · "POV" format</h3>
+  <p class="why" style="color:var(--muted);font-size:14px;margin-bottom:10px">IG par POV format Shorts karta vadhare chale che — relatable + share thay</p>
+  <div class="tbl-wrap"><table>
+    <tr><th style="width:70px">સમય</th><th>Visual</th><th>Screen text</th></tr>
+    <tr><td class="t">0–3s</td><td>ફોન સામે બેઠેલો shot (selfie angle, ઘરે)</td><td class="st">POV: મહિનાની આખરી તારીખ છે... 📅</td></tr>
+    <tr><td class="t">3–8s</td><td>ડાયરી + કેલ્ક્યુલેટર shots ઝડપી cuts</td><td class="st">...ને ટોટલ ત્રીજી વાર ખોટું આવ્યું 🤯</td></tr>
+    <tr><td class="t">8–15s</td><td>App: Dashboard ખૂલે — બધું તૈયાર</td><td class="st">...ને પછી આ App મળી. ટોટલ? પહેલેથી તૈયાર. ✅</td></tr>
+    <tr><td class="t">15–22s</td><td>Entries scroll + બાકી રકમ</td><td class="st">કામ · ઉપાડ · બાકી — બધું આપોઆપ</td></tr>
+    <tr><td class="t">22–26s</td><td>End card</td><td class="st">Diamond Work Book · Link in Bio 💎</td></tr>
+  </table></div>
+
+  <h3>IG-specific Reel B · User voice format (Week 3-4 ma)</h3>
+  <p class="why" style="color:var(--muted);font-size:14px;margin-bottom:10px">Saacho user 15 second potana shabdo ma bole — social proof no sauthi saccho format. Pehla user malે pachhi j banavvo, script vagar, permission sathe.</p>
+  <div class="tbl-wrap"><table>
+    <tr><th style="width:70px">સમય</th><th>Visual</th><th>Screen text</th></tr>
+    <tr><td class="t">0–3s</td><td>User potana ફોન સાથે (ચહેરો ના બતાવવો હોય તો ફોન + હાથ)</td><td class="st">"પહેલા ડાયરીમાં લખતો..."</td></tr>
+    <tr><td class="t">3–18s</td><td>User bole (potana shabdo — script NAHI aapvi) + વચ્ચે app screens</td><td class="st">[User na shabdo j subtitle tarike]</td></tr>
+    <tr><td class="t">18–24s</td><td>End card</td><td class="st">તમે પણ અજમાવો · Link in Bio</td></tr>
+  </table></div>
+
+  <h3>Week-wise posting (Shorts + Reels sathe)</h3>
+  <div class="tbl-wrap"><table>
+    <tr><th>Week</th><th>YouTube</th><th>Instagram</th></tr>
+    <tr><td><strong>1</strong></td><td>Long video + Short 1, 3</td><td>Reel: Short 1, 3 + POV Reel A</td></tr>
+    <tr><td><strong>2</strong></td><td>Short 2, 6</td><td>Reel: Short 2, 6</td></tr>
+    <tr><td><strong>3</strong></td><td>Short 4 (malik), 5</td><td>Reel: Short 4, 5 + Reel B (user male to)</td></tr>
+    <tr><td><strong>4</strong></td><td>Best chalti Short ni v2</td><td>Best Reel boost (₹200/day test)</td></tr>
+  </table></div>
+</section>
+
+<footer>
+  Diamond Work Book · Video Production Kit · Aug 2026 — "ઘડાઈ" kyay nathi, badhe "કામ" · [PLAY LINK] ni jagya utm vali link mukvi
+</footer>
 </div>
+
+<script>
+const tabs=document.querySelectorAll('.tab'),panels=document.querySelectorAll('.panel');
+tabs.forEach(t=>t.addEventListener('click',()=>{
+  tabs.forEach(x=>x.classList.remove('active'));
+  panels.forEach(p=>p.classList.remove('active'));
+  t.classList.add('active');
+  document.getElementById('p-'+t.dataset.t).classList.add('active');
+  window.scrollTo({top:0});
+}));
+function cp(btn){
+  const block=btn.parentElement;
+  const clone=block.cloneNode(true);
+  clone.querySelector('.copybtn').remove();
+  clone.querySelector('.lang').remove();
+  const text=clone.textContent.trim();
+  navigator.clipboard.writeText(text).then(()=>{
+    btn.textContent='COPIED ✓';
+    setTimeout(()=>btn.textContent='COPY',1500);
+  });
+}
+</script>
+</body>
+</html>
