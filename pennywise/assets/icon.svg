@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Pennywise">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1a8f66"/>
+      <stop offset="1" stop-color="#0d5540"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="114" fill="url(#bg)"/>
+
+  <!-- base + post -->
+  <g fill="none" stroke="#F4F6F5" stroke-width="15" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="256" y1="168" x2="256" y2="352"/>
+    <line x1="196" y1="360" x2="316" y2="360"/>
+    <polyline points="238,352 256,320 274,352" fill="#F4F6F5" stroke="none"/>
+    <!-- beam (tilted: left low, right high) -->
+    <line x1="150" y1="196" x2="362" y2="140"/>
+    <circle cx="256" cy="168" r="9" fill="#F4F6F5" stroke="none"/>
+  </g>
+
+  <!-- left pan (lower, holds coin) -->
+  <g stroke="#F4F6F5" stroke-width="9" stroke-linecap="round" fill="none">
+    <line x1="150" y1="196" x2="108" y2="250"/>
+    <line x1="150" y1="196" x2="192" y2="250"/>
+  </g>
+  <path d="M100 250 Q150 312 200 250 Z" fill="#F4F6F5"/>
+
+  <!-- right pan (higher, holds check) -->
+  <g stroke="#F4F6F5" stroke-width="9" stroke-linecap="round" fill="none">
+    <line x1="362" y1="140" x2="320" y2="194"/>
+    <line x1="362" y1="140" x2="404" y2="194"/>
+  </g>
+  <path d="M312 194 Q362 256 412 194 Z" fill="#F4F6F5"/>
+
+  <!-- gold coin on left pan -->
+  <circle cx="150" cy="222" r="34" fill="#F5C542" stroke="#E0A92B" stroke-width="6"/>
+  <text x="150" y="238" font-family="Arial, sans-serif" font-size="42" font-weight="800" fill="#B9791A" text-anchor="middle">$</text>
+
+  <!-- white check above right pan -->
+  <polyline points="338,150 356,170 392,124" fill="none" stroke="#F4F6F5" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
