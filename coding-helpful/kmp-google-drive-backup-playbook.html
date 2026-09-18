@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Google Drive Backup in KMP</title>
+<meta name="description" content="A build-it-again guide for Google Drive backup in a Kotlin Multiplatform app — Android and iOS — written from a shipped implementation, with every trap that broke it.">
+<meta name="theme-color" content="#146e52">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme: light;
+  --brand:#146e52; --brand-dark:#0c4a37; --brand-soft:#e7f1ec;
+  --page:#f7f6f1; --card:#ffffff; --ink:#15211d; --body:#37463f; --muted:#7a8a82;
+  --line:#e3e6e1; --code-bg:#11201b; --code-ink:#dbe7e1;
+  --warn:#8a3d1f; --warn-soft:#fbeee6;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--body);
+  font-family:"Plus Jakarta Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+
+/* ---- hero ---- */
+.hero{background:linear-gradient(135deg,#1b8c68,#0c4a37);color:#fff;padding:64px 24px 88px}
+.hero-in{max-width:1180px;margin:0 auto}
+.eyebrow{display:inline-block;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);
+  padding:6px 14px;border-radius:999px;font-size:12.5px;font-weight:700;letter-spacing:.06em;
+  text-transform:uppercase}
+.hero h1{margin:18px 0 10px;font-size:clamp(30px,5vw,46px);line-height:1.12;font-weight:800;
+  letter-spacing:-.02em;text-wrap:balance}
+.hero p{margin:0;max-width:62ch;font-size:17px;color:rgba(255,255,255,.88)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.chip{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);border-radius:8px;
+  padding:5px 11px;font-size:13px;font-weight:600;font-family:var(--mono)}
+
+/* ---- layout ---- */
+.shell{max-width:1180px;margin:-56px auto 0;padding:0 24px 80px;
+  display:grid;grid-template-columns:232px minmax(0,1fr);gap:32px;align-items:start}
+nav.toc{position:sticky;top:20px;background:var(--card);border:1px solid var(--line);
+  border-radius:14px;padding:18px 16px;font-size:13.5px}
+nav.toc b{display:block;font-size:11px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:10px}
+nav.toc a{display:block;padding:5px 8px;margin:0 -8px;border-radius:7px;color:var(--body);
+  text-decoration:none;font-weight:600;line-height:1.35}
+nav.toc a:hover{background:var(--brand-soft);color:var(--brand-dark)}
+main{background:var(--card);border:1px solid var(--line);border-radius:16px;
+  padding:clamp(22px,4vw,52px);min-width:0}
+
+/* ---- prose ---- */
+main h1{display:none}
+main h2{margin:56px 0 4px;font-size:27px;font-weight:800;color:var(--ink);letter-spacing:-.015em;
+  padding-top:22px;border-top:1px solid var(--line);scroll-margin-top:20px;text-wrap:balance}
+main > h2:first-of-type{margin-top:0;border-top:0;padding-top:0}
+main h3{margin:38px 0 4px;font-size:19.5px;font-weight:800;color:var(--ink);scroll-margin-top:20px}
+main h3[id^="trap"]{background:var(--warn-soft);color:var(--warn);border-left:4px solid var(--warn);
+  padding:12px 16px;border-radius:0 10px 10px 0;margin-top:34px}
+main h4{margin:26px 0 2px;font-size:16.5px;font-weight:800;color:var(--ink)}
+main p{margin:12px 0}
+main a{color:var(--brand);text-decoration:underline;text-underline-offset:2px}
+strong{color:var(--ink);font-weight:700}
+hr{border:0;border-top:1px solid var(--line);margin:44px 0}
+main hr{display:none}
+ul,ol{margin:12px 0;padding-left:22px}
+li{margin:6px 0}
+li.task{list-style:none;position:relative}
+li.task::before{content:"";position:absolute;left:-21px;top:6px;width:13px;height:13px;
+  border:1.5px solid var(--muted);border-radius:3.5px}
+code{font-family:var(--mono);font-size:.875em;background:var(--brand-soft);color:var(--brand-dark);
+  padding:1.5px 5px;border-radius:5px;word-break:break-word}
+pre.code{background:var(--code-bg);color:var(--code-ink);border-radius:12px;padding:18px 20px;
+  overflow-x:auto;margin:16px 0;position:relative}
+pre.code code{background:none;color:inherit;padding:0;font-size:13.2px;line-height:1.62;
+  white-space:pre;word-break:normal}
+pre.code[data-lang]:not([data-lang=""])::after{content:attr(data-lang);position:absolute;top:9px;
+  right:13px;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
+  color:#6f8a80}
+.tablewrap{overflow-x:auto;margin:18px 0}
+table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:420px}
+th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--brand-soft);color:var(--brand-dark);font-weight:700;font-size:12.5px;
+  letter-spacing:.05em;text-transform:uppercase}
+tbody tr:last-child td{border-bottom:0}
+em{color:var(--ink)}
+
+footer{max-width:1180px;margin:0 auto;padding:0 24px 56px;color:var(--muted);font-size:13.5px}
+
+@media (max-width:880px){
+  .shell{grid-template-columns:1fr;gap:20px}
+  nav.toc{position:static}
+  .hero{padding:44px 16px 72px}
+  .shell{padding:0 16px 56px}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-in">
+    <span class="eyebrow">Implementation playbook</span>
+    <h1>Google Drive backup in a Kotlin Multiplatform app</h1>
+    <p>A build-it-again guide for Android and iOS, written from a shipped implementation. Every piece of code here runs; every trap in Part&nbsp;7 is something that actually broke the build it came from.</p>
+    <div class="chips">
+      <span class="chip">drive.appdata</span>
+      <span class="chip">Ktor REST</span>
+      <span class="chip">AuthorizationClient</span>
+      <span class="chip">GoogleSignIn-iOS</span>
+      <span class="chip">WorkManager</span>
+      <span class="chip">BGTaskScheduler</span>
+    </div>
+  </div>
+</div>
+
+<div class="shell">
+  <nav class="toc">
+    <b>On this page</b>
+<a href="#contents">Contents</a>
+<a href="#1-what-you-are-building">1. What you are building</a>
+<a href="#2-the-architecture-and-why">2. The architecture, and why</a>
+<a href="#3-google-cloud-console-setup">3. Google Cloud Console setup</a>
+<a href="#4-dependencies">4. Dependencies</a>
+<a href="#5-the-shared-code-commonmain">5. The shared code (commonMain)</a>
+<a href="#6-the-platform-code">6. The platform code</a>
+<a href="#7-every-trap-and-how-to-avoid-it">7. Every trap, and how to avoid it</a>
+<a href="#8-test-checklist">8. Test checklist</a>
+<a href="#appendix-a--encrypting-the-backup-file">Appendix A — encrypting the backup file</a>
+<a href="#appendix-b--file-association">Appendix B — file association</a>  </nav>
+  <main>
+<h1 id="google-drive-backup-in-a-kotlin-multiplatform-app">Google Drive backup in a Kotlin Multiplatform app</h1>
+<p>A build-it-again guide for Android + iOS, written from a working implementation.</p>
+<p>Everything here has shipped and been verified on a real Android device and an iOS simulator. The code is copied from the working app, not reconstructed, and every "trap" in Part 7 is something that actually broke during that build — not a list of theoretical risks.</p>
+<p><strong>Read Part 7 before you write any code.</strong> It is the part that saves the days.</p>
+<hr>
+<h2 id="contents">Contents</h2>
+<ol><li><a href="#1-what-you-are-building">What you are building</a></li><li><a href="#2-the-architecture-and-why">The architecture, and why</a></li><li><a href="#3-google-cloud-console-setup">Google Cloud Console setup</a></li><li><a href="#4-dependencies">Dependencies</a></li><li><a href="#5-the-shared-code-commonmain">The shared code</a></li><li><a href="#6-the-platform-code">The platform code</a></li><li><a href="#7-every-trap-and-how-to-avoid-it">Every trap, and how to avoid it</a></li><li><a href="#8-test-checklist">Test checklist</a></li><li><a href="#appendix-a--encrypting-the-backup-file">Appendix A — encrypting the backup file</a></li><li><a href="#appendix-b--file-association">Appendix B — file association</a></li></ol>
+<hr>
+<h2 id="1-what-you-are-building">1. What you are building</h2>
+<p>A person taps <strong>Connect</strong>, picks a Google account, and from then on the app keeps one backup file in a hidden folder inside <em>their own</em> Drive. They can back up now, restore, choose a daily or weekly cadence, or disconnect.</p>
+<p>Three rules shape every decision below:</p>
+<div class="tablewrap"><table><thead><tr><th>Rule</th><th>Consequence</th></tr></thead><tbody><tr><td>The backup is <strong>their</strong> file, in <strong>their</strong> Drive</td><td>You run no server and hold no copy. Nothing to breach, nothing to pay for.</td></tr><tr><td>The app asks for <strong>one</strong> scope: <code>drive.appdata</code></td><td>A per-app hidden folder. You cannot see their documents or photos, and cannot be accused of it.</td></tr><tr><td>The Drive feature <strong>adds a destination</strong>, not a format</td><td>Whatever your app already exports to a file is exactly what goes to Drive. One format, one restore path, one set of bugs.</td></tr></tbody></table></div>
+<p>If your app does not already have working export/import, build that first. Drive on top of a shaky export just makes the shaky export harder to debug.</p>
+<h3 id="why-driveappdata-and-not-drivefile">Why <code>drive.appdata</code> and not <code>drive.file</code></h3>
+<p><code>drive.appdata</code> writes to a folder Drive maintains per application. It is invisible in the person's Drive UI (they can inspect and delete it under <em>Settings → Manage apps</em>), unreadable by any other app, and — importantly for shipping — <strong>not a restricted scope</strong>, so it needs no Google security assessment and no CASA audit. <code>drive.file</code> and anything broader drag you into review.</p>
+<hr>
+<h2 id="2-the-architecture-and-why">2. The architecture, and why</h2>
+<pre class="code" data-lang=""><code>                         commonMain  (all the logic lives here)
+   ┌──────────────────────────────────────────────────────────────────┐
+   │  DriveBackupRepository ── connect / backupNow / restore /         │
+   │          │                disconnect / remoteInfo                 │
+   │          ├─ DriveApiClient    → Drive REST over Ktor              │
+   │          ├─ DrivePrefs        → DataStore: account, last, cadence │
+   │          ├─ AutoBackupRunner  → the one &quot;is it due?&quot; decision     │
+   │          └─ DriveStartup      → re-arm + catch-up on foreground   │
+   └──────────────────────────────────────────────────────────────────┘
+        ▲ interface                ▲ interface            ▲ interface
+   GoogleAuthProvider       HttpClientEngine       AutoBackupScheduler
+        │                          │                      │
+   ┌────┴─────┐              ┌─────┴─────┐          ┌─────┴──────┐
+   │ Android  │              │  OkHttp   │          │ WorkManager│
+   │ iOS      │              │  Darwin   │          │ BGTask     │
+   └──────────┘              └───────────┘          └────────────┘</code></pre>
+<p><strong>The platform layer supplies exactly three things.</strong> An HTTP engine, a way to get an access token, and a way to be woken up on a cadence. Everything else — all the Drive calls, all the state, all the "should this run" logic — is written once.</p>
+<p>Two decisions are worth defending up front, because both are tempting to get wrong:</p>
+<p><strong>Plain REST, not Google's Drive client library.</strong> <code>com.google.api-client</code> is JVM-only. Use it and the whole feature is Android-only. The REST API underneath is six endpoints and works identically from Ktor on both platforms. This is the single most important structural choice in the document.</p>
+<p><strong>Kotlin never imports Google's iOS SDK.</strong> GoogleSignIn-iOS is a Swift package linked into the app target. Reaching it from Kotlin/Native via cinterop means vendoring it into the Kotlin build for three calls. Instead Kotlin declares an <code>interface GoogleAuthBridge</code>, Swift implements it, and the app hands the implementation in at launch.</p>
+<hr>
+<h2 id="3-google-cloud-console-setup">3. Google Cloud Console setup</h2>
+<p>Do this first. Every "it doesn't work" in this feature is 80% likely to be here.</p>
+<h3 id="31-project-and-api">3.1 Project and API</h3>
+<ol><li><a href="https://console.cloud.google.com">console.cloud.google.com</a> → create a project (or reuse one).</li><li><strong>APIs &amp; Services → Library → Google Drive API → Enable.</strong></li></ol>
+<p>Firebase is <strong>not</strong> needed. This is plain OAuth against a Cloud project.</p>
+<h3 id="32-branding--oauth-consent">3.2 Branding / OAuth consent</h3>
+<p><strong>APIs &amp; Services → OAuth consent screen (Branding).</strong></p>
+<ul><li><strong>App name</strong> — this is what the person reads on the consent screen. Put the real app name here.</li></ul>
+<p>  Not <code>MyApp - Prod</code>, not <code>myapp-android</code>. They see it.</p>
+<ul><li>User support email, developer contact email, app logo if you have one.</li><li><strong>User type: External.</strong></li></ul>
+<h3 id="33-scope">3.3 Scope</h3>
+<p>**Data access → Add or remove scopes → filter for <code>drive.appdata</code>.** Add <code>https://www.googleapis.com/auth/drive.appdata</code> and nothing else.</p>
+<p>Adding a broader Drive scope "just in case" is how you end up in a security assessment. Don't.</p>
+<h3 id="34-publishing-status">3.4 Publishing status</h3>
+<p><strong>Audience → Publish app → In production.</strong></p>
+<p>Leave it in <em>Testing</em> and two things bite you:</p>
+<ul><li>Only accounts on the test-user list can connect — and iOS enforces this far more strictly than</li></ul>
+<p>  Android, because iOS goes through the full browser OAuth flow.</p>
+<ul><li><strong>Refresh tokens expire after 7 days.</strong> Your beta testers will report "it disconnects itself</li></ul>
+<p>  every week" and you will hunt for a bug that isn't in your code.</p>
+<p>With only <code>drive.appdata</code> requested, publishing to production needs no verification and no review. It is one button.</p>
+<h3 id="35-oauth-clients">3.5 OAuth clients</h3>
+<p><strong>Credentials → Create credentials → OAuth client ID.</strong> You need <strong>three</strong>, not two:</p>
+<div class="tablewrap"><table><thead><tr><th>#</th><th>Type</th><th>Fields</th><th>When</th></tr></thead><tbody><tr><td>1</td><td>Android</td><td>package name + <strong>debug</strong> SHA-1</td><td>Now — this is what you develop against</td></tr><tr><td>2</td><td>Android</td><td>package name + <strong>Play App Signing</strong> SHA-1</td><td>After your first upload to Play</td></tr><tr><td>3</td><td>iOS</td><td>bundle ID</td><td>Now — this one covers everything</td></tr></tbody></table></div>
+<p><strong>Android needs two because Android identifies a client by package + signing certificate</strong>, and your debug builds are signed with a different certificate from your release builds.</p>
+<p>Debug SHA-1:</p>
+<pre class="code" data-lang="bash"><code>keytool -list -v -keystore ~/.android/debug.keystore \
+        -alias androiddebugkey -storepass android -keypass android | grep SHA1</code></pre>
+<p>Release SHA-1 comes from <strong>Play Console → Setup → App signing → App signing key certificate</strong>, and only exists after your first AAB upload. Create client #2 then, or create it now with a placeholder and edit the SHA-1 later.</p>
+<p><strong>iOS needs only one, ever.</strong> iOS identifies a client by bundle ID alone — there is no certificate component. One iOS client covers simulator, device, TestFlight and the App Store. If someone tells you to make an "iOS prod client", they are wrong; it will be byte-for-byte equivalent and will only confuse you about which ID belongs in <code>Info.plist</code>.</p>
+<p>You never need the client <em>secret</em> for either platform.</p>
+<h3 id="36-what-to-write-down">3.6 What to write down</h3>
+<pre class="code" data-lang=""><code>iOS client ID          →  &lt;N&gt;-&lt;hash&gt;.apps.googleusercontent.com
+Reversed for the URL   →  com.googleusercontent.apps.&lt;N&gt;-&lt;hash&gt;</code></pre>
+<p>Both go into <code>Info.plist</code>. Android needs nothing in the app at all — Play Services matches your package name and signature to the client automatically.</p>
+<hr>
+<h2 id="4-dependencies">4. Dependencies</h2>
+<p><code>gradle/libs.versions.toml</code>:</p>
+<pre class="code" data-lang="toml"><code>[versions]
+ktor = &quot;3.6.0&quot;
+playServicesAuth = &quot;22.0.0&quot;
+work = &quot;2.11.2&quot;
+coroutines = &quot;1.11.0&quot;
+datastore = &quot;1.2.1&quot;
+
+[libraries]
+ktor-client-core                = { module = &quot;io.ktor:ktor-client-core&quot;,                     version.ref = &quot;ktor&quot; }
+ktor-client-content-negotiation = { module = &quot;io.ktor:ktor-client-content-negotiation&quot;,      version.ref = &quot;ktor&quot; }
+ktor-serialization-json         = { module = &quot;io.ktor:ktor-serialization-kotlinx-json&quot;,      version.ref = &quot;ktor&quot; }
+ktor-client-okhttp              = { module = &quot;io.ktor:ktor-client-okhttp&quot;,                   version.ref = &quot;ktor&quot; }
+ktor-client-darwin              = { module = &quot;io.ktor:ktor-client-darwin&quot;,                   version.ref = &quot;ktor&quot; }
+play-services-auth              = { module = &quot;com.google.android.gms:play-services-auth&quot;,    version.ref = &quot;playServicesAuth&quot; }
+coroutines-play-services        = { module = &quot;org.jetbrains.kotlinx:kotlinx-coroutines-play-services&quot;, version.ref = &quot;coroutines&quot; }
+androidx-work-runtime           = { module = &quot;androidx.work:work-runtime-ktx&quot;,               version.ref = &quot;work&quot; }</code></pre>
+<p><code>composeApp/build.gradle.kts</code>:</p>
+<pre class="code" data-lang="kotlin"><code>commonMain.dependencies {
+    implementation(libs.ktor.client.core)
+    implementation(libs.ktor.client.content.negotiation)
+    implementation(libs.ktor.serialization.json)
+}
+androidMain.dependencies {
+    implementation(libs.ktor.client.okhttp)
+    implementation(libs.play.services.auth)
+    implementation(libs.coroutines.play.services)   // Task.await()
+    implementation(libs.androidx.work.runtime)
+}
+iosMain.dependencies {
+    implementation(libs.ktor.client.darwin)
+}</code></pre>
+<p>iOS also needs the Swift package. In XcodeGen's <code>project.yml</code>:</p>
+<pre class="code" data-lang="yaml"><code>packages:
+  GoogleSignIn:
+    url: https://github.com/google/GoogleSignIn-iOS
+    majorVersion: 10.0.0
+targets:
+  iosApp:
+    dependencies:
+      - package: GoogleSignIn
+        product: GoogleSignIn     # NOT GoogleSignInSwift unless you want their button</code></pre>
+<p>Declare it in <code>project.yml</code>, not by adding it in Xcode's UI — if your <code>.pbxproj</code> is generated, a package added through the UI vanishes the next time anyone runs <code>xcodegen generate</code>.</p>
+<p>Android manifest:</p>
+<pre class="code" data-lang="xml"><code>&lt;uses-permission android:name=&quot;android.permission.INTERNET&quot; /&gt;
+&lt;uses-permission android:name=&quot;android.permission.ACCESS_NETWORK_STATE&quot; /&gt;</code></pre>
+<p>iOS <code>Info.plist</code>:</p>
+<pre class="code" data-lang="xml"><code>&lt;key&gt;GIDClientID&lt;/key&gt;
+&lt;string&gt;NNN-hash.apps.googleusercontent.com&lt;/string&gt;
+
+&lt;key&gt;CFBundleURLTypes&lt;/key&gt;
+&lt;array&gt;&lt;dict&gt;
+  &lt;key&gt;CFBundleURLSchemes&lt;/key&gt;
+  &lt;array&gt;&lt;string&gt;com.googleusercontent.apps.NNN-hash&lt;/string&gt;&lt;/array&gt;
+&lt;/dict&gt;&lt;/array&gt;
+
+&lt;!-- only if you want background auto-backup --&gt;
+&lt;key&gt;BGTaskSchedulerPermittedIdentifiers&lt;/key&gt;
+&lt;array&gt;&lt;string&gt;com.yourcompany.yourapp.autobackup&lt;/string&gt;&lt;/array&gt;
+&lt;key&gt;UIBackgroundModes&lt;/key&gt;
+&lt;array&gt;&lt;string&gt;processing&lt;/string&gt;&lt;/array&gt;</code></pre>
+<hr>
+<h2 id="5-the-shared-code-commonmain">5. The shared code (commonMain)</h2>
+<p>Ten small files. Create them in this order — each only depends on the ones above it.</p>
+<h3 id="51-googleauthproviderkt--the-seam">5.1 <code>GoogleAuthProvider.kt</code> — the seam</h3>
+<pre class="code" data-lang="kotlin"><code>const val DRIVE_APPDATA_SCOPE = &quot;https://www.googleapis.com/auth/drive.appdata&quot;
+
+/**
+ * Where an access token comes from, with the platform left out of it.
+ *
+ * This is authorization, not sign-in. The app has no accounts and no login screen; connecting an
+ * account grants one folder and nothing else.
+ */
+interface GoogleAuthProvider {
+    /** Shows the account picker and consent screen. Only call this from something just tapped. */
+    suspend fun connect(): String
+
+    /**
+     * A token with no UI at all, for a background job.
+     * Throws NeedsConsent rather than prompting: a worker has no screen to prompt on.
+     */
+    suspend fun accessToken(): String
+
+    /** Drop a token Drive has just rejected, so the next call fetches a fresh one. */
+    suspend fun invalidate(token: String)
+
+    /** Forget whatever the platform SDK is holding locally, on disconnect. */
+    suspend fun clearSession()
+}</code></pre>
+<p>Four methods. That is the entire platform surface of authorization.</p>
+<h3 id="52-drivemodelskt--the-vocabulary">5.2 <code>DriveModels.kt</code> — the vocabulary</h3>
+<pre class="code" data-lang="kotlin"><code>enum class BackupFrequency(val days: Int) { OFF(0), DAILY(1), WEEKLY(7) }
+
+data class DriveAccount(val email: String, val displayName: String?)
+data class DriveBackupInfo(val modifiedAtMillis: Long?, val sizeBytes: Long?)
+
+sealed class DriveError(message: String, cause: Throwable? = null) : Exception(message, cause) {
+    class NotConnected  : DriveError(&quot;No Drive account connected&quot;)
+    class NeedsConsent  : DriveError(&quot;Drive permission must be granted again&quot;)
+    class Cancelled     : DriveError(&quot;Drive permission was cancelled&quot;)
+    class Network(cause: Throwable? = null) : DriveError(&quot;Network error&quot;, cause)
+    class Auth(val detail: String)          : DriveError(&quot;Google auth error: $detail&quot;)
+    class Http(val code: Int, val body: String) : DriveError(&quot;Drive HTTP $code&quot;)
+    class NoBackupFound : DriveError(&quot;No backup in this account&quot;)
+    class Unexpected(cause: Throwable) : DriveError(cause.message ?: &quot;Unexpected&quot;, cause)
+}</code></pre>
+<p><strong>Make this sealed class rich from day one.</strong> Every one of these has a different message in the UI and a different retry policy in the background worker. Collapsing them into one <code>DriveException</code> means that when something breaks in six months you get "Something went wrong" and no way to tell a dead network from a revoked grant.</p>
+<p><code>Auth</code> deliberately carries a <code>detail</code> string. When the platform SDK fails in a way you did not anticipate, that string is the only evidence you will have.</p>
+<h3 id="53-driveapikt--the-six-rest-calls">5.3 <code>DriveApi.kt</code> — the six REST calls</h3>
+<pre class="code" data-lang="kotlin"><code>const val DRIVE_BACKUP_FILE_NAME = &quot;yourapp-backup.json&quot;
+
+@Serializable
+data class DriveFile(
+    val id: String,
+    val name: String? = null,
+    val size: String? = null,          // Drive sends int64 as a STRING
+    val modifiedTime: String? = null,  // RFC 3339
+)
+
+@Serializable internal data class DriveFileList(val files: List&lt;DriveFile&gt; = emptyList())
+@Serializable internal data class DriveCreateMeta(val name: String, val parents: List&lt;String&gt;, val mimeType: String)
+@Serializable internal data class DriveAbout(val user: DriveUser)
+@Serializable internal data class DriveUser(val displayName: String? = null, val emailAddress: String? = null)
+
+/**
+ * A client of its own, not the app&#x27;s. If your app ever grows its own API client, whatever that
+ * carries by default — a base URL, an auth header, an interceptor — must not reach Google.
+ */
+fun createDriveHttpClient(engine: HttpClientEngine): HttpClient = HttpClient(engine) {
+    expectSuccess = false                 // authed() must SEE a 401, not have it thrown at it
+    install(ContentNegotiation) { json(Json { ignoreUnknownKeys = true }) }
+    install(HttpTimeout) {
+        connectTimeoutMillis = 15_000
+        requestTimeoutMillis = 120_000    // a backup is one upload; let it take a while
+    }
+}
+
+class DriveApiClient(
+    private val http: HttpClient,
+    private val auth: GoogleAuthProvider,
+) {
+    private val json = Json { encodeDefaults = true }
+
+    /**
+     * Who the token belongs to.
+     * Takes the token directly because connect() has one in hand and has not yet saved the
+     * account it belongs to — which is the very thing this call is being made to find out.
+     */
+    suspend fun about(token: String? = null): DriveAccount {
+        val about: DriveAbout = authed(token) { t -&gt;
+            http.get(&quot;$API/about&quot;) { bearerAuth(t); parameter(&quot;fields&quot;, &quot;user(displayName,emailAddress)&quot;) }
+        }.body()
+        val email = about.user.emailAddress ?: throw DriveError.Auth(&quot;Account has no email address&quot;)
+        return DriveAccount(email, about.user.displayName)
+    }
+
+    suspend fun find(name: String): DriveFile? =
+        authed { t -&gt;
+            http.get(&quot;$API/files&quot;) {
+                bearerAuth(t)
+                parameter(&quot;spaces&quot;, &quot;appDataFolder&quot;)
+                parameter(&quot;q&quot;, &quot;name = &#x27;$name&#x27; and trashed = false&quot;)
+                parameter(&quot;fields&quot;, &quot;files($FIELDS)&quot;)
+                parameter(&quot;orderBy&quot;, &quot;modifiedTime desc&quot;)
+                parameter(&quot;pageSize&quot;, 1)
+            }
+        }.body&lt;DriveFileList&gt;().files.firstOrNull()
+
+    suspend fun create(name: String, bytes: ByteArray): DriveFile {
+        val boundary = &quot;up-&quot; + Random.nextLong().toULong().toString(16)
+        val meta = json.encodeToString(
+            DriveCreateMeta.serializer(),
+            DriveCreateMeta(name, listOf(&quot;appDataFolder&quot;), JSON_MIME),
+        )
+        return authed { t -&gt;
+            http.post(&quot;$UPLOAD/files&quot;) {
+                bearerAuth(t)
+                parameter(&quot;uploadType&quot;, &quot;multipart&quot;)
+                parameter(&quot;fields&quot;, FIELDS)
+                setBody(ByteArrayContent(
+                    multipartRelated(boundary, meta, bytes),
+                    ContentType.MultiPart.Related.withParameter(&quot;boundary&quot;, boundary),
+                ))
+            }
+        }.body()
+    }
+
+    /** Replaces the contents, so the account keeps exactly one backup. */
+    suspend fun update(fileId: String, bytes: ByteArray): DriveFile =
+        authed { t -&gt;
+            http.patch(&quot;$UPLOAD/files/$fileId&quot;) {
+                bearerAuth(t)
+                parameter(&quot;uploadType&quot;, &quot;media&quot;)
+                parameter(&quot;fields&quot;, FIELDS)
+                setBody(ByteArrayContent(bytes, ContentType.Application.Json))
+            }
+        }.body()
+
+    suspend fun download(fileId: String): String =
+        authed { t -&gt; http.get(&quot;$API/files/$fileId&quot;) { bearerAuth(t); parameter(&quot;alt&quot;, &quot;media&quot;) } }
+            .bodyAsText()
+
+    /** Best effort: local state is already cleared, and a person disconnecting on a train
+     *  should not be told it failed. */
+    suspend fun revoke(token: String) {
+        runCatching { http.submitForm(REVOKE_URL, parameters { append(&quot;token&quot;, token) }) }
+    }
+
+    private suspend fun authed(
+        initialToken: String? = null,
+        send: suspend (String) -&gt; HttpResponse,
+    ): HttpResponse {
+        val token = initialToken ?: auth.accessToken()
+        var res = network { send(token) }
+
+        if (res.status == HttpStatusCode.Unauthorized) {
+            // A token handed in by connect() is the freshest there will ever be, and the account
+            // it belongs to has not been saved yet — so asking for another would fail with
+            // &quot;not connected&quot; and bury the real problem under the wrong message.   &lt;-- TRAP 4
+            if (initialToken != null) throw DriveError.NeedsConsent()
+            auth.invalidate(token)
+            res = network { send(auth.accessToken()) }
+            if (res.status == HttpStatusCode.Unauthorized) throw DriveError.NeedsConsent()
+        }
+        if (!res.status.isSuccess()) {
+            val body = res.bodyAsText()
+            // The consent screen lets the Drive checkbox be unticked. The token is then real and
+            // valid, and simply not allowed to do this — which reads as 403, not 401.
+            if (res.status == HttpStatusCode.Forbidden &amp;&amp; &quot;insufficient&quot; in body.lowercase()) {
+                throw DriveError.NeedsConsent()
+            }
+            val excerpt = body.take(500)
+            println(&quot;Drive: HTTP ${res.status.value} — $excerpt&quot;)
+            throw DriveError.Http(res.status.value, excerpt)
+        }
+        return res
+    }
+
+    /**
+     * Anything the engine throws is the network failing. Ktor&#x27;s engines do not share an exception
+     * type across platforms — OkHttp throws IOException, Darwin throws its own — so catch broadly.
+     */
+    private suspend fun network(block: suspend () -&gt; HttpResponse): HttpResponse =
+        try { block() }
+        catch (e: DriveError) { throw e }
+        catch (e: Exception) {
+            println(&quot;Drive: network failure — ${e::class.simpleName}: ${e.message}&quot;)
+            throw DriveError.Network(e)
+        }
+
+    private companion object {
+        const val API        = &quot;https://www.googleapis.com/drive/v3&quot;
+        const val UPLOAD     = &quot;https://www.googleapis.com/upload/drive/v3&quot;
+        const val REVOKE_URL = &quot;https://oauth2.googleapis.com/revoke&quot;
+        const val FIELDS     = &quot;id,name,size,modifiedTime&quot;
+        const val JSON_MIME  = &quot;application/json&quot;
+    }
+}
+
+/** Drive&#x27;s multipart upload: the metadata as one part, the file as the next. */
+private fun multipartRelated(boundary: String, metadataJson: String, content: ByteArray): ByteArray {
+    val head = buildString {
+        append(&quot;--$boundary\r\n&quot;)
+        append(&quot;Content-Type: application/json; charset=UTF-8\r\n\r\n&quot;)
+        append(metadataJson)
+        append(&quot;\r\n--$boundary\r\n&quot;)
+        append(&quot;Content-Type: application/json\r\n\r\n&quot;)
+    }.encodeToByteArray()
+    return head + content + &quot;\r\n--$boundary--\r\n&quot;.encodeToByteArray()
+}</code></pre>
+<p>Note <code>authed()</code> — the retry-once-then-give-up rule lives in exactly one place. Every call gets it, and no call gets it twice.</p>
+<h3 id="54-driveprefskt--five-keys-in-datastore">5.4 <code>DrivePrefs.kt</code> — five keys in DataStore</h3>
+<pre class="code" data-lang="kotlin"><code>data class DrivePrefsState(
+    val account: DriveAccount? = null,
+    val lastBackupMillis: Long? = null,
+    val lastSizeBytes: Long? = null,
+    val frequency: BackupFrequency = BackupFrequency.OFF,
+)
+
+/**
+ * Shares the one DataStore the rest of the app uses rather than opening a second: two stores over
+ * the same directory is a way to lose writes, and these are five keys.
+ */
+class DrivePrefs(private val store: DataStore&lt;Preferences&gt;) {
+
+    val state: Flow&lt;DrivePrefsState&gt; = store.data.map { p -&gt;
+        DrivePrefsState(
+            account = p[EMAIL]?.let { DriveAccount(it, p[NAME]) },
+            lastBackupMillis = p[LAST_AT],
+            lastSizeBytes = p[LAST_SIZE],
+            frequency = BackupFrequency.entries.firstOrNull { it.name == p[FREQ] } ?: BackupFrequency.OFF,
+        )
+    }
+
+    suspend fun snapshot() = state.first()
+    suspend fun connectedEmail() = snapshot().account?.email
+    suspend fun frequency() = snapshot().frequency
+    suspend fun lastBackupMillis() = snapshot().lastBackupMillis
+
+    suspend fun setAccount(account: DriveAccount) { /* EMAIL, NAME */ }
+    suspend fun setLastBackup(atMillis: Long, sizeBytes: Long) { /* LAST_AT, LAST_SIZE */ }
+    suspend fun setFrequency(frequency: BackupFrequency) { /* FREQ */ }
+
+    /**
+     * Forgets the account and the backup that belonged to it. The cadence is deliberately KEPT:
+     * it is a preference about how the person likes to work, and should still be set the way they
+     * left it when they connect a different account.
+     */
+    suspend fun clearAccount() {
+        store.edit { it.remove(EMAIL); it.remove(NAME); it.remove(LAST_AT); it.remove(LAST_SIZE) }
+    }
+
+    private companion object {
+        val EMAIL     = stringPreferencesKey(&quot;drive_account_email&quot;)
+        val NAME      = stringPreferencesKey(&quot;drive_account_name&quot;)
+        val LAST_AT   = longPreferencesKey(&quot;drive_last_backup_at&quot;)
+        val LAST_SIZE = longPreferencesKey(&quot;drive_last_backup_size&quot;)
+        val FREQ      = stringPreferencesKey(&quot;drive_backup_frequency&quot;)
+    }
+}</code></pre>
+<h3 id="55-drivebackuprepositorykt--the-five-operations">5.5 <code>DriveBackupRepository.kt</code> — the five operations</h3>
+<p>This is the file to read most carefully. Two comments in it describe rules that protect data.</p>
+<pre class="code" data-lang="kotlin"><code>class DriveBackupRepository(
+    private val drive: DriveApiClient,
+    private val auth: GoogleAuthProvider,
+    private val prefs: DrivePrefs,
+    private val backup: BackupRepository,     // YOUR existing export/import
+) {
+    /**
+     * One backup or restore at a time, across every caller.
+     *
+     * The dangerous pair is an automatic backup starting while a restore is running: the upload
+     * would carry the half-replaced database, and overwrite the very file being restored from.
+     */
+    private val lock = Mutex()
+
+    /**
+     * Connects an account, and REPORTS whatever backup is already in it.
+     *
+     * A backup found here is returned, never acted on: the person may be connecting the account
+     * their old phone used, and quietly overwriting it with a new install&#x27;s empty database is the
+     * one unrecoverable thing this feature could do. When the folder is empty there is nothing to
+     * lose, so the first backup is taken immediately.
+     */
+    suspend fun connect(): DriveBackupInfo? {
+        val token = auth.connect()
+        val account = drive.about(token)
+        prefs.setAccount(account)
+        val existing = drive.find(DRIVE_BACKUP_FILE_NAME)?.toInfo()
+        if (existing == null) backupNow()
+        return existing
+    }
+
+    suspend fun backupNow(): Unit = lock.withLock {
+        val text = backup.exportBackup().getOrElse { throw DriveError.Unexpected(it) }
+        val bytes = text.encodeToByteArray()
+        val existing = drive.find(DRIVE_BACKUP_FILE_NAME)
+        if (existing == null) drive.create(DRIVE_BACKUP_FILE_NAME, bytes)
+        else drive.update(existing.id, bytes)
+        prefs.setLastBackup(now(), bytes.size.toLong())
+    }
+
+    suspend fun remoteInfo(): DriveBackupInfo? = drive.find(DRIVE_BACKUP_FILE_NAME)?.toInfo()
+
+    suspend fun restore(): RestoreSummary = lock.withLock {
+        val file = drive.find(DRIVE_BACKUP_FILE_NAME) ?: throw DriveError.NoBackupFound()
+        val text = drive.download(file.id)
+        val summary = backup.importBackup(text).getOrElse { throw it }
+        // Local and Drive now hold the same data, which is what LETS automatic backups start:
+        // until this point an upload would have been this device&#x27;s data overwriting someone else&#x27;s.
+        prefs.setLastBackup(now(), text.encodeToByteArray().size.toLong())
+        summary
+    }
+
+    /**
+     * Clears locally first, hands the grant back to Google afterwards — in that order because the
+     * local half always succeeds and the remote half needs the network. Someone disconnecting on a
+     * plane should see it disconnect.
+     */
+    suspend fun disconnect() {
+        val token = runCatching { auth.accessToken() }.getOrNull()
+        prefs.clearAccount()
+        prefs.setFrequency(BackupFrequency.OFF)
+        auth.clearSession()
+        if (token != null) withTimeoutOrNull(5_000) { drive.revoke(token) }
+    }
+}</code></pre>
+<h3 id="56-autobackuprunnerkt--the-single-is-it-due-decision">5.6 <code>AutoBackupRunner.kt</code> — the single "is it due?" decision</h3>
+<pre class="code" data-lang="kotlin"><code>enum class AutoBackupResult { Done, Skipped, RetryLater, Failed }
+
+/**
+ * A scheduler that wakes slightly early still counts as due. WorkManager runs periodic work inside
+ * a flex window rather than on the dot, and iOS decides for itself. Without slack, a run arriving
+ * twenty minutes early would do nothing and wait a whole cadence for the next one.
+ */
+private const val DUE_SLACK_MS = 2 * 60 * 60 * 1000L
+
+fun nextDueMillis(last: Long, f: BackupFrequency) = last + f.days * DAY_MS - DUE_SLACK_MS
+
+class AutoBackupRunner(
+    private val repo: DriveBackupRepository,
+    private val prefs: DrivePrefs,
+) {
+    /** A background wake-up and an app launch can land together; only one of them uploads. */
+    private val mutex = Mutex()
+
+    suspend fun runIfDue(): AutoBackupResult = mutex.withLock {
+        val s = prefs.snapshot()
+        val last = s.lastBackupMillis
+        when {
+            s.account == null -&gt; return AutoBackupResult.Skipped
+            s.frequency == BackupFrequency.OFF -&gt; return AutoBackupResult.Skipped
+
+            // Never backed up or restored on THIS install. The account may hold another device&#x27;s
+            // backup the person has not decided about yet — and uploading a fresh install&#x27;s empty
+            // database over it is the one thing that cannot be undone. The first move is theirs.
+            last == null -&gt; return AutoBackupResult.Skipped
+
+            now() &lt; nextDueMillis(last, s.frequency) -&gt; return AutoBackupResult.Skipped
+        }
+        try {
+            repo.backupNow()
+            AutoBackupResult.Done
+        } catch (e: CancellationException) {
+            throw e                                  // never swallow this
+        } catch (e: DriveError) {
+            when {
+                e is DriveError.Network -&gt; AutoBackupResult.RetryLater
+                e is DriveError.Http &amp;&amp; (e.code == 429 || e.code &gt;= 500) -&gt; AutoBackupResult.RetryLater
+                // NeedsConsent, Auth, NotConnected: no amount of retrying produces a permission.
+                else -&gt; AutoBackupResult.Failed
+            }
+        } catch (e: Exception) {
+            AutoBackupResult.Failed
+        }
+    }
+}</code></pre>
+<p>Every path — WorkManager, iOS background task, app launch — comes through <code>runIfDue()</code>. The rules are enforced once, not three times.</p>
+<h3 id="57-drivestartupkt--the-safety-net-that-actually-carries-the-feature">5.7 <code>DriveStartup.kt</code> — the safety net that actually carries the feature</h3>
+<pre class="code" data-lang="kotlin"><code>/**
+ * Two things, and the second is the important one. Re-applying the schedule puts back anything the
+ * system dropped — a force-stop on Android clears pending work. Then a due backup is taken there
+ * and then, which on iOS is the only DEPENDABLE backup there is: BGTaskScheduler runs when iOS
+ * decides, and it may decide not to for days.
+ */
+class DriveStartup(
+    private val prefs: DrivePrefs,
+    private val scheduler: AutoBackupScheduler,
+    private val runner: AutoBackupRunner,
+    private val appScope: CoroutineScope,   // app-lifetime, NOT a screen&#x27;s
+) {
+    fun onForeground() {
+        appScope.launch {
+            scheduler.apply(prefs.frequency())
+            runner.runIfDue()
+        }
+    }
+}</code></pre>
+<p>Call it from the app root:</p>
+<pre class="code" data-lang="kotlin"><code>LifecycleStartEffect(driveStartup) {
+    driveStartup.onForeground()
+    onStopOrDispose { }
+}</code></pre>
+<p><code>LifecycleStartEffect</code>, not <code>LaunchedEffect(Unit)</code> — the latter fires once per composition, so an app resumed from the background after four days would never catch up.</p>
+<h3 id="58-drivemodulekt--koin-wiring">5.8 <code>DriveModule.kt</code> — Koin wiring</h3>
+<pre class="code" data-lang="kotlin"><code>object DriveQualifiers {
+    val AppScope = named(&quot;drive_app_scope&quot;)   // outlives any screen
+    val Engine   = named(&quot;drive_engine&quot;)      // OkHttp on Android, Darwin on iOS
+    val Http     = named(&quot;drive_http&quot;)        // Drive&#x27;s own client, never the app&#x27;s
+}
+
+val driveModule: Module = module {
+    single&lt;CoroutineScope&gt;(DriveQualifiers.AppScope) {
+        CoroutineScope(SupervisorJob() + Dispatchers.Default)
+    }
+    single(DriveQualifiers.Http) { createDriveHttpClient(get(DriveQualifiers.Engine)) }
+    single { DriveApiClient(http = get(DriveQualifiers.Http), auth = get()) }
+    single { DrivePrefs(store = get()) }
+    single { DriveBackupRepository(drive = get(), auth = get(), prefs = get(), backup = get()) }
+    single { AutoBackupRunner(repo = get(), prefs = get()) }
+    single { DriveStartup(prefs = get(), scheduler = get(), runner = get(),
+                          appScope = get(DriveQualifiers.AppScope)) }
+}</code></pre>
+<p>Also needed: <code>AutoBackupScheduler</code> (one method, <code>suspend fun apply(frequency)</code>) and <code>fun parseRfc3339(value: String): Long? = runCatching { Instant.parse(value).toEpochMilliseconds() }.getOrNull()</code>.</p>
+<hr>
+<h2 id="6-the-platform-code">6. The platform code</h2>
+<h3 id="61-android--authorization">6.1 Android — authorization</h3>
+<p>Use <code>AuthorizationClient</code>. The older <code>GoogleSignIn</code> client is deprecated, and it is a <em>sign-in</em> API, which an app with no accounts has no use for.</p>
+<pre class="code" data-lang="kotlin"><code>class AndroidGoogleAuthProvider(
+    private val appContext: Context,
+    private val activityProvider: ActivityProvider,
+    private val prefs: DrivePrefs,
+) : GoogleAuthProvider {
+
+    private val scopes = listOf(Scope(DRIVE_APPDATA_SCOPE))
+
+    override suspend fun connect(): String {
+        val activity = activityProvider.current()
+            ?: throw DriveError.Auth(&quot;No activity on screen to ask on&quot;)
+        val client = Identity.getAuthorizationClient(activity)
+
+        // No setAccount: leaving it out is what produces the ACCOUNT PICKER, which is also how
+        // someone switches to a different account later.
+        val request = AuthorizationRequest.builder().setRequestedScopes(scopes).build()
+
+        val first = gms { client.authorize(request).await() }
+        if (!first.hasResolution()) return first.tokenOrThrow()   // already granted, no screen
+
+        val pending = first.pendingIntent ?: throw DriveError.NeedsConsent()
+        val result = activity.launchForResult(pending)
+        val data = result.data
+        if (result.resultCode != Activity.RESULT_OK || data == null) throw DriveError.Cancelled()
+        return gms { client.getAuthorizationResultFromIntent(data) }.tokenOrThrow()
+    }
+
+    override suspend fun accessToken(): String {
+        val email = prefs.connectedEmail() ?: throw DriveError.NotConnected()
+        val request = AuthorizationRequest.builder()
+            .setRequestedScopes(scopes)
+            // Pinned to the connected account: WITHOUT THIS, a device with several Google accounts
+            // could silently return a token for a different one, and back up into its folder.
+            .setAccount(Account(email, &quot;com.google&quot;))
+            .build()
+        val result = gms { Identity.getAuthorizationClient(appContext).authorize(request).await() }
+        if (result.hasResolution()) throw DriveError.NeedsConsent()  // wants a screen; there is none
+        return result.tokenOrThrow()
+    }
+
+    override suspend fun invalidate(token: String) {
+        runCatching {
+            Identity.getAuthorizationClient(appContext)
+                .clearToken(ClearTokenRequest.builder().setToken(token).build()).await()
+        }
+    }
+
+    override suspend fun clearSession() = Unit  // nothing local; revoke is shared REST
+
+    private fun AuthorizationResult.tokenOrThrow() = accessToken ?: throw DriveError.NeedsConsent()
+
+    private inline fun &lt;T&gt; gms(block: () -&gt; T): T = try { block() } catch (e: ApiException) {
+        throw when (e.statusCode) {
+            CommonStatusCodes.NETWORK_ERROR -&gt; DriveError.Network(e)
+            CommonStatusCodes.CANCELED      -&gt; DriveError.Cancelled()
+            // DEVELOPER_ERROR (10) is worth recognising by sight: the build&#x27;s signing certificate
+            // or package name matches no OAuth client in the Cloud project.
+            else -&gt; DriveError.Auth(&quot;ApiException ${e.statusCode}&quot;)
+        }
+    }
+}</code></pre>
+<p>Two helpers make this work from a platform-free ViewModel:</p>
+<pre class="code" data-lang="kotlin"><code>/**
+ * Whichever Activity is on screen, for the one thing that needs one. Weakly held so a rotation
+ * cannot leave a destroyed Activity alive in a singleton.
+ */
+class ActivityProvider {
+    private var ref: WeakReference&lt;ComponentActivity&gt;? = null
+    fun attach(a: ComponentActivity) { ref = WeakReference(a) }
+    fun detach(a: ComponentActivity) { if (ref?.get() === a) ref = null }
+    fun current(): ComponentActivity? = ref?.get()
+}
+
+/**
+ * Launches the consent screen and suspends until it returns. The THREE-argument register is the one
+ * without a LifecycleOwner — the ordinary registerForActivityResult must be called before the
+ * Activity starts, and this is called when someone taps a button.
+ */
+suspend fun ComponentActivity.launchForResult(pending: PendingIntent): ActivityResult =
+    withContext(Dispatchers.Main) {
+        suspendCancellableCoroutine { cont -&gt;
+            lateinit var launcher: ActivityResultLauncher&lt;IntentSenderRequest&gt;
+            launcher = activityResultRegistry.register(
+                // Unique per call: a stale registration under a reused key would deliver this
+                // result to the previous caller&#x27;s callback.
+                &quot;drive_auth_${System.nanoTime()}&quot;,
+                ActivityResultContracts.StartIntentSenderForResult(),
+            ) { result -&gt; launcher.unregister(); if (cont.isActive) cont.resume(result) }
+            launcher.launch(IntentSenderRequest.Builder(pending.intentSender).build())
+            cont.invokeOnCancellation { launcher.unregister() }
+        }
+    }</code></pre>
+<p>In your Activity: <code>activityProvider.attach(this)</code> in <code>onCreate</code>, <code>detach(this)</code> in <code>onDestroy</code>.</p>
+<h3 id="62-android--scheduling">6.2 Android — scheduling</h3>
+<pre class="code" data-lang="kotlin"><code>class AndroidAutoBackupScheduler(private val context: Context) : AutoBackupScheduler {
+    override suspend fun apply(frequency: BackupFrequency) {
+        val wm = WorkManager.getInstance(context)
+        if (frequency == BackupFrequency.OFF) {
+            wm.cancelUniqueWork(AutoBackupWorker.UNIQUE_NAME); return
+        }
+        // A FLEX WINDOW, not a bare period. Without one the flex equals the whole interval and
+        // WorkManager may run a &quot;daily&quot; backup at any point in the day — 20 hours after the last
+        // one, or 28. Asking for the final stretch keeps it near the same time of day.
+        val request = PeriodicWorkRequestBuilder&lt;AutoBackupWorker&gt;(
+            frequency.days.toLong(), TimeUnit.DAYS,
+            if (frequency == BackupFrequency.WEEKLY) 12L else 2L, TimeUnit.HOURS,
+        )
+            .setConstraints(Constraints.Builder()
+                .setRequiredNetworkType(NetworkType.CONNECTED).build())
+            .setBackoffCriteria(BackoffPolicy.EXPONENTIAL, 30L, TimeUnit.MINUTES)
+            .build()
+
+        // UPDATE, not REPLACE. This runs on every launch, and REPLACE would restart the period each
+        // time — an app opened daily would NEVER reach a weekly backup.
+        wm.enqueueUniquePeriodicWork(
+            AutoBackupWorker.UNIQUE_NAME, ExistingPeriodicWorkPolicy.UPDATE, request,
+        )
+    }
+}
+
+/**
+ * Decides nothing — AutoBackupRunner does. Dependencies come through KoinComponent rather than a
+ * custom WorkerFactory: the default factory constructs workers reflectively and only ever passes
+ * these two arguments.
+ */
+class AutoBackupWorker(context: Context, params: WorkerParameters) :
+    CoroutineWorker(context, params), KoinComponent {
+
+    private val runner: AutoBackupRunner by inject()
+
+    override suspend fun doWork(): Result = when (runner.runIfDue()) {
+        // Skipped is a SUCCESS: not being due, or not being connected, is not a failure.
+        AutoBackupResult.Done, AutoBackupResult.Skipped -&gt; Result.success()
+        AutoBackupResult.RetryLater -&gt;
+            if (runAttemptCount + 1 &lt; 3) Result.retry() else Result.success()
+        AutoBackupResult.Failed -&gt; Result.failure()   // periodic work keeps its schedule anyway
+    }
+
+    companion object { const val UNIQUE_NAME = &quot;drive_auto_backup&quot; }
+}</code></pre>
+<h3 id="63-ios--the-kotlinswift-bridge">6.3 iOS — the Kotlin↔Swift bridge</h3>
+<p>Kotlin declares, Swift implements:</p>
+<pre class="code" data-lang="kotlin"><code>// iosMain
+interface GoogleAuthBridge {
+    fun requestDriveAccess(scopes: List&lt;String&gt;, completion: (String?, String?) -&gt; Unit)
+    fun freshToken(scopes: List&lt;String&gt;, completion: (String?, String?) -&gt; Unit)
+    fun clearSession()
+}</code></pre>
+<p><code>completion</code> gets exactly one non-null argument: a token, or an error code string. Those codes are the contract between the two languages.</p>
+<pre class="code" data-lang="kotlin"><code>class IosGoogleAuthProvider(
+    private val bridge: GoogleAuthBridge,
+    private val prefs: DrivePrefs,
+) : GoogleAuthProvider {
+
+    private val scopes = listOf(DRIVE_APPDATA_SCOPE)
+
+    // Everything on the bridge ends in UIKit, which is main-thread only.
+    override suspend fun connect(): String =
+        withContext(Dispatchers.Main) { bridgeCall { bridge.requestDriveAccess(scopes, it) } }
+
+    override suspend fun accessToken(): String {
+        if (prefs.connectedEmail() == null) throw DriveError.NotConnected()
+        return withContext(Dispatchers.Main) { bridgeCall { bridge.freshToken(scopes, it) } }
+    }
+
+    /** The SDK refreshes its own token before it expires, so there is no cache here to clear. */
+    override suspend fun invalidate(token: String) = Unit
+
+    override suspend fun clearSession() { withContext(Dispatchers.Main) { bridge.clearSession() } }
+
+    private suspend fun bridgeCall(call: ((String?, String?) -&gt; Unit) -&gt; Unit): String =
+        suspendCancellableCoroutine { cont -&gt;
+            call { token, code -&gt;
+                if (cont.isActive) {
+                    if (token != null) cont.resume(token)
+                    else cont.resumeWithException(code.toDriveError())
+                }
+            }
+        }
+
+    private fun String?.toDriveError(): DriveError = when (this) {
+        &quot;CANCELLED&quot;     -&gt; DriveError.Cancelled()
+        &quot;NOT_CONNECTED&quot; -&gt; DriveError.NotConnected()
+        &quot;NEEDS_CONSENT&quot; -&gt; DriveError.NeedsConsent()
+        &quot;NETWORK&quot;       -&gt; DriveError.Network()
+        &quot;NO_CLIENT_ID&quot;  -&gt; DriveError.Auth(&quot;Google client ID is not configured&quot;)
+        else -&gt; {
+            println(&quot;Drive: bridge returned an unhandled code — $this&quot;)
+            DriveError.Auth(this ?: &quot;UNKNOWN&quot;)
+        }
+    }
+}</code></pre>
+<p>Swift side:</p>
+<pre class="code" data-lang="swift"><code>import UIKit
+import GoogleSignIn
+import ComposeApp
+
+final class GoogleAuthBridgeImpl: NSObject, GoogleAuthBridge {
+
+    func requestDriveAccess(scopes: [String], completion: @escaping (String?, String?) -&gt; Void) {
+        guard Self.hasClientID() else { completion(nil, &quot;NO_CLIENT_ID&quot;); return }
+        guard let presenter = Self.topViewController() else { completion(nil, &quot;NO_PRESENTER&quot;); return }
+        let gid = GIDSignIn.sharedInstance
+
+        // Already has a session but not this scope — ask only for what is missing, so the person
+        // is not made to pick their account again.
+        if let user = gid.currentUser {
+            let missing = scopes.filter { !(user.grantedScopes ?? []).contains($0) }
+            guard !missing.isEmpty else { Self.fresh(user, completion); return }
+            user.addScopes(missing, presenting: presenter) { result, error in
+                Self.finish(result?.user, error, scopes, completion)
+            }
+            return
+        }
+        gid.signIn(withPresenting: presenter, hint: nil, additionalScopes: scopes) { result, error in
+            Self.finish(result?.user, error, scopes, completion)
+        }
+    }
+
+    func freshToken(scopes: [String], completion: @escaping (String?, String?) -&gt; Void) {
+        guard Self.hasClientID() else { completion(nil, &quot;NO_CLIENT_ID&quot;); return }
+        let gid = GIDSignIn.sharedInstance
+        if let user = gid.currentUser { Self.checked(user, scopes, completion); return }
+        guard gid.hasPreviousSignIn() else { completion(nil, &quot;NOT_CONNECTED&quot;); return }
+        // A relaunch, or a background task: the session is in the keychain, not in memory.
+        gid.restorePreviousSignIn { user, error in
+            guard let user else { completion(nil, error.map(Self.code(for:)) ?? &quot;NOT_CONNECTED&quot;); return }
+            Self.checked(user, scopes, completion)
+        }
+    }
+
+    func clearSession() { GIDSignIn.sharedInstance.signOut() }
+
+    /// Signing in and being GRANTED the scope are two different things: the consent screen asks
+    /// for it with a tick box, and Google hands back a valid session whether or not it stays
+    /// ticked. So a sign-in result goes through the same check as a restored one.   &lt;-- TRAP 2
+    private static func finish(_ user: GIDGoogleUser?, _ error: Error?, _ scopes: [String],
+                               _ completion: @escaping (String?, String?) -&gt; Void) {
+        if let error { completion(nil, code(for: error)); return }
+        guard let user else { completion(nil, &quot;UNKNOWN&quot;); return }
+        checked(user, scopes, completion)
+    }
+
+    private static func checked(_ user: GIDGoogleUser, _ scopes: [String],
+                                _ completion: @escaping (String?, String?) -&gt; Void) {
+        let granted = user.grantedScopes ?? []
+        guard scopes.allSatisfy({ granted.contains($0) }) else {
+            print(&quot;Drive: scope not granted — wanted \(scopes) got \(granted)&quot;)
+            completion(nil, &quot;NEEDS_CONSENT&quot;); return
+        }
+        fresh(user, completion)
+    }
+
+    private static func fresh(_ user: GIDGoogleUser,
+                              _ completion: @escaping (String?, String?) -&gt; Void) {
+        user.refreshTokensIfNeeded { user, error in
+            if let error { completion(nil, code(for: error)); return }
+            guard let token = user?.accessToken.tokenString else { completion(nil, &quot;UNKNOWN&quot;); return }
+            completion(token, nil)
+        }
+    }
+
+    private static func code(for error: Error) -&gt; String {
+        let ns0 = error as NSError
+        // Keep this. When something fails in a way you did not anticipate, it is the only evidence.
+        print(&quot;Drive: GoogleSignIn failed — domain=\(ns0.domain) code=\(ns0.code) \(ns0.localizedDescription)&quot;)
+        if let gidError = error as? GIDSignInError {
+            switch gidError.code {
+            case .canceled:            return &quot;CANCELLED&quot;
+            case .hasNoAuthInKeychain: return &quot;NOT_CONNECTED&quot;
+            default:                   return &quot;GID_\(gidError.code.rawValue)&quot;
+            }
+        }
+        let ns = error as NSError
+        if ns.domain == NSURLErrorDomain { return &quot;NETWORK&quot; }
+        return &quot;UNKNOWN_\(ns.domain)_\(ns.code)&quot;
+    }
+
+    /// A missing or placeholder client id makes GoogleSignIn raise an OBJECTIVE-C EXCEPTION, which
+    /// Swift cannot catch — so it takes the app down rather than failing the call.   &lt;-- TRAP 3
+    private static func hasClientID() -&gt; Bool {
+        guard let id = Bundle.main.object(forInfoDictionaryKey: &quot;GIDClientID&quot;) as? String
+        else { return false }
+        return !id.isEmpty &amp;&amp; !id.hasPrefix(&quot;REPLACE_WITH_&quot;)
+    }
+
+    /// Whatever is actually in front of the person — the Compose host, or a sheet above it.
+    private static func topViewController() -&gt; UIViewController? {
+        let scene = UIApplication.shared.connectedScenes
+            .compactMap { $0 as? UIWindowScene }
+            .first { $0.activationState == .foregroundActive }
+        var top = scene?.keyWindow?.rootViewController
+        while let presented = top?.presentedViewController { top = presented }
+        return top
+    }
+}</code></pre>
+<p>Handing it to Kotlin — the bridge must exist <strong>before Koin is built</strong>:</p>
+<pre class="code" data-lang="kotlin"><code>// iosMain/di/PlatformModule.ios.kt
+private var authBridge: GoogleAuthBridge? = null
+
+/** Swift: PlatformModule_iosKt.registerGoogleAuthBridge(bridge:), from iOSApp.init() */
+fun registerGoogleAuthBridge(bridge: GoogleAuthBridge) { authBridge = bridge }</code></pre>
+<pre class="code" data-lang="swift"><code>@main
+struct iOSApp: App {
+    init() {
+        // Both before the first view exists, and in this order. The bridge has to be in place
+        // before Koin is built, and iOS refuses a background task identifier registered after
+        // launch finishes.
+        PlatformModule_iosKt.registerGoogleAuthBridge(bridge: GoogleAuthBridgeImpl())
+        IosAutoBackupKt.registerAutoBackupTask()
+    }
+
+    var body: some Scene {
+        WindowGroup {
+            ContentView().onOpenURL { url in
+                if url.isFileURL { openBackupFile(url) }
+                else { GIDSignIn.sharedInstance.handle(url) }   // the consent page coming back
+            }
+        }
+    }
+}</code></pre>
+<h3 id="64-ios--scheduling">6.4 iOS — scheduling</h3>
+<pre class="code" data-lang="kotlin"><code>/** Must match BGTaskSchedulerPermittedIdentifiers in Info.plist EXACTLY, or iOS refuses it. */
+const val AUTO_BACKUP_TASK_ID = &quot;com.yourcompany.yourapp.autobackup&quot;
+
+/** iOS rejects a request asking to run immediately; this is the floor it will accept. */
+private const val MIN_DELAY_MS = 15 * 60 * 1000L
+
+class IosAutoBackupScheduler(private val prefs: DrivePrefs) : AutoBackupScheduler {
+    override suspend fun apply(frequency: BackupFrequency) {
+        val scheduler = BGTaskScheduler.sharedScheduler
+        if (frequency == BackupFrequency.OFF) {
+            scheduler.cancelTaskRequestWithIdentifier(AUTO_BACKUP_TASK_ID); return
+        }
+        val now = now()
+        val due = prefs.lastBackupMillis()?.let { nextDueMillis(it, frequency) } ?: now
+        val request = BGProcessingTaskRequest(AUTO_BACKUP_TASK_ID).apply {
+            requiresNetworkConnectivity = true
+            requiresExternalPower = false     // one small JSON file; no need to wait for a charger
+            earliestBeginDate = NSDate.dateWithTimeIntervalSinceNow(
+                maxOf(due - now, MIN_DELAY_MS) / 1000.0)
+        }
+        // Submitting the same identifier replaces whatever was pending, so this is safe on launch.
+        memScoped {
+            val error = alloc&lt;ObjCObjectVar&lt;NSError?&gt;&gt;()
+            if (!scheduler.submitTaskRequest(request, error.ptr)) {
+                // ALWAYS fails on the simulator, which has no background scheduling at all.
+                println(&quot;BGTask submit failed — ${error.value?.localizedDescription}&quot;)
+            }
+        }
+    }
+}
+
+fun registerAutoBackupTask() {
+    BGTaskScheduler.sharedScheduler.registerForTaskWithIdentifier(AUTO_BACKUP_TASK_ID, null) { task -&gt;
+        (task as? BGProcessingTask)?.let(::handleAutoBackup)
+    }
+}
+
+private fun handleAutoBackup(task: BGProcessingTask) {
+    var ok = false
+    val job = deps.appScope.launch(start = CoroutineStart.LAZY) {
+        // Apple&#x27;s advice: book the NEXT slot first. If this work runs long and is killed, the
+        // following one is already scheduled.
+        deps.scheduler.apply(deps.prefs.frequency())
+        val result = deps.runner.runIfDue()
+        ok = result == AutoBackupResult.Done || result == AutoBackupResult.Skipped
+    }
+    task.expirationHandler = { job.cancel() }
+    // EXACTLY ONCE, however the job ended. Calling setTaskCompleted twice, or not at all, is how
+    // an app teaches iOS to stop granting it background time.
+    job.invokeOnCompletion { cause -&gt; task.setTaskCompletedWithSuccess(cause == null &amp;&amp; ok) }
+    job.start()
+}</code></pre>
+<p><code>IosAutoBackupScheduler</code> needs <code>@OptIn(ExperimentalForeignApi::class, BetaInteropApi::class)</code>.</p>
+<h3 id="65-platform-di">6.5 Platform DI</h3>
+<pre class="code" data-lang="kotlin"><code>// androidMain
+single { ActivityProvider() }
+single&lt;HttpClientEngine&gt;(DriveQualifiers.Engine) { OkHttp.create() }
+single&lt;GoogleAuthProvider&gt; {
+    AndroidGoogleAuthProvider(androidContext(), activityProvider = get(), prefs = get())
+}
+single&lt;AutoBackupScheduler&gt; { AndroidAutoBackupScheduler(androidContext()) }
+
+// iosMain
+single&lt;HttpClientEngine&gt;(DriveQualifiers.Engine) { Darwin.create() }
+single&lt;GoogleAuthProvider&gt; {
+    val bridge = authBridge ?: error(&quot;call registerGoogleAuthBridge() in iOSApp.init()&quot;)
+    IosGoogleAuthProvider(bridge = bridge, prefs = get())
+}
+single&lt;AutoBackupScheduler&gt; { IosAutoBackupScheduler(prefs = get()) }</code></pre>
+<hr>
+<h2 id="7-every-trap-and-how-to-avoid-it">7. Every trap, and how to avoid it</h2>
+<p>These all happened. In rough order of how much time each one costs.</p>
+<h3 id="trap-1--ios-simulator-builds-are-unsigned-so-the-keychain-is-closed">Trap 1 — iOS simulator builds are unsigned, so the keychain is closed</h3>
+<p><strong>Symptom.</strong> Sign-in completes, the person picks their account, and then the app is still not connected. No consent checkbox ever appears. The error is generic.</p>
+<p><strong>The evidence, once you log it:</strong> <code>domain=com.google.GIDSignIn code=-2 keychain error</code>.</p>
+<p><strong>Cause.</strong> A common KMP <code>project.yml</code> carries:</p>
+<pre class="code" data-lang="yaml"><code>&quot;CODE_SIGNING_ALLOWED[sdk=iphonesimulator*]&quot;: &quot;NO&quot;</code></pre>
+<p>because simulator builds "need no signing". But an unsigned app carries <strong>no entitlements</strong>, and since iOS 15 an app with no entitlements cannot touch the keychain. GoogleSignIn stores its session there. Device builds are signed normally, so this is invisible until someone tests on a simulator — which is where you test.</p>
+<p><strong>Fix.</strong> Sign the simulator ad-hoc, which still needs no team and no certificate:</p>
+<pre class="code" data-lang="yaml"><code>CODE_SIGN_ENTITLEMENTS: iosApp/iosApp.entitlements
+&quot;CODE_SIGN_IDENTITY[sdk=iphonesimulator*]&quot;: &quot;-&quot;
+&quot;CODE_SIGNING_ALLOWED[sdk=iphonesimulator*]&quot;: &quot;YES&quot;
+&quot;CODE_SIGNING_REQUIRED[sdk=iphonesimulator*]&quot;: &quot;YES&quot;</code></pre>
+<p><code>iosApp/iosApp.entitlements</code>:</p>
+<pre class="code" data-lang="xml"><code>&lt;key&gt;keychain-access-groups&lt;/key&gt;
+&lt;array&gt;&lt;string&gt;$(AppIdentifierPrefix)$(PRODUCT_BUNDLE_IDENTIFIER)&lt;/string&gt;&lt;/array&gt;</code></pre>
+<p><code>$(PRODUCT_BUNDLE_IDENTIFIER)</code>, <strong>not</strong> <code>$(CFBundleIdentifier)</code> — the latter is not a build setting and silently resolves to nothing, leaving the entitlements dictionary empty.</p>
+<p><strong>Verify it, don't assume it:</strong></p>
+<pre class="code" data-lang="bash"><code>plutil -p &lt;DerivedData&gt;/Build/Intermediates.noindex/iosApp.build/Debug-iphonesimulator/\
+iosApp.build/iosApp.app-Simulated.xcent</code></pre>
+<p>You must see both keys:</p>
+<pre class="code" data-lang=""><code>&quot;application-identifier&quot; =&gt; &quot;TEAMID.com.yourcompany.yourapp&quot;
+&quot;keychain-access-groups&quot; =&gt; [ 0 =&gt; &quot;TEAMID.com.yourcompany.yourapp&quot; ]</code></pre>
+<p>An empty <code>{}</code> means it did not take.</p>
+<h3 id="trap-2--signing-in-is-not-the-same-as-being-granted-the-scope">Trap 2 — signing in is not the same as being granted the scope</h3>
+<p>Google's consent screen shows the Drive permission as a <strong>tick box</strong>. Untick it and sign-in still succeeds, and <code>GIDSignIn</code> hands back a perfectly valid session and a real access token. The token simply cannot touch Drive.</p>
+<p>If you take the token straight from the sign-in callback, the app believes it is connected and then fails at the first Drive call — reported as whatever that call's HTTP error happens to be, which tells you nothing.</p>
+<p><strong>Fix.</strong> Check <code>user.grantedScopes</code> after sign-in, not only after restoring a session. See <code>finish()</code> above. Also keep the 403-with-"insufficient" check in <code>authed()</code> as a backstop for the case where the scope is revoked from the web later.</p>
+<h3 id="trap-3--a-missing-gidclientid-crashes-the-app-uncatchably">Trap 3 — a missing <code>GIDClientID</code> crashes the app, uncatchably</h3>
+<p>GoogleSignIn raises an <strong>Objective-C exception</strong> when <code>GIDClientID</code> is absent or a placeholder. Swift cannot catch that. The app dies the moment someone taps Connect.</p>
+<p><strong>Fix.</strong> The <code>hasClientID()</code> guard above. An app that says "not set up yet" beats an app that disappears.</p>
+<h3 id="trap-4--the-401-retry-masks-the-real-error-on-the-connect-path">Trap 4 — the 401 retry masks the real error on the connect path</h3>
+<p><code>authed()</code> retries a 401 by asking the auth provider for a fresh token. On the <strong>connect</strong> path that is wrong: the token was handed in by <code>connect()</code> and is the freshest one that will ever exist, and the account has not been saved to prefs yet — so <code>accessToken()</code> throws <code>NotConnected</code>.</p>
+<p>The person then reads <em>"Connect a Google account first"</em> while standing on the Connect button.</p>
+<p><strong>Fix.</strong> <code>if (initialToken != null) throw DriveError.NeedsConsent()</code> before the retry.</p>
+<h3 id="trap-5--existingperiodicworkpolicyreplace-means-weekly-backups-never-happen">Trap 5 — <code>ExistingPeriodicWorkPolicy.REPLACE</code> means weekly backups never happen</h3>
+<p>You re-apply the schedule on every launch (correctly — a force-stop clears pending work). With <code>REPLACE</code>, every launch restarts the period. An app opened daily never reaches a weekly backup.</p>
+<p><strong>Fix.</strong> <code>UPDATE</code>. It picks up a changed cadence without resetting the running timer.</p>
+<h3 id="trap-6--periodic-work-with-no-flex-window-drifts-across-the-whole-day">Trap 6 — periodic work with no flex window drifts across the whole day</h3>
+<p><code>PeriodicWorkRequestBuilder(1, DAYS)</code> sets the flex interval equal to the whole period. WorkManager may run a "daily" backup 20 hours after the last one, or 28. It feels random, because it is.</p>
+<p><strong>Fix.</strong> Pass an explicit flex: <code>(1, DAYS, 2, HOURS)</code>. And give <code>AutoBackupRunner</code> a matching slack (2h) so a run arriving early inside that window still counts as due — otherwise it does nothing and waits another full period.</p>
+<h3 id="trap-7--bgtaskscheduler-will-teach-you-to-distrust-it">Trap 7 — <code>BGTaskScheduler</code> will teach you to distrust it</h3>
+<ul><li>It <strong>always</strong> fails to submit on the simulator. Log it, do not throw.</li><li>The identifier must appear in <code>BGTaskSchedulerPermittedIdentifiers</code> <strong>character for character</strong>.</li><li><code>registerForTaskWithIdentifier</code> must be called before launch finishes — in <code>init()</code>, not in a view.</li><li><code>setTaskCompleted</code> must be called <strong>exactly once</strong>. Twice, or never, and iOS quietly stops giving</li></ul>
+<p>  your app background time.</p>
+<ul><li>Even done perfectly, iOS may not run it for days.</li></ul>
+<p><strong>Therefore:</strong> never let iOS auto-backup depend on <code>BGTaskScheduler</code>. The real mechanism is <code>DriveStartup.onForeground()</code> — catch up on launch. Treat the background task as a bonus.</p>
+<h3 id="trap-8--googles-drive-client-library-is-jvm-only">Trap 8 — Google's Drive client library is JVM-only</h3>
+<p><code>com.google.api-client</code> / <code>google-api-services-drive</code> will not link on Kotlin/Native. Discovering this after building Android first means rewriting the whole data layer.</p>
+<p><strong>Fix.</strong> Plain REST from the start, as in §5.3. Six endpoints.</p>
+<h3 id="trap-9--silent-token-for-the-wrong-google-account">Trap 9 — silent token for the wrong Google account</h3>
+<p>On Android, <code>AuthorizationRequest</code> <strong>without</strong> <code>setAccount()</code> returns a token for whichever account Play Services feels like. On a phone with a personal and a work account, backups can start landing in the wrong folder, and nothing announces it.</p>
+<p><strong>Fix.</strong> Omit <code>setAccount</code> in <code>connect()</code> (you <em>want</em> the picker), and always pin it in <code>accessToken()</code> using the email you saved.</p>
+<h3 id="trap-10--apiexception-status-code-10">Trap 10 — <code>ApiException</code> status code 10</h3>
+<p><code>DEVELOPER_ERROR</code>. It means the package name or signing certificate of this build matches no OAuth client in the Cloud project. Nine times out of ten: you created the client with the release SHA-1 and are running a debug build, or vice versa. Learn to recognise the number.</p>
+<h3 id="trap-11--publishing-status-and-the-7-day-disappearing-connection">Trap 11 — publishing status, and the 7-day disappearing connection</h3>
+<p>In <em>Testing</em>, refresh tokens expire after 7 days. Testers report the app "forgets" Drive every week. Also, iOS enforces the test-user allowlist much more strictly than Android's Play Services path — so the classic shape of this bug is "Android works, iOS doesn't".</p>
+<p><strong>Fix.</strong> Publish to production. With only <code>drive.appdata</code> it needs no review.</p>
+<h3 id="trap-12--xcodegens-info-block-overwrites-your-committed-infoplist">Trap 12 — XcodeGen's <code>info:</code> block overwrites your committed <code>Info.plist</code></h3>
+<p>If <code>project.yml</code> uses an <code>info:</code> block, XcodeGen <strong>generates</strong> the plist at that path, destroying whatever was there — <code>GIDClientID</code>, URL schemes, <code>CADisableMinimumFrameDurationOnPhone</code> (without which Compose 1.12 aborts on launch), your display name — every time anyone runs <code>xcodegen generate</code>.</p>
+<p><strong>Fix.</strong> <code>INFOPLIST_FILE: iosApp/Info.plist</code> and keep the plist under version control.</p>
+<h3 id="trap-13--the-oauth-redirect-never-comes-back">Trap 13 — the OAuth redirect never comes back</h3>
+<p><code>CFBundleURLSchemes</code> must contain the <strong>reversed</strong> client ID (<code>com.googleusercontent.apps.NNN-hash</code>), and <code>onOpenURL</code> must route non-file URLs to <code>GIDSignIn.sharedInstance.handle(url)</code>. Miss either and sign-in hangs with no error at all — which is harder to diagnose than a crash.</p>
+<h3 id="trap-14--auto-backup-overwriting-another-devices-backup">Trap 14 — auto-backup overwriting another device's backup</h3>
+<p>New phone. Person installs the app, connects the account their old phone was backing up to, and hasn't restored yet. An automatic backup fires and uploads the empty database over the only copy of their data.</p>
+<p><strong>Fix.</strong> The <code>last == null -&gt; Skipped</code> rule in <code>AutoBackupRunner</code>. Automatic backups only begin once <em>this install</em> has either backed up or restored at least once. <code>connect()</code> backs up immediately only when the folder is <strong>empty</strong>, so most people never notice the rule exists.</p>
+<h3 id="trap-15--a-backup-running-during-a-restore">Trap 15 — a backup running during a restore</h3>
+<p>An auto-backup firing mid-restore uploads the half-replaced database, over the very file being restored from.</p>
+<p><strong>Fix.</strong> One <code>Mutex</code> in <code>DriveBackupRepository</code> covering <code>backupNow</code> and <code>restore</code>, plus a second in <code>AutoBackupRunner</code> so a background wake-up and a launch cannot both start.</p>
+<h3 id="trap-16--disconnecting-fails-offline">Trap 16 — disconnecting fails offline</h3>
+<p>Revoke first and the whole disconnect fails without a network. Someone disconnecting on a plane watches the account stay connected.</p>
+<p><strong>Fix.</strong> Clear local state first, revoke afterwards, wrapped in <code>withTimeoutOrNull(5_000)</code>.</p>
+<h3 id="trap-17--expectsuccess--true">Trap 17 — <code>expectSuccess = true</code></h3>
+<p>Ktor's default throws on non-2xx, so <code>authed()</code> never sees the 401 it exists to handle. Set <code>expectSuccess = false</code> on the Drive client.</p>
+<h3 id="trap-18--drive-sends-int64-as-a-string">Trap 18 — Drive sends int64 as a string</h3>
+<p><code>size</code> is <code>"6312"</code>, not <code>6312</code>. Type it <code>String?</code> and use <code>toLongOrNull()</code>. Also set <code>ignoreUnknownKeys = true</code> — Drive adds fields.</p>
+<h3 id="trap-19--compose-resources-does-not-unescape">Trap 19 — Compose Resources does not unescape <code>\'</code></h3>
+<p><code>&lt;string name="x"&gt;Couldn\'t read the file&lt;/string&gt;</code> puts a literal backslash on screen. Use a typographic apostrophe (<code>’</code>) instead.</p>
+<h3 id="trap-20--a-version-catalog-alias-ending-in-a-kotlin-keyword">Trap 20 — a version catalog alias ending in a Kotlin keyword</h3>
+<p><code>compose-material3-window-size-class</code> generates the accessor <code>libs.compose.material3.window.size.class</code> — and <code>class</code> is a keyword. The build fails with a message that does not mention your alias. Rename it.</p>
+<h3 id="trap-21--launchedeffectunit-instead-of-lifecyclestarteffect">Trap 21 — <code>LaunchedEffect(Unit)</code> instead of <code>LifecycleStartEffect</code></h3>
+<p><code>LaunchedEffect(Unit)</code> fires once per composition. An app resumed from the background four days later never re-checks whether a backup is due. Use <code>LifecycleStartEffect</code>.</p>
+<h3 id="trap-22--one-ios-client-is-enough-two-is-a-trap">Trap 22 — one iOS client is enough; two is a trap</h3>
+<p>Because Android needs a debug client and a release client, people assume iOS needs the same. It does not — iOS clients are identified by bundle ID alone. A second "prod" iOS client with the same bundle ID is byte-for-byte equivalent and will only make you wonder which ID belongs in <code>Info.plist</code>.</p>
+<hr>
+<h2 id="8-test-checklist">8. Test checklist</h2>
+<p>Work down this list. Items marked <strong>[both]</strong> must be done on Android <em>and</em> iOS.</p>
+<p><strong>Connect</strong></p>
+<ul><li>[both] Connect on a clean install → account email appears, first backup taken</li><li>[both] Connect to an account that <strong>already has</strong> a backup → app <em>reports</em> it, does not overwrite</li><li>[both] Cancel the account picker → no error toast, nothing changes</li><li>[both] Untick the Drive box on the consent screen → "Drive permission needed", not a generic error</li><li>[both] Connect with no network → "Check your internet connection"</li></ul>
+<p><strong>Backup / restore</strong></p>
+<ul><li>[both] Back up now → size and timestamp update</li><li>[both] Back up twice → the account still holds exactly <strong>one</strong> file</li><li>[both] Restore → data returns; restore with an empty account → "No backup in this account"</li><li>[both] Force-quit mid-upload → next launch recovers, no corrupt file</li></ul>
+<p><strong>Cadence</strong></p>
+<ul><li>[both] Set Daily, force-quit, relaunch → schedule re-applied (Android: <code>adb shell dumpsys jobscheduler | grep &lt;pkg&gt;</code>)</li><li>Android: <code>adb shell cmd jobscheduler run -f &lt;pkg&gt; &lt;id&gt;</code> to force a run</li><li>iOS: pause in the debugger and use the <code>_simulateLaunchForTaskWithIdentifier</code> LLDB trick</li><li>[both] Set Off → pending work cancelled</li><li>[both] Turn the clock forward past the due time, relaunch → catch-up backup fires</li></ul>
+<p><strong>Disconnect</strong></p>
+<ul><li>[both] Disconnect → confirmation dialog first, then account cleared, cadence Off</li><li>[both] Disconnect with no network → still disconnects locally</li><li>[both] Check <a href="https://myaccount.google.com/permissions">myaccount.google.com/permissions</a> → grant gone</li></ul>
+<p><strong>Accounts and builds</strong></p>
+<ul><li>Android: two Google accounts on the device → backups always land in the connected one</li><li>Android: release-signed build with the Play SHA-1 client → connects (this is where <code>ApiException 10</code> shows up)</li><li>iOS: simulator <strong>and</strong> a real device</li><li>[both] Revoke access from the web, then open the app → "Drive permission needed", recoverable by reconnecting</li></ul>
+<hr>
+<h2 id="appendix-a--encrypting-the-backup-file">Appendix A — encrypting the backup file</h2>
+<p>Optional, and worth doing: a backup is a complete record of someone's data, and it ends up in Downloads, in a chat, on a memory card.</p>
+<p><strong>Be honest about the limit.</strong> With no user password there is nowhere for a key to live except the binary. This stops other apps and casual reading; it does not stop someone who decompiles your app. Write that in the code comment so nobody later mistakes it for real protection.</p>
+<p>Envelope:</p>
+<pre class="code" data-lang=""><code>MAGIC1.&lt;base64 of: iv(16) || ciphertext || mac(32)&gt;</code></pre>
+<p>AES-256-CBC for the content, HMAC-SHA-256 over <code>iv || ciphertext</code>, computed after encryption and <strong>verified before decryption</strong> so a tampered or truncated file is rejected rather than decrypted into nonsense. Compare the MAC in constant time.</p>
+<p>Keep the shared logic in <code>commonMain</code> and <code>expect</code> only five primitives — <code>aesCbcEncrypt</code>, <code>aesCbcDecrypt</code>, <code>hmacSha256</code>, <code>sha256</code>, <code>secureRandomBytes</code> — so the two platforms cannot drift into producing files the other cannot read. Android: <code>javax.crypto</code>. iOS: CommonCrypto (<code>CCCrypt</code>, <code>CCHmac</code>, <code>CC_SHA256</code>, <code>SecRandomCopyBytes</code>).</p>
+<p>Two Kotlin/Native details that cost time:</p>
+<ul><li><code>CC_SHA256</code> needs <code>o.addressOf(0).reinterpret&lt;UByteVar&gt;()</code> — the pointer types do not match.</li><li>An empty <code>ByteArray</code> has no address to pin; guard before <code>usePinned</code>.</li></ul>
+<p>On import, accept both sealed and plain files (<code>looksEncrypted(text)</code>), so backups made before you shipped encryption still restore.</p>
+<hr>
+<h2 id="appendix-b--file-association">Appendix B — file association</h2>
+<p>To make your exported file open only in your app:</p>
+<p><strong>Android</strong> — <code>AndroidManifest.xml</code>, a VIEW intent-filter for your vendor MIME type, plus <code>pathPattern</code> variants for the extension (<code>.*\\.yourext</code>, <code>.*\\..*\\.yourext</code>, … — Android's pathPattern does not backtrack, so you need several).</p>
+<p><strong>iOS</strong> — <code>UTExportedTypeDeclarations</code> (declare the type) <em>and</em> <code>CFBundleDocumentTypes</code> (claim it). Both. In <code>onOpenURL</code>, file URLs arrive <strong>security-scoped</strong>: call <code>startAccessingSecurityScopedResource()</code>, read, and release in a <code>defer</code> — skip it and the read fails and the scope leaks.</p>
+<p>On both platforms the incoming file should be handed to a <code>MutableStateFlow&lt;String?&gt;</code> that the UI observes and turns into a confirmation dialog. Never restore just because a file was opened.</p>
+<hr>
+<p><em>Written from a shipped implementation. If something here contradicts what you observe, trust what you observe — then fix this document.</em></p>  </main>
+</div>
+
+<footer>
+  Written from a shipped implementation. If something here contradicts what you observe, trust what you observe — then fix this document.
+</footer>
+
+</body>
+</html>
