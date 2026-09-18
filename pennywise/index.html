@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pennywise — a private expense tracker</title>
+<meta name="description" content="A simple, private way to track what you spend. No account, no ads, nothing collected. Your records stay on your phone.">
+<meta name="theme-color" content="#146e52">
+<link rel="icon" href="assets/icon-180.png">
+<link rel="apple-touch-icon" href="assets/icon-180.png">
+<meta property="og:title" content="Pennywise — a private expense tracker">
+<meta property="og:description" content="No account, no ads, nothing collected. Your records stay on your phone.">
+<meta property="og:image" content="assets/icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a class="brand" href="index.html">
+      <img src="assets/icon-180.png" alt="" width="36" height="36">
+      Pennywise
+    </a>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="privacy-policy.html">Privacy</a>
+      <a href="terms-and-conditions.html">Terms</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-inner wrap">
+    <div class="hero-icon"><img src="assets/icon.png" alt="The Pennywise app icon" width="72" height="72"></div>
+    <span class="app-name">💰 Pennywise</span>
+    <h1>Know where the money went.</h1>
+    <p class="lead">A straightforward book for what you spend, earn and lend. Open it and start writing — there is no sign-up, no profile, and nothing to agree to first.</p>
+    <div class="actions">
+      <!-- Replace href once the listing is live, and drop aria-disabled. -->
+      <a class="btn btn-light" href="#" aria-disabled="true">▶ Coming to Google Play</a>
+    </div>
+    <p class="fineprint">Android and iPhone · Free · No advertising</p>
+  </div>
+</section>
+
+<div class="badges">
+  <div class="badge">
+    <div class="b-ico" aria-hidden="true">🙅</div>
+    <h4>No account</h4>
+    <p>Nothing to sign up for. The app works the second it opens.</p>
+  </div>
+  <div class="badge">
+    <div class="b-ico" aria-hidden="true">📱</div>
+    <h4>No servers</h4>
+    <p>We do not run one. Your entries are written to your own phone.</p>
+  </div>
+  <div class="badge">
+    <div class="b-ico" aria-hidden="true">🚫</div>
+    <h4>No tracking</h4>
+    <p>No analytics, no ads, no crash reporting. None of it is in the app.</p>
+  </div>
+  <div class="badge">
+    <div class="b-ico" aria-hidden="true">☁️</div>
+    <h4>Your backup</h4>
+    <p>A file you keep, or a hidden folder in your own Google Drive.</p>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <div class="content" id="features">
+    <div class="section-head">
+      <h2>What it does</h2>
+      <p>Everything an ordinary month asks of a money book.</p>
+    </div>
+
+    <section class="sec" style="border-bottom: none; padding-bottom: 8px;">
+      <div class="sec-body">
+        <ul class="features">
+          <li>
+            <div class="ic" aria-hidden="true">📒</div>
+            <h3>Daily entries</h3>
+            <p>Income, expenses and transfers between your own accounts, each with a category, a note and a date.</p>
+          </li>
+          <li>
+            <div class="ic" aria-hidden="true">🏦</div>
+            <h3>Several accounts</h3>
+            <p>Cash, bank, savings — as many as you keep. One is your primary, and the app opens on it.</p>
+          </li>
+          <li>
+            <div class="ic" aria-hidden="true">🎯</div>
+            <h3>Monthly budgets</h3>
+            <p>A limit per category. Set it once and it carries forward; what was spent resets each month.</p>
+          </li>
+          <li>
+            <div class="ic" aria-hidden="true">📊</div>
+            <h3>Reports you can read</h3>
+            <p>Spending by category, income against expense, and budget against what actually went out.</p>
+          </li>
+          <li>
+            <div class="ic" aria-hidden="true">🤝</div>
+            <h3>A lending ledger</h3>
+            <p>Who owes you and who you owe, person by person, with the running balance kept for you.</p>
+          </li>
+          <li>
+            <div class="ic" aria-hidden="true">🔔</div>
+            <h3>Bill reminders</h3>
+            <p>Recurring bills, daily to yearly, with a nudge on the day — and a tap to record the payment.</p>
+          </li>
+          <li>
+            <div class="ic" aria-hidden="true">📄</div>
+            <h3>PDF statements</h3>
+            <p>Export a month or a year as a proper statement, laid out the way a bank would print it.</p>
+          </li>
+          <li>
+            <div class="ic" aria-hidden="true">↩️</div>
+            <h3>Carry forward</h3>
+            <p>Last month's closing balance opens the next one, so a month never starts from nothing.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </div>
+
+  <div class="content">
+    <div class="section-head">
+      <h2>The part most expense apps leave out</h2>
+      <p>Why “nothing is collected” is a statement about the build, not a promise.</p>
+    </div>
+
+    <section class="sec">
+      <div class="sec-num" aria-hidden="true">🔒</div>
+      <div class="sec-body">
+        <h2>Nothing is compiled in to collect with</h2>
+        <p>Pennywise has no analytics library, no advertising SDK and no crash-reporting service compiled into it. Not configured off — <em>absent</em>. We have no way of knowing how many people use the app, which screens they open, or a single figure any of them recorded.</p>
+        <p>That is possible because there is no account and no server. Your entries are written to a database inside the app's private storage on your phone, and they stay there unless you choose to move them.</p>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="sec-num" aria-hidden="true">☁️</div>
+      <div class="sec-body">
+        <h2>Backup goes to your Drive</h2>
+        <p>If you switch on Google Drive backup, the file goes to a hidden folder inside <em>your</em> Google account. The app asks for one permission, <code>drive.appdata</code>, which cannot read anything else in your Drive. We never hold a copy.</p>
+        <p><a href="privacy-policy.html">Read the full privacy policy →</a></p>
+      </div>
+    </section>
+  </div>
+
+  <div class="contact-cta">
+    <h3>Questions before you install?</h3>
+    <p>Write to us — we answer.</p>
+    <a class="btn btn-light" href="mailto:support@ganutra.com">✉️ <span class="fill">support@ganutra.com</span></a>
+  </div>
+</main>
+
+<footer>
+  <div class="foot">
+    <a class="brand" href="index.html">
+      <img src="assets/icon-180.png" alt="" width="36" height="36">
+      Pennywise
+    </a>
+    <div class="foot-links">
+      <a href="index.html">Home</a>
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="terms-and-conditions.html">Terms of Use</a>
+      <a href="mailto:support@ganutra.com"><span class="fill">support@ganutra.com</span></a>
+    </div>
+  </div>
+  <div class="copyright">© <span class="fill">2026 Ganutra</span>. All rights reserved.</div>
+</footer>
+
+</body>
+</html>

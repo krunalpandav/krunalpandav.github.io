@@ -1,0 +1,214 @@
+/* Pennywise site — shared by index, privacy-policy and terms-and-conditions.
+   Light only, deliberately: these pages are read once, often from a store listing, and the
+   green has to look the same to everyone who opens them. */
+
+:root {
+  color-scheme: light;
+
+  --brand:      #146e52;   /* the launcher icon's green */
+  --brand-dark: #0c4a37;
+  --brand-lift: #1b8c68;
+  --brand-50:   #e8f2ed;
+  --grad: linear-gradient(135deg, #1b8c68 0%, #0c4a37 100%);
+
+  --ink:    #1b2420;
+  --body:   #3d4a44;
+  --muted:  #6b7671;
+  --line:   #e6e3da;
+  --page:   #f7f6f1;
+  --white:  #ffffff;
+
+  --radius: 18px;
+  --shadow: 0 10px 30px rgba(12, 74, 55, .10);
+
+  --sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+img { max-width: 100%; display: block; }
+
+body {
+  font-family: var(--sans);
+  color: var(--ink);
+  line-height: 1.7;
+  background: var(--page);
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--brand); text-decoration: none; }
+a:hover { text-decoration: underline; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; border-radius: 6px; }
+
+.wrap { max-width: 880px; margin: 0 auto; padding: 0 20px; }
+
+.btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--grad); color: #fff; font-weight: 600;
+  padding: 13px 24px; border-radius: 999px; box-shadow: var(--shadow);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.btn:hover { transform: translateY(-2px); box-shadow: 0 14px 34px rgba(12, 74, 55, .22); text-decoration: none; }
+.btn-light { background: #fff; color: var(--brand); }
+.btn-ghost { background: #fff; color: var(--ink); border: 1px solid var(--line); box-shadow: none; }
+.btn[aria-disabled="true"] { opacity: .6; pointer-events: none; }
+@media (prefers-reduced-motion: reduce) { .btn:hover { transform: none; } }
+
+/* ── header ─────────────────────────────────────────────── */
+header {
+  position: sticky; top: 0; z-index: 20;
+  background: rgba(255, 255, 255, .86); backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.nav {
+  display: flex; align-items: center; justify-content: space-between;
+  height: 66px; max-width: 1100px; margin: 0 auto; padding: 0 20px; gap: 16px;
+}
+.brand { display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 1.05rem; color: var(--ink); }
+.brand:hover { text-decoration: none; }
+.brand img { width: 36px; height: 36px; border-radius: 9px; }
+.nav-links { display: flex; gap: 26px; align-items: center; }
+.nav-links a { color: var(--muted); font-weight: 500; font-size: .95rem; }
+.nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--ink); text-decoration: none; }
+.nav-links a.btn { color: #fff; }
+@media (max-width: 680px) {
+  .nav { height: auto; min-height: 58px; padding: 9px 16px; gap: 10px; }
+  .nav-links { gap: 16px; }
+  .nav-links a:not(.btn) { font-size: .85rem; }
+  .brand { font-size: .92rem; gap: 8px; min-width: 0; }
+  .brand img { width: 30px; height: 30px; flex: 0 0 auto; }
+}
+
+/* ── hero ───────────────────────────────────────────────── */
+.hero {
+  background: var(--grad); color: #fff;
+  position: relative; overflow: hidden;
+  padding: 58px 0 84px; text-align: center;
+}
+.hero::after {
+  content: ""; position: absolute; right: -120px; top: -120px; width: 420px; height: 420px;
+  background: radial-gradient(circle, rgba(255,255,255,.16), transparent 70%); border-radius: 50%;
+}
+.hero::before {
+  content: ""; position: absolute; left: -100px; bottom: -160px; width: 360px; height: 360px;
+  background: radial-gradient(circle, rgba(255,255,255,.12), transparent 70%); border-radius: 50%;
+}
+.hero-inner { position: relative; z-index: 1; }
+/* The icon is a dark green square, so it needs a light tile to sit on or it disappears
+   into the gradient behind it. */
+.hero-icon {
+  width: 88px; height: 88px; border-radius: 22px; margin: 0 auto 18px;
+  background: #fff; padding: 8px; box-shadow: 0 16px 40px rgba(0, 0, 0, .25);
+}
+.hero-icon img { width: 100%; height: 100%; border-radius: 15px; }
+.hero .app-name {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.3);
+  padding: 6px 16px; border-radius: 999px; font-size: .9rem; font-weight: 600; margin-bottom: 20px;
+}
+.hero h1 { font-size: 2.3rem; line-height: 1.15; font-weight: 800; margin-bottom: 10px; text-wrap: balance; }
+.hero p.lead { font-size: 1.05rem; opacity: .95; max-width: 560px; margin: 0 auto; }
+.hero .updated { margin-top: 18px; font-size: .85rem; opacity: .85; font-weight: 500; }
+.hero .actions { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-top: 26px; }
+.hero .fineprint { margin-top: 16px; font-size: .85rem; opacity: .85; }
+
+/* ── badges that lift over the hero's bottom edge ───────── */
+.badges {
+  display: flex; gap: 14px; flex-wrap: wrap; justify-content: center;
+  max-width: 880px; margin: -50px auto 0; padding: 0 20px; position: relative; z-index: 5;
+}
+.badge {
+  flex: 1 1 178px; background: #fff; border: 1px solid var(--line);
+  border-radius: var(--radius); box-shadow: var(--shadow); padding: 20px; text-align: center;
+}
+.badge .b-ico {
+  width: 46px; height: 46px; border-radius: 12px; background: var(--brand-50); color: var(--brand);
+  display: flex; align-items: center; justify-content: center; font-size: 1.3rem; margin: 0 auto 10px;
+}
+.badge h4 { font-size: .98rem; margin-bottom: 2px; }
+.badge p { color: var(--muted); font-size: .84rem; line-height: 1.45; }
+
+/* ── the one white card that holds the document ─────────── */
+.content {
+  margin: 42px auto 0; background: #fff; border: 1px solid var(--line);
+  border-radius: 22px; box-shadow: 0 6px 24px rgba(12, 74, 55, .06); padding: 14px 34px 40px;
+}
+.intro { font-size: 1.02rem; color: var(--body); padding: 24px 0 6px; border-bottom: 1px solid var(--line); }
+
+.sec { display: flex; gap: 16px; padding: 26px 0; border-bottom: 1px solid var(--line); }
+.sec:last-of-type { border-bottom: none; }
+.sec-num {
+  flex: 0 0 38px; height: 38px; border-radius: 11px; background: var(--brand-50); color: var(--brand);
+  display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1rem;
+  font-variant-numeric: tabular-nums;
+}
+.sec-body { flex: 1; min-width: 0; }
+.sec-body h2 { font-size: 1.18rem; font-weight: 700; margin-bottom: 8px; scroll-margin-top: 84px; }
+.sec-body p { color: var(--body); margin-bottom: 8px; }
+.sec-body p:last-child { margin-bottom: 0; }
+.sec-body ul { padding-left: 20px; color: var(--body); margin-bottom: 8px; }
+.sec-body ul:last-child { margin-bottom: 0; }
+.sec-body li { margin-bottom: 6px; }
+.sec-body li::marker { color: var(--brand); }
+.sec-body .fine { color: var(--muted); font-size: .9rem; }
+
+code {
+  background: #f1f3f1; padding: 2px 7px; border-radius: 6px;
+  font-size: .88em; color: var(--brand-dark);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; overflow-wrap: anywhere;
+}
+
+/* ── feature grid on the landing page ───────────────────── */
+.features { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 26px; list-style: none; }
+.features li { display: grid; gap: 6px; align-content: start; }
+.features .ic {
+  width: 44px; height: 44px; border-radius: 12px; background: var(--brand-50);
+  display: flex; align-items: center; justify-content: center; font-size: 1.25rem; margin-bottom: 4px;
+}
+.features h3 { font-size: 1rem; font-weight: 700; }
+.features p { color: var(--muted); font-size: .9rem; line-height: 1.55; }
+
+.section-head { padding: 26px 0 4px; }
+.section-head h2 { font-size: 1.45rem; font-weight: 800; margin-bottom: 6px; }
+.section-head p { color: var(--muted); }
+
+/* ── contact call to action ─────────────────────────────── */
+.contact-cta {
+  margin: 34px auto 0; background: var(--grad); color: #fff;
+  border-radius: 22px; padding: 34px; text-align: center; box-shadow: var(--shadow);
+}
+.contact-cta h3 { font-size: 1.3rem; margin-bottom: 6px; }
+.contact-cta p { opacity: .95; margin-bottom: 20px; }
+
+/* ── footer ─────────────────────────────────────────────── */
+footer { background: #10161f; color: #aeb6c2; padding: 42px 0; font-size: .92rem; margin-top: 54px; }
+.foot {
+  display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; align-items: center;
+  max-width: 1100px; margin: 0 auto; padding: 0 20px;
+}
+.foot a { color: #cfd6e0; }
+.foot .brand { color: #fff; }
+.foot-links { display: flex; gap: 22px; flex-wrap: wrap; }
+.copyright { max-width: 1100px; margin: 18px auto 0; padding: 0 20px; opacity: .7; }
+
+/* Values the site owner must replace before publishing. */
+.fill { border-bottom: 2px dotted currentColor; }
+
+.editor {
+  border: 1px dashed var(--brand); border-radius: 14px; background: var(--brand-50);
+  padding: 18px 20px; margin: 26px auto 0; max-width: 880px;
+}
+.editor h2 { font-size: .95rem; font-weight: 700; margin-bottom: 8px; }
+.editor p { margin-bottom: 8px; font-size: .92rem; color: var(--body); }
+.editor p:last-child { margin-bottom: 0; }
+.editor ul { margin: 0 0 8px 1.1rem; font-size: .92rem; color: var(--body); }
+
+@media (max-width: 560px) {
+  .hero { padding: 44px 0 78px; }
+  .hero h1 { font-size: 1.8rem; }
+  .content { padding: 10px 20px 30px; }
+  .sec { gap: 12px; }
+  .sec-num { flex-basis: 32px; height: 32px; font-size: .9rem; border-radius: 9px; }
+  .contact-cta { padding: 28px 20px; }
+}
