@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PassVault — your vault, only on your phone</title>
+  <meta name="description" content="PassVault is an offline password manager with built-in 2FA codes. Encrypted on your phone, no account, no server, no tracking.">
+  <meta name="theme-color" content="#080B10">
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="index.html"><img src="assets/icon.svg" alt="" width="36" height="36">PassVault</a>
+      <nav class="nav" aria-label="Main">
+        <a href="#features">Features</a>
+        <a href="#security">Security</a>
+        <a href="#faq">FAQ</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <img class="app-icon" src="assets/icon.svg" alt="PassVault app icon" width="104" height="104">
+        <div class="badge-row">
+          <span class="badge">NO CLOUD · NO ACCOUNT</span>
+          <span class="badge">2FA BUILT IN</span>
+        </div>
+        <h1>Your vault.<br>Only on your phone.</h1>
+        <p class="lead">Passwords, cards, notes and 2FA codes — encrypted here, unlocked only by you.</p>
+        <div class="cta-row">
+          <a class="button" href="#features">See what's inside</a>
+          <a class="button secondary" href="privacy.html">Read the privacy policy</a>
+        </div>
+        <p class="note">Coming soon to Google Play for Android.</p>
+      </div>
+    </section>
+
+    <section class="screens" aria-label="App screenshots">
+      <div class="wrap">
+        <div class="phone-row">
+          <figure class="phone"><img src="assets/screens/vault.webp" alt="Vault list with logins, a card, a note and an identity" width="540" height="1200" loading="lazy"></figure>
+          <figure class="phone"><img src="assets/screens/detail.webp" alt="A login with its live 2FA code" width="540" height="1200" loading="lazy"></figure>
+          <figure class="phone"><img src="assets/screens/health.webp" alt="Vault health score with breached, reused and 2FA findings" width="540" height="1200" loading="lazy"></figure>
+          <figure class="phone"><img src="assets/screens/generator.webp" alt="Password generator" width="540" height="1200" loading="lazy"></figure>
+        </div>
+        <p class="note">Screens from the app, filled with demo data.</p>
+      </div>
+    </section>
+
+    <section id="features">
+      <div class="wrap">
+        <h2>Everything in one safe</h2>
+        <p class="section-intro">Logins, cards, notes and identities — sorted, searchable, and locked so only you can open them.</p>
+        <div class="grid">
+          <article class="card">
+            <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1 3 5v6c0 5.6 3.8 10.7 9 12 5.2-1.3 9-6.4 9-12V5l-9-4Zm0 6a3 3 0 0 1 1 5.8V16h-2v-3.2A3 3 0 0 1 12 7Z"/></svg></div>
+            <h3>Logins, cards, notes, identities</h3>
+            <p>Keep every kind of secret in one encrypted vault, with tags, favourites and search.</p>
+          </article>
+          <article class="card">
+            <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm1 11h-5v-2h3V6h2v7Z"/></svg></div>
+            <h3>Codes that refresh themselves</h3>
+            <p>One-time 2FA codes live next to the login they belong to. Scan a site's QR code — no second app to open.</p>
+          </article>
+          <article class="card">
+            <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h16v2H4zm0 7h16v2H4zm0 7h10v2H4z"/></svg></div>
+            <h3>Autofill in your apps</h3>
+            <p>Fill usernames and passwords in other apps. PassVault checks the app's identity first, so look-alikes get nothing.</p>
+          </article>
+          <article class="card">
+            <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 2 21h20L12 2Zm1 15h-2v-2h2v2Zm0-4h-2V9h2v4Z"/></svg></div>
+            <h3>Vault health</h3>
+            <p>Spot breached, reused and weak passwords, and logins that could use 2FA — checked on your phone, never online.</p>
+          </article>
+          <article class="card">
+            <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17 8h-1V6a4 4 0 0 0-8 0v2H7a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Zm-5 9a2 2 0 1 1 0-4 2 2 0 0 1 0 4Zm2-9h-4V6a2 2 0 0 1 4 0v2Z"/></svg></div>
+            <h3>Password generator</h3>
+            <p>Long, random passwords with the characters you choose, and a strength meter that tells the truth.</p>
+          </article>
+          <article class="card">
+            <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 2h9l5 5v15H6V2Zm8 1.5V8h4.5L14 3.5ZM9 12h8v2H9v-2Zm0 4h8v2H9v-2Z"/></svg></div>
+            <h3>Emergency Kit</h3>
+            <p>A printable kit with your Secret Key and its QR code — the way back in if you ever forget your master password.</p>
+          </article>
+          <article class="card">
+            <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 12v7H5v-7H3v9h18v-9h-2Zm-6 .7 2.6-2.6L17 11.5 12 16.5l-5-5 1.4-1.4 2.6 2.6V3h2v9.7Z"/></svg></div>
+            <h3>Bring your passwords along</h3>
+            <p>Import from Chrome, Apple Passwords, 1Password or Bitwarden. Export an encrypted backup file any time.</p>
+          </article>
+          <article class="card">
+            <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.4 10A7.5 7.5 0 0 0 5.3 8 6 6 0 0 0 6 20h13a5 5 0 0 0 .4-10Z"/></svg></div>
+            <h3>Optional encrypted backup</h3>
+            <p>Turn on Google Drive backup and an encrypted copy goes to a hidden folder in your own Drive. Only your master password opens it.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="security">
+      <div class="wrap">
+        <h2>Nothing leaves your phone</h2>
+        <p class="section-intro">No account, no sync, no server that can be breached. The vault is encrypted right here, and PassVault ships with no analytics, ads or crash-reporting code.</p>
+        <ul class="checks">
+          <li><strong>Zero-knowledge.</strong> Your master password is never stored. It unlocks a random vault key; every item is sealed with AES-256-GCM.</li>
+          <li><strong>Hardware-backed keys.</strong> Settings are encrypted with a key held in the Android Keystore, and biometric unlock uses your phone's secure hardware.</li>
+          <li><strong>Locks itself.</strong> Auto-lock after the time you choose, copied secrets cleared from the clipboard, and screenshots blocked by default.</li>
+          <li><strong>Refuses unsafe phones.</strong> Like a banking app, PassVault won't open on a rooted phone or with USB debugging switched on.</li>
+          <li><strong>Read in-house.</strong> QR codes are decoded by PassVault's own on-device code — nothing you scan is handed to anyone else.</li>
+          <li><strong>Gone when you say so.</strong> Delete an item and it's gone; Settings → Erase vault wipes everything, including your Drive backup if you ask.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="wrap faq">
+        <h2>Questions</h2>
+        <details>
+          <summary>What if I forget my master password?</summary>
+          <p>Use the Secret Key from your Emergency Kit to recover the vault and set a new master password. Without the master password or the Secret Key, nobody — including us — can open your vault.</p>
+        </details>
+        <details>
+          <summary>Do I need an account?</summary>
+          <p>No. There is no PassVault account and no PassVault server. Google Drive backup is optional and uses your own Google account.</p>
+        </details>
+        <details>
+          <summary>What data do you collect?</summary>
+          <p>None. PassVault never sends your vault, your usage or your device details to us. The <a href="privacy.html">privacy policy</a> explains every case where anything leaves your phone.</p>
+        </details>
+        <details>
+          <summary>Can I move to a new phone?</summary>
+          <p>Yes — restore from your Google Drive backup with your master password, or from an encrypted backup file with your Secret Key.</p>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>© 2026 Ganutra · PassVault</span>
+      <nav aria-label="Legal">
+        <a href="privacy.html">Privacy policy</a>
+        <a href="terms.html">Terms &amp; conditions</a>
+        <a href="mailto:support@ganutra.app">support@ganutra.app</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>

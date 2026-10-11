@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108 108" role="img" aria-label="PassVault">
+  <!-- Same mark as the Android launcher icon: brass safe dial on ink. -->
+  <rect width="108" height="108" rx="24" fill="#0E1117"/>
+  <circle cx="54" cy="54" r="24" fill="none" stroke="#E0B354" stroke-width="7"/>
+  <circle cx="54" cy="54" r="8" fill="#E0B354"/>
+  <rect x="52" y="22" width="4" height="9" fill="#E0B354"/>
+</svg>

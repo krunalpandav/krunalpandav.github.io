@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Privacy Policy — PassVault</title>
+  <meta name="description" content="How PassVault handles your information: encrypted on your phone, nothing collected.">
+  <meta name="theme-color" content="#080B10">
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="index.html"><img src="assets/icon.svg" alt="" width="36" height="36">PassVault</a>
+      <nav class="nav" aria-label="Main">
+        <a href="index.html#features">Features</a>
+        <a href="index.html#security">Security</a>
+        <a href="privacy.html" aria-current="page">Privacy</a>
+        <a href="terms.html">Terms</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="legal">
+    <!-- Same text as the in-app policy (feature/settings/.../files/privacy_policy.md); PrivacyPageSyncTest keeps them equal. -->
+    <article class="reading">
+      <h1>PassVault Privacy Policy</h1>
+      <p class="effective">Effective date: 11 October 2026</p>
+      <p>PassVault is a password manager made by Ganutra. This policy explains what happens to your information when you use the PassVault app (package <code>app.ganutra.passvault</code>).</p>
+      <h2>The short version</h2>
+      <ul>
+        <li>Your vault lives on your phone, encrypted. We have no servers and no accounts, and we never receive your data.</li>
+        <li>PassVault has no analytics, no advertising, no crash reporting and no tracking of any kind.</li>
+        <li>If you turn on Google Drive backup, an encrypted copy goes to a hidden app folder in your own Google Drive. Only your master password or Secret Key can open it.</li>
+        <li>You can delete everything at any time from Settings → Erase vault.</li>
+      </ul>
+      <h2>What PassVault stores on your phone</h2>
+      <p>PassVault keeps the items you save — logins, passwords, cards, secure notes, identities, 2FA secrets, recovery codes, tags and password history — together with your settings.</p>
+      <p>Every item is encrypted with AES-256-GCM using a random vault key. That vault key is itself locked with a key derived from your master password (PBKDF2-SHA256), and a second copy is locked with your Secret Key from the Emergency Kit. Settings are encrypted with a key held in the Android Keystore. Your master password is never stored; we cannot see it and cannot reset it.</p>
+      <p>If you turn on biometric unlock, a key protected by your phone's secure hardware unlocks the vault. Your fingerprint or face data never reaches PassVault — the system handles it.</p>
+      <h2>What we collect</h2>
+      <p>Nothing. PassVault does not send your vault, your usage, your device details or any identifier to us or to anyone else. There are no third-party analytics, advertising or crash-reporting SDKs in the app. QR codes are read by PassVault's own on-device decoder, and the password-health and breached-password checks run entirely on your phone against a list built into the app.</p>
+      <h2>Google Drive backup (optional, off by default)</h2>
+      <p>When you connect Google Drive in Settings → Backup to Drive:</p>
+      <ul>
+        <li>PassVault asks Google for access to its own hidden app folder in your Drive (the <code>drive.appdata</code> scope). It cannot see any of your other Drive files.</li>
+        <li>The backup file contains your vault sealed under your master password. The only readable parts are its format version, the time it was made and the random salt and settings needed to derive the key — none of which reveal your data. Neither Google nor we can read the contents.</li>
+        <li>To show which account is connected, PassVault reads the account's name and email address from Google. They are kept on your phone only.</li>
+        <li>Daily automatic backup, if you turn it on, runs in the background through Android's scheduler.</li>
+      </ul>
+      <p>Google stores the backup under the <a href="https://policies.google.com/privacy">Google Privacy Policy</a>. You can disconnect at any time in Settings → Backup to Drive, delete the backup when erasing your vault, or remove it in Google Drive → Settings → Manage apps → PassVault → Delete hidden app data.</p>
+      <h2>Files you create</h2>
+      <p>Encrypted exports (<code>.pvault</code>) and the Emergency Kit PDF are saved only where you choose. The Emergency Kit contains your Secret Key, which can open your vault and backups — keep it offline and private. Imports read only the file you pick.</p>
+      <h2>Permissions</h2>
+      <ul>
+        <li><strong>Camera</strong> — asked only when you scan a 2FA or Emergency Kit QR code. Frames are decoded in memory and never saved or sent.</li>
+        <li><strong>Internet and network state</strong> — used only for Google Drive backup and restore.</li>
+        <li><strong>Biometrics</strong> — to unlock with your fingerprint or face, if you turn it on.</li>
+        <li><strong>Run at startup, keep awake</strong> — lets the scheduled Drive backup run after a restart.</li>
+        <li><strong>Hide overlay windows</strong> — stops other apps drawing over PassVault to trick your taps.</li>
+      </ul>
+      <p>PassVault also checks, on your phone only, whether known rooting or hooking tools are installed and whether developer options or USB debugging are on. The result is never stored or sent; it only decides whether the vault opens.</p>
+      <h2>Autofill and the clipboard</h2>
+      <p>When you use PassVault as your autofill service, it fills a login only into the app or website you choose, and checks that app's identity to stop look-alike apps. Copied secrets are marked sensitive and cleared from the clipboard after the time you set.</p>
+      <h2>Keeping and deleting your data</h2>
+      <p>Your data stays until you delete it. Deleting an item removes it and its password history immediately. Settings → Erase vault deletes everything PassVault holds on your phone — the vault, settings, keys and local backup copy — and can also delete your Google Drive backup. Uninstalling the app removes the data on your phone too. Because we never receive your data, there is nothing for us to delete on our side.</p>
+      <h2>Children</h2>
+      <p>PassVault is not directed at children under 13, and we do not knowingly collect information from anyone — children included.</p>
+      <h2>Changes to this policy</h2>
+      <p>If this policy changes, the new version will ship with an app update and carry a new effective date.</p>
+      <h2>Contact</h2>
+      <p>Questions or requests: support@ganutra.app</p>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>© 2026 Ganutra · PassVault</span>
+      <nav aria-label="Legal">
+        <a href="privacy.html">Privacy policy</a>
+        <a href="terms.html">Terms &amp; conditions</a>
+        <a href="mailto:support@ganutra.app">support@ganutra.app</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>
