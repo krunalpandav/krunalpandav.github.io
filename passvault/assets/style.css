@@ -71,7 +71,7 @@ p { margin: 0 0 1em; }
 
 /* Screenshots */
 .screens { padding-top: 8px; border-top: 0; }
-.phone-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+.phone-row { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; }
 .phone { margin: 0; padding: 8px; border-radius: 28px; background: var(--surface-high); border: 1px solid var(--outline); box-shadow: 0 20px 48px rgba(0, 0, 0, 0.45); }
 .phone img { display: block; width: 100%; height: auto; border-radius: 20px; }
 .screens .note { text-align: center; }
