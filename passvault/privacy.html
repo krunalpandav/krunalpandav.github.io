@@ -1,88 +1,212 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Privacy Policy — PassVault</title>
-  <meta name="description" content="How PassVault handles your information: encrypted on your phone, nothing collected.">
-  <meta name="theme-color" content="#080B10">
-  <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy Policy — Pennywise</title>
+<meta name="description" content="Pennywise collects nothing. No account, no server, no analytics, no ads. Here is exactly what the app stores and where.">
+<meta name="theme-color" content="#146e52">
+<link rel="icon" href="assets/icon-180.png">
+<link rel="apple-touch-icon" href="assets/icon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
-  <header class="site-header">
-    <div class="wrap">
-      <a class="brand" href="index.html"><img src="assets/icon.svg" alt="" width="36" height="36">PassVault</a>
-      <nav class="nav" aria-label="Main">
-        <a href="index.html#features">Features</a>
-        <a href="index.html#security">Security</a>
-        <a href="privacy.html" aria-current="page">Privacy</a>
-        <a href="terms.html">Terms</a>
-      </nav>
-    </div>
-  </header>
 
-  <main class="legal">
-    <!-- Same text as the in-app policy (feature/settings/.../files/privacy_policy.md); PrivacyPageSyncTest keeps them equal. -->
-    <article class="reading">
-      <h1>PassVault Privacy Policy</h1>
-      <p class="effective">Effective date: 11 October 2026</p>
-      <p>PassVault is a password manager made by Ganutra. This policy explains what happens to your information when you use the PassVault app (package <code>app.ganutra.passvault</code>).</p>
-      <h2>The short version</h2>
-      <ul>
-        <li>Your vault lives on your phone, encrypted. We have no servers and no accounts, and we never receive your data.</li>
-        <li>PassVault has no analytics, no advertising, no crash reporting and no tracking of any kind.</li>
-        <li>If you turn on Google Drive backup, an encrypted copy goes to a hidden app folder in your own Google Drive. Only your master password or Secret Key can open it.</li>
-        <li>You can delete everything at any time from Settings → Erase vault.</li>
-      </ul>
-      <h2>What PassVault stores on your phone</h2>
-      <p>PassVault keeps the items you save — logins, passwords, cards, secure notes, identities, 2FA secrets, recovery codes, tags and password history — together with your settings.</p>
-      <p>Every item is encrypted with AES-256-GCM using a random vault key. That vault key is itself locked with a key derived from your master password (PBKDF2-SHA256), and a second copy is locked with your Secret Key from the Emergency Kit. Settings are encrypted with a key held in the Android Keystore. Your master password is never stored; we cannot see it and cannot reset it.</p>
-      <p>If you turn on biometric unlock, a key protected by your phone's secure hardware unlocks the vault. Your fingerprint or face data never reaches PassVault — the system handles it.</p>
-      <h2>What we collect</h2>
-      <p>Nothing. PassVault does not send your vault, your usage, your device details or any identifier to us or to anyone else. There are no third-party analytics, advertising or crash-reporting SDKs in the app. QR codes are read by PassVault's own on-device decoder, and the password-health and breached-password checks run entirely on your phone against a list built into the app.</p>
-      <h2>Google Drive backup (optional, off by default)</h2>
-      <p>When you connect Google Drive in Settings → Backup to Drive:</p>
-      <ul>
-        <li>PassVault asks Google for access to its own hidden app folder in your Drive (the <code>drive.appdata</code> scope). It cannot see any of your other Drive files.</li>
-        <li>The backup file contains your vault sealed under your master password. The only readable parts are its format version, the time it was made and the random salt and settings needed to derive the key — none of which reveal your data. Neither Google nor we can read the contents.</li>
-        <li>To show which account is connected, PassVault reads the account's name and email address from Google. They are kept on your phone only.</li>
-        <li>Daily automatic backup, if you turn it on, runs in the background through Android's scheduler.</li>
-      </ul>
-      <p>Google stores the backup under the <a href="https://policies.google.com/privacy">Google Privacy Policy</a>. You can disconnect at any time in Settings → Backup to Drive, delete the backup when erasing your vault, or remove it in Google Drive → Settings → Manage apps → PassVault → Delete hidden app data.</p>
-      <h2>Files you create</h2>
-      <p>Encrypted exports (<code>.pvault</code>) and the Emergency Kit PDF are saved only where you choose. The Emergency Kit contains your Secret Key, which can open your vault and backups — keep it offline and private. Imports read only the file you pick.</p>
-      <h2>Permissions</h2>
-      <ul>
-        <li><strong>Camera</strong> — asked only when you scan a 2FA or Emergency Kit QR code. Frames are decoded in memory and never saved or sent.</li>
-        <li><strong>Internet and network state</strong> — used only for Google Drive backup and restore.</li>
-        <li><strong>Biometrics</strong> — to unlock with your fingerprint or face, if you turn it on.</li>
-        <li><strong>Run at startup, keep awake</strong> — lets the scheduled Drive backup run after a restart.</li>
-        <li><strong>Hide overlay windows</strong> — stops other apps drawing over PassVault to trick your taps.</li>
-      </ul>
-      <p>PassVault also checks, on your phone only, whether known rooting or hooking tools are installed and whether developer options or USB debugging are on. The result is never stored or sent; it only decides whether the vault opens.</p>
-      <h2>Autofill and the clipboard</h2>
-      <p>When you use PassVault as your autofill service, it fills a login only into the app or website you choose, and checks that app's identity to stop look-alike apps. Copied secrets are marked sensitive and cleared from the clipboard after the time you set.</p>
-      <h2>Keeping and deleting your data</h2>
-      <p>Your data stays until you delete it. Deleting an item removes it and its password history immediately. Settings → Erase vault deletes everything PassVault holds on your phone — the vault, settings, keys and local backup copy — and can also delete your Google Drive backup. Uninstalling the app removes the data on your phone too. Because we never receive your data, there is nothing for us to delete on our side.</p>
-      <h2>Children</h2>
-      <p>PassVault is not directed at children under 13, and we do not knowingly collect information from anyone — children included.</p>
-      <h2>Changes to this policy</h2>
-      <p>If this policy changes, the new version will ship with an app update and carry a new effective date.</p>
-      <h2>Contact</h2>
-      <p>Questions or requests: support@ganutra.app</p>
-    </article>
-  </main>
-
-  <footer class="site-footer">
-    <div class="wrap">
-      <span>© 2026 Ganutra · PassVault</span>
-      <nav aria-label="Legal">
-        <a href="privacy.html">Privacy policy</a>
-        <a href="terms.html">Terms &amp; conditions</a>
-        <a href="mailto:support@ganutra.app">support@ganutra.app</a>
-      </nav>
+<header>
+  <div class="nav">
+    <a class="brand" href="index.html">
+      <img src="assets/icon-180.png" alt="" width="36" height="36">
+      Pennywise
+    </a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="privacy-policy.html" aria-current="page">Privacy</a>
+      <a href="terms-and-conditions.html">Terms</a>
     </div>
-  </footer>
+  </div>
+</header>
+<!-- ══ end removable block ══ -->
+
+<section class="hero">
+  <div class="hero-inner wrap">
+    <div class="hero-icon"><img src="assets/icon.png" alt="The Pennywise app icon" width="72" height="72"></div>
+    <span class="app-name">🔒 Pennywise</span>
+    <h1>Privacy Policy</h1>
+    <p class="lead">Your money is your business. Pennywise is built so that it stays that way — nothing is collected, and there is nowhere for it to be collected to.</p>
+    <p class="updated">Last updated <span class="fill">31 October 2026</span></p>
+  </div>
+</section>
+
+<div class="badges">
+  <div class="badge">
+    <div class="b-ico" aria-hidden="true">🙅</div>
+    <h4>No account</h4>
+    <p>No sign-up, no login, no profile. The app works the moment you open it.</p>
+  </div>
+  <div class="badge">
+    <div class="b-ico" aria-hidden="true">📱</div>
+    <h4>Stays on your phone</h4>
+    <p>Entries are written to your device. We run no server for them to reach.</p>
+  </div>
+  <div class="badge">
+    <div class="b-ico" aria-hidden="true">🚫</div>
+    <h4>No tracking</h4>
+    <p>No analytics, no ads, no crash reporting. None of it is in the app.</p>
+  </div>
+  <div class="badge">
+    <div class="b-ico" aria-hidden="true">☁️</div>
+    <h4>Your Drive, not ours</h4>
+    <p>Backup goes to a hidden folder in your own Google account.</p>
+  </div>
+</div>
+
+<main class="wrap">
+  <div class="content">
+
+    <p class="intro">
+      This policy applies to the Pennywise mobile application for Android and iPhone, published by
+      <span class="fill">Ganutra</span> (“we”, “us”). It does not cover any other app, website or
+      service. Using Pennywise means you accept this policy and the
+      <a href="terms-and-conditions.html">Terms of Use</a>.
+    </p>
+
+    <section class="sec">
+      <div class="sec-num">1</div>
+      <div class="sec-body">
+        <h2 id="storage">What the app stores, and where</h2>
+        <p>Everything you enter — accounts, transactions, categories, budgets, the people in your ledger and your reminders — is written to a database inside the app's private storage on your device. On both platforms that storage is readable only by Pennywise.</p>
+        <p>Your preferences (theme, currency, reminder times, whether Drive backup is connected, and which Pennywise Pro plan this device last confirmed) sit alongside it in the same private storage.</p>
+        <p class="fine">Technically: a SQLite database named <code>pennywise.db</code> and a preferences file named <code>pennywise.preferences_pb</code>, both inside the app's own sandbox.</p>
+        <p><b>The backup copy on your phone.</b> When you tap <em>Backup data</em>, the app writes one backup file, <code>pennywise-backup.pennywise</code>, to a <b>Pennywise/Backups</b> folder on your device, replacing the previous one. On Android that folder is in <code>Android/media/app.ganutra.pennywise/</code>; on iPhone it is in the app's folder in the Files app. It is kept there on purpose so that it survives the app being reinstalled — on Android it stays even after Pennywise is uninstalled (section 8 explains how to remove it).</p>
+        <p>Every backup file is encrypted. By default it is sealed with a key built into the app, which keeps it unreadable to anyone who simply opens the file, but not to someone who takes the app apart. You can add your own backup password in Settings; the app does not store or send that password, so if you forget it, a backup made with it cannot be opened by anyone, including us.</p>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="sec-num">2</div>
+      <div class="sec-body">
+        <h2 id="collect">What we collect about you</h2>
+        <p><b>Nothing.</b> The app contains no analytics library, no advertising SDK, no crash-reporting service and no tracking of any kind. We do not know how many people use Pennywise, which screens they open, or anything they have recorded in it.</p>
+        <p>There is no account to identify you by, and no server for information to be sent to.</p>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="sec-num">3</div>
+      <div class="sec-body">
+        <h2 id="leaves">When data leaves your device</h2>
+        <p>Only in ways you start yourself. There are exactly three:</p>
+        <ul>
+          <li><b>Google Drive backup</b> — off unless you turn it on. Section 4 covers it in full.</li>
+          <li><b>A backup file you share</b> — the backup is written to your phone (section 1). If you share or move that <code>.pennywise</code> file, it goes wherever you send it.</li>
+          <li><b>A PDF statement</b> — exported the same way, to a location you pick.</li>
+        </ul>
+        <p>Those are ordinary files on your device, or wherever you send them. We never see them.</p>
+        <p>Buying or checking Pennywise Pro is not one of them: none of your records are involved. Section 5 explains what happens instead.</p>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="sec-num">4</div>
+      <div class="sec-body">
+        <h2 id="drive">Google Drive backup</h2>
+        <p>This is switched off until you connect an account, and it can be disconnected at any time.</p>
+        <p>When you connect, the app asks Google for a single permission — <code>drive.appdata</code>. That grants access to one hidden folder Google keeps for Pennywise inside your own Drive. It does <b>not</b> give the app access to your documents, your photos or anything else in your Drive, and it cannot be used to.</p>
+        <p>Once connected, you can choose to back up automatically — daily or weekly — and the app then uploads a fresh backup in the background whenever the phone is online, without you opening it. Choose <em>Off</em> to back up to Drive only when you tap it.</p>
+        <p>What is written there is the same encrypted file you would get from <em>Backup data</em>. It goes from your device to your Google account directly — it does not pass through us, and we hold no copy.</p>
+        <p>Because that folder lives in your Google account, Google's own privacy policy governs how they store it. You can inspect or delete it whenever you like, at <b>drive.google.com → Settings → Manage apps → Pennywise</b>.</p>
+        <p>Disconnecting inside the app clears the connection on your device and asks Google to revoke the permission. You can also revoke it yourself at <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener">myaccount.google.com/permissions</a>.</p>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="sec-num">5</div>
+      <div class="sec-body">
+        <h2 id="purchases">Pennywise Pro purchases</h2>
+        <p>Pennywise is paid for with a yearly subscription (which starts with a free trial) or a one-time lifetime purchase. Both are sold through <b>Google Play</b> on Android and the <b>App Store</b> on iPhone, and the store handles the whole payment.</p>
+        <ul>
+          <li><b>Your payment details go to the store, not to us.</b> Card numbers, UPI handles, billing addresses and your store account are entered in Google's or Apple's own purchase screen. The app never sees them.</li>
+          <li><b>Checking your plan stays on the phone.</b> The app asks the Play Store app or the App Store on your device whether this store account has an active plan, and the store answers with which plan it is. Pennywise runs no server for this, uses no third-party purchase service, and sends none of your records anywhere to do it.</li>
+          <li><b>The answer is remembered on the device</b>, so the app keeps opening without an internet connection.</li>
+          <li><b>Sales reports.</b> Google and Apple send us reports of sales, refunds and payouts so that we can be paid, account for tax and handle refund requests. Those reports come from the stores under their own privacy policies; we use them for nothing else.</li>
+        </ul>
+        <p>A plan is not carried between Android and iPhone. Doing that would need an account and a server to match the two store purchases, and Pennywise has neither — section 5 of the Terms of Use explains what to do when switching.</p>
+        <p>Trials, renewals, cancellations and refunds are governed by the store you bought through. See the <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a> and the <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">Apple Privacy Policy</a>, and section 5 of our <a href="terms-and-conditions.html#pro">Terms of Use</a>.</p>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="sec-num">6</div>
+      <div class="sec-body">
+        <h2 id="permissions">Permissions the app asks for, and why</h2>
+        <ul>
+          <li><b>Notifications</b> — to show the reminders you set. Decline and the rest of the app works normally; only reminders stop appearing.</li>
+          <li><b>Internet and network state</b> — used solely to reach Google Drive when backup is switched on, and to wait for a connection before an automatic backup runs. With backup off, Pennywise itself makes no network requests at all; checking a Pro plan is done by the Play Store app or the App Store on your device.</li>
+          <li><b>In-app purchases</b> (Android) — lets the app hand a Pro purchase to Google Play. It gives the app no access to your payment details.</li>
+          <li><b>Run after restart</b> (Android) — so bill reminders and the expense reminder you have already scheduled survive the phone being switched off and on. Alarms do not otherwise outlive a reboot.</li>
+        </ul>
+        <p>The app asks for no access to contacts, location, camera, microphone, SMS, call logs or your photo library.</p>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="sec-num">7</div>
+      <div class="sec-body">
+        <h2 id="children">Children</h2>
+        <p>Pennywise is a personal record-keeping tool intended for general use. It collects nothing from anyone, children included, and has no account system through which an age could be known or a profile built.</p>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="sec-num">8</div>
+      <div class="sec-body">
+        <h2 id="deletion">Deleting your data</h2>
+        <p>All of it is under your control, because all of it is either on your device or in your own Google account:</p>
+        <ul>
+          <li><b>On the device</b> — uninstalling Pennywise removes the database and preferences with it. On Android you can also use <em>Settings → Apps → Pennywise → Clear data</em>.</li>
+          <li><b>The backup copy on the phone</b> — on Android it is <b>not</b> removed when you uninstall. Delete the <code>Pennywise/Backups</code> folder inside <code>Android/media/app.ganutra.pennywise/</code> with any file manager. On iPhone it is removed with the app, or delete it from the Files app.</li>
+          <li><b>In your Drive</b> — <em>drive.google.com → Settings → Manage apps → Pennywise → Delete hidden app data</em>.</li>
+          <li><b>Files you exported</b> — delete them wherever you saved them.</li>
+        </ul>
+        <p>There is nothing for us to delete, because we never held anything. That also means <b>we cannot recover your data for you</b> — see clause 3 of the <a href="terms-and-conditions.html#your-data">Terms of Use</a>.</p>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="sec-num">9</div>
+      <div class="sec-body">
+        <h2 id="changes">Changes to this policy</h2>
+        <p>If the app ever begins handling information differently, this page will be updated and the date at the top will change. Continuing to use Pennywise after that means accepting the updated policy.</p>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="contact-cta">
+    <h3>Questions about any of this?</h3>
+    <p>Ask us anything about what the app does with your information.</p>
+    <a class="btn btn-light" href="mailto:support@ganutra.com">✉️ <span class="fill">support@ganutra.com</span></a>
+  </div>
+</main>
+
+<footer>
+  <div class="foot">
+    <a class="brand" href="index.html">
+      <img src="assets/icon-180.png" alt="" width="36" height="36">
+      Pennywise
+    </a>
+    <div class="foot-links">
+      <a href="index.html">Home</a>
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="terms-and-conditions.html">Terms of Use</a>
+      <a href="mailto:support@ganutra.com"><span class="fill">support@ganutra.com</span></a>
+    </div>
+  </div>
+  <div class="copyright">© <span class="fill">2026 Ganutra</span>. All rights reserved.</div>
+</footer>
+
 </body>
 </html>
