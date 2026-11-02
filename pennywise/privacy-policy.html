@@ -32,11 +32,11 @@
 
 <section class="hero">
   <div class="hero-inner wrap">
-    <div class="hero-icon"><img src="assets/icon.svg" alt="The Pennywise app icon" width="72" height="72"></div>
+    <div class="hero-icon"><img src="assets/icon.png" alt="The Pennywise app icon" width="72" height="72"></div>
     <span class="app-name">🔒 Pennywise</span>
     <h1>Privacy Policy</h1>
     <p class="lead">Your money is your business. Pennywise is built so that it stays that way — nothing is collected, and there is nowhere for it to be collected to.</p>
-    <p class="updated">Last updated <span class="fill">31 October 2026</span></p>
+    <p class="updated">Last updated <span class="fill">2 November 2026</span></p>
   </div>
 </section>
 
@@ -78,10 +78,11 @@
       <div class="sec-body">
         <h2 id="storage">What the app stores, and where</h2>
         <p>Everything you enter — accounts, transactions, categories, budgets, the people in your ledger and your reminders — is written to a database inside the app's private storage on your device. On both platforms that storage is readable only by Pennywise.</p>
-        <p>Your preferences (theme, currency, reminder times, whether Drive backup is connected, and which Pennywise Pro plan this device last confirmed) sit alongside it in the same private storage.</p>
+        <p>Your preferences (theme, currency, reminder times, whether Drive backup is connected, which Pennywise Pro plan this device last confirmed, and which version of the terms you accepted) sit alongside it in the same private storage. If you start a free trial in the app, it also notes a random identifier for that trial and the date it ends.</p>
         <p class="fine">Technically: a SQLite database named <code>pennywise.db</code> and a preferences file named <code>pennywise.preferences_pb</code>, both inside the app's own sandbox.</p>
         <p><b>The backup copy on your phone.</b> When you tap <em>Backup data</em>, the app writes one backup file, <code>pennywise-backup.pennywise</code>, to a <b>Pennywise/Backups</b> folder on your device, replacing the previous one. On Android that folder is in <code>Android/media/app.ganutra.pennywise/</code>; on iPhone it is in the app's folder in the Files app. It is kept there on purpose so that it survives the app being reinstalled — on Android it stays even after Pennywise is uninstalled (section 8 explains how to remove it).</p>
-        <p>Every backup file is encrypted. By default it is sealed with a key built into the app, which keeps it unreadable to anyone who simply opens the file, but not to someone who takes the app apart. You can add your own backup password in Settings; the app does not store or send that password, so if you forget it, a backup made with it cannot be opened by anyone, including us.</p>
+        <p>Every backup file is encrypted. By default it is sealed with a key built into the app, which keeps it unreadable to anyone who simply opens the file, but not to someone who takes the app apart. A backup also carries the free-trial notes from above — the random trial identifiers and their end dates — so the free-trial rules in section 5 of the <a href="terms-and-conditions.html#one-trial">Terms of Use</a> still apply after a restore. They identify no person or store account, and like the rest of the backup they never reach us.</p>
+        <p>You can add your own backup password in Settings; the app does not store or send that password, so if you forget it, a backup made with it cannot be opened by anyone, including us.</p>
       </div>
     </section>
 
